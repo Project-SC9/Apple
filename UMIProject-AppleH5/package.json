@@ -1,0 +1,52 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "test": "cross-env UMI_ENV=test umi test",
+    "build_test": "cross-env UMI_ENV=test umi build",
+    "build_prod": "cross-env UMI_ENV=prod umi build",
+    "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.2.2",
+    "antd": "4.0.3",
+    "crypto-js": "^4.0.0",
+    "dva": "^2.6.0-beta.6",
+    "griffith": "^1.5.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "rc-queue-anim": "^1.8.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-textscroll": "^1.0.0",
+    "redux-persist": "^6.0.0",
+    "umi": "2.13.7",
+    "umi-plugin-react": "1.15.3",
+    "umi-request": "^1.2.19"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "mockjs": "^1.1.0",
+    "react-test-renderer": "^16.13.1",
+    "redux-logger": "^3.0.6"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
