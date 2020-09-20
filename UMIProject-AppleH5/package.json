@@ -1,6 +1,6 @@
 {
   "private": true,
-  "homepage ": "https://Project-SC9.github.io/Apple",
+  "homepage ": "https://project-sc9.github.io/Apple/",
   "scripts": {
     "start": "umi dev",
     "test": "cross-env UMI_ENV=test umi test",
@@ -8,8 +8,7 @@
     "build_prod": "cross-env UMI_ENV=prod umi build",
     "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
     "precommit": "lint-staged",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "docs:deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
