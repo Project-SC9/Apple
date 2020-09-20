@@ -49,18 +49,18 @@ class Index extends Component {
           {/**图片区 */}
           <div className={styles.waterfall_plot}>
             <div className={styles.waterfall_plot_left}>
-              <img src={require('../../../assets/image/cards02.png')} />
-              <img src={require('../../../assets/image/cards03.png')} />
-              <img src={require('../../../assets/image/cards01.png')} />
-              <img src={require('../../../assets/image/cards04.png')} />
-              <img src={require('../../../assets/image/cards05.png')} />
+              <img src={require('assets/image/cards02.png')} />
+              <img src={require('assets/image/cards03.png')} />
+              <img src={require('assets/image/cards01.png')} />
+              <img src={require('assets/image/cards04.png')} />
+              <img src={require('assets/image/cards05.png')} />
             </div>
             <div className={styles.waterfall_plot_right}>
-              <img src={require('../../../assets/image/cards05.png')} />
-              <img src={require('../../../assets/image/cards04.png')} />
-              <img src={require('../../../assets/image/cards02.png')} />
-              <img src={require('../../../assets/image/cards03.png')} />
-              <img src={require('../../../assets/image/cards01.png')} />
+              <img src={require('assets/image/cards05.png')} />
+              <img src={require('assets/image/cards04.png')} />
+              <img src={require('assets/image/cards02.png')} />
+              <img src={require('assets/image/cards03.png')} />
+              <img src={require('assets/image/cards01.png')} />
             </div>
           </div>
         </div>

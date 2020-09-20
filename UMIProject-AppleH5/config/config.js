@@ -44,8 +44,8 @@ export default {
         }],
         'umi-plugin-gh-pages',
     ],
-    base: '/Project-SC9/Apple/',
-    publicPath: '/Project-SC9/Apple/',
+    // base: '/Project-SC9/Apple/',
+    // publicPath: '/Project-SC9/Apple/',
 
     /** webpack配置 **/
     chainWebpack: webpackConfig,

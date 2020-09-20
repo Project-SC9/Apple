@@ -9,7 +9,7 @@ export class Index extends PureComponent {
     render() {
         return (
             <div className={styles.bottom_bar}>
-                <img src={require('../../../../assets/image/Ellipse.png')} />
+                <img src={require('assets/image/Ellipse.png')} />
                 <div className={styles.bar_title}>
                     <h3>Toy parts</h3>
                     <p>15/100 hits</p>
