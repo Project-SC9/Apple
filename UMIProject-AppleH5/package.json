@@ -1,5 +1,6 @@
 {
   "private": true,
+  "homepage ": "./",
   "scripts": {
     "start": "umi dev",
     "test": "cross-env UMI_ENV=test umi test",
@@ -22,6 +23,7 @@
     "react-textscroll": "^1.0.0",
     "redux-persist": "^6.0.0",
     "umi": "2.13.7",
+    "umi-plugin-gh-pages": "^0.2.0",
     "umi-plugin-react": "1.15.3",
     "umi-request": "^1.2.19"
   },

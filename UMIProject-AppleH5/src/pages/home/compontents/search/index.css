@@ -1,0 +1,63 @@
+.search {
+  width: 80%;
+  height: 3.75rem;
+  margin: .25rem auto;
+}
+
+.search :global .am-search {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  background-color: #f2f2f2;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+}
+
+.search :global .am-search-input {
+  width: 92%;
+  margin: auto;
+  height: 62%;
+  background: transparent;
+  flex: inherit;
+}
+
+.search :global .am-search-cancel-show {
+  display: none;
+}
+
+.search :global .am-search-input .am-search-synthetic-ph-icon {
+  width: 2rem;
+  height: 2rem;
+  background-size: 2rem auto;
+  background-image: url('../../../../assets/image/Glyph.png');
+}
+
+.search :global .am-search-input input[type="search"],
+.search :global .am-search-input .am-search-synthetic-ph {
+  height: 100%;
+  text-align: left;
+}
+
+.search :global .am-search-input .am-search-synthetic-ph-placeholder {
+  margin-left: 4%;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #c4c4c4;
+}
+
+.search :global .am-search.am-search-start .am-search-input input[type="search"] {
+  padding: 0 1.75rem 0 3.5625rem;
+}
+
+
+.search :global .am-search-input input[type="search"] {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #c4c4c4;
+}
+
+.search :global .am-search.am-search-start .am-search-input .am-search-synthetic-ph {
+  padding-left: 0;
+}

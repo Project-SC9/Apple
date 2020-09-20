@@ -6,7 +6,7 @@ export default {
     treeShaking: true,
 
     /** 浏览器路由配置 **/
-    history: 'browser',
+    history: 'hash',
 
     /** 路由配置 **/
     routes: routerConfig,
@@ -42,7 +42,10 @@ export default {
                 ],
             },
         }],
+        'umi-plugin-gh-pages',
     ],
+    base: '/Project-SC9/Apple/',
+    publicPath: '/Project-SC9/Apple/',
 
     /** webpack配置 **/
     chainWebpack: webpackConfig,

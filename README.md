@@ -14,5 +14,5 @@ yarn
 运行
 yarn start
 打包
-yarn build
+umi build
 ```
