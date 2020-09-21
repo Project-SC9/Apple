@@ -1,0 +1,45 @@
+/* 走马灯 */
+.space_carousel {
+  padding: 1rem 0rem;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.carousel {
+  width: 4.625rem;
+  height: 5.75rem;
+}
+
+.carousel_img {
+  width: 4.625rem;
+  height: 4.625rem;
+  border-radius: 0.625rem;
+  background-color: #f2f2f2;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 0.625rem;
+  -moz-border-radius: 0.625rem;
+  -ms-border-radius: 0.625rem;
+  -o-border-radius: 0.625rem;
+}
+
+.carousel_img img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.carousel p {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #a9a9a9;
+  text-align: center;
+}
+
+.space_carousel :global .slider-frame {
+  transform: translate3d(-1.25rem, 0px, 0px) !important;
+  -webkit-transform: translate3d(-1.25rem, 0px, 0px) !important;
+  -moz-transform: translate3d(-1.25rem, 0px, 0px) !important;
+  -ms-transform: translate3d(-1.25rem, 0px, 0px) !important;
+  -o-transform: translate3d(-1.25rem, 0px, 0px) !important;
+}

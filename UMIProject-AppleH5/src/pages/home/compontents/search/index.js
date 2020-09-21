@@ -7,17 +7,19 @@ import { SearchBar } from 'antd-mobile';
 export class Index extends PureComponent {
     render() {
         return (
-            <div className={styles.search}>
-                <SearchBar
-                    placeholder="Search.."
-                    onSubmit={value => console.log(value, 'onSubmit')}
-                    onClear={value => console.log(value, 'onClear')}
-                    onFocus={() => console.log('onFocus')}
-                    onBlur={() => console.log('onBlur')}
-                    onCancel={() => console.log('onCancel')}
-                    onChange={this.searchChangedHandler}
-                    showCancelButton={false}
-                />
+            <div className={styles.footer}>
+                <div className={styles.search}>
+                    <SearchBar
+                        placeholder="Search.."
+                        onSubmit={value => console.log(value, 'onSubmit')}
+                        onClear={value => console.log(value, 'onClear')}
+                        onFocus={() => console.log('onFocus')}
+                        onBlur={() => console.log('onBlur')}
+                        onCancel={() => console.log('onCancel')}
+                        onChange={this.searchChangedHandler}
+                        showCancelButton={false}
+                    />
+                </div>
             </div>
         )
     }

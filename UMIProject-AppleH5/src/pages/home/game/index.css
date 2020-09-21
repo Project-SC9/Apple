@@ -1,0 +1,87 @@
+/* 弹出框 */
+.modal_header {
+  width: 12.5rem;
+  height: 12.5rem;
+  margin: auto;
+  position: fixed;
+}
+
+.modal_header_img {
+  width: 12.5rem;
+  height: 12.5rem;
+  background: url('../../../assets/image/task-bg.png') no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: -15%;
+  left: 45%;
+}
+
+.modal_header img {
+  width: 90%;
+}
+
+.modal_content {
+  margin: auto;
+  position: relative;
+  top: 43%;
+}
+
+.modal_content h2 {
+  margin: 5% auto;
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  text-align: center;
+  color: #673AB7;
+  letter-spacing: 0.125rem;
+}
+
+.modal_content p {
+  margin: 2% auto;
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  color: #673AB7;
+  margin-bottom: 12%;
+}
+
+.modal_content :global .am-button {
+  width: 68%;
+  height: 2.5rem;
+  margin: auto;
+  background: #673AB7;
+  border-radius: 2.625rem;
+  -webkit-border-radius: 2.625rem;
+  -moz-border-radius: 2.625rem;
+  -ms-border-radius: 2.625rem;
+  -o-border-radius: 2.625rem;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 2;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.popup_modal :global .am-modal-transparent {
+  width: 80%;
+  height: 51%;
+  background: url('../../../assets/image/base.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.popup_modal :global .am-modal-transparent .am-modal-content .am-modal-body,
+.popup_modal :global .am-modal-transparent .am-modal-content {
+  padding: 0;
+}
+
+.popup_modal :global .am-modal-content {
+  background: transparent;
+}

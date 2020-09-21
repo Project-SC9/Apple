@@ -2,25 +2,37 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  position: relative;
 }
 
 .main_top {
-  width: 80%;
+  width: 93%;
   margin: auto;
-  padding-top: 2.6875rem;
-  margin-bottom: 1.4375rem;
+  padding: 0.625rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.main_top h1 {
-  font-size: 2.25rem;
-  font-weight: bold;
-  color: #272727;
+.main_top img {
+  width: 45%;
 }
 
-.main_top p {
-  font-size: 1.875rem;
-  font-weight: 300;
-  color: #000000;
+.main_come_button,
+.main_come_button:hover,
+.main_come_button:active {
+  width: 7.5rem;
+  height: 2rem;
+  line-height: 2rem;
+  border: 0;
+  background: linear-gradient(89.95deg, #fd8383 0.04%, #72cdff 99.33%);
+  color: #ffffff;
+  border-radius: 1.8125rem;
+  -webkit-border-radius: 1.8125rem;
+  -moz-border-radius: 1.8125rem;
+  -ms-border-radius: 1.8125rem;
+  -o-border-radius: 1.8125rem;
 }
 
 .main_content {
@@ -31,69 +43,139 @@
   margin-bottom: 7.5rem;
 }
 
-/* 走马灯 */
-.space_carousel {
+/* 轮播 */
+.swiper {
   padding: 1rem 0rem;
-  overflow: hidden;
   touch-action: none;
+  text-align: center;
 }
 
-.carousel {
-  width: 4.625rem;
-  height: 5.75rem;
+.swiper_content p {
+  font-size: 1rem;
+  margin-bottom: .8rem;
 }
 
-.carousel_img {
-  width: 4.625rem;
-  height: 4.625rem;
-  border-radius: 0.625rem;
-  background-color: #f2f2f2;
+.swiper_content h3 {
+  position: relative;
+  color: #fd8383;
+  font-size: 1.625rem;
+  margin-bottom: 3rem;
+}
+
+.swiper_content h3:before {
+  content: attr(text);
+  position: absolute;
+  z-index: 10;
+  color: #72cdff;
+  mask: linear-gradient(to left, #72cdff, transparent);
+  -webkit-mask: linear-gradient(to left, #72cdff, transparent);
+}
+
+.swiper_img {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  -webkit-border-radius: 0.625rem;
-  -moz-border-radius: 0.625rem;
-  -ms-border-radius: 0.625rem;
-  -o-border-radius: 0.625rem;
 }
 
-.carousel_img img {
-  width: 3rem;
-  height: 3rem;
-}
-
-.carousel p {
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: #a9a9a9;
-  text-align: center;
-}
-
-.space_carousel :global .slider-frame {
-  transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -webkit-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -moz-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -ms-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -o-transform: translate3d(-1.25rem, 0px, 0px) !important;
-}
-
-/* 瀑布流布局 */
-.waterfall_plot {
+.swiper_img img {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  margin-bottom: 1.25rem;
 }
 
-.waterfall_plot_left,
-.waterfall_plot_right {
+.swiper :global .slider-frame {
+  overflow: inherit !important;
+}
+
+.swiper :global .slider-decorator-0 {
+  top: 5.625rem;
+  bottom: auto !important;
+}
+
+.swiper :global .am-carousel-wrap-dot>span {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #C4C4C4;
+}
+
+.swiper :global .am-carousel-wrap-dot-active>span {
+  background: #EA6A6A;
+}
+
+/* 弹出框 */
+.modal_header {
+  position: relative;
+}
+
+.modal_header img {
+  width: 57%;
+  padding-top: 5.41%;
+}
+
+.modal_header p {
+  position: absolute;
+  right: 4.62%;
+  top: 3.68%;
+  font-size: 17px;
+  color: #9C9C9C;
+}
+
+.modal_content {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
 }
 
-.waterfall_plot img {
-  width: 90%;
-  margin-bottom: 1rem;
+.modal_content img {
+  width: 7.5625rem;
+  height: 7.5625rem;
+  margin: 6% auto;
+}
+
+.modal_content h2 {
+  width: 87%;
+  margin: 5% auto;
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  text-align: center;
+  color: #673AB7;
+  letter-spacing: 0.125rem;
+}
+
+.modal_content :global .am-button {
+  width: 75%;
+  height: 2.5rem;
+  margin: auto;
+  background: #673AB7;
+  border-radius: 2.625rem;
+  -webkit-border-radius: 2.625rem;
+  -moz-border-radius: 2.625rem;
+  -ms-border-radius: 2.625rem;
+  -o-border-radius: 2.625rem;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 2;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.popup_modal :global .am-modal-transparent {
+  width: 80%;
+  height: 51%;
+  background: url('../../../assets/image/base.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.popup_modal :global .am-modal-transparent .am-modal-content .am-modal-body,
+.popup_modal :global .am-modal-transparent .am-modal-content {
+  padding: 0;
+}
+
+.popup_modal :global .am-modal-content {
+  background: transparent;
 }

@@ -19,6 +19,10 @@ export default [
             path: '/home/main',
             component: './home/main/index',
           },
+          {
+            path: '/home/game',
+            component: './home/game/index',
+          },
         ],
       },
     ],
