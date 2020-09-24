@@ -6,18 +6,26 @@
 }
 
 .carousel {
-  width: 4.625rem;
-  height: 5.75rem;
+  width: 91%;
+  height: 3rem;
+  margin: auto;
+  background: url('assets/image/border.svg') no-repeat;
+  background-size: 100% 100%;
 }
 
 .carousel_img {
-  width: 4.625rem;
-  height: 4.625rem;
+  width: 85%;
+  height: auto;
+  margin: auto;
   border-radius: 0.625rem;
-  background-color: #f2f2f2;
-  display: table-cell;
+  background-color: transparent;
+  padding-top: 8%;
   vertical-align: middle;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
   -webkit-border-radius: 0.625rem;
   -moz-border-radius: 0.625rem;
   -ms-border-radius: 0.625rem;
@@ -25,15 +33,16 @@
 }
 
 .carousel_img img {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .carousel p {
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: #a9a9a9;
-  text-align: center;
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.375rem;
+  color: #000000;
 }
 
 .space_carousel :global .slider-frame {

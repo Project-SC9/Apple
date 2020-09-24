@@ -1,6 +1,6 @@
 {
   "private": true,
-  "homepage ": "https://project-sc9.github.io/Apple/",
+  "homepage ": ".",
   "scripts": {
     "start": "umi dev",
     "test": "cross-env UMI_ENV=test umi test",

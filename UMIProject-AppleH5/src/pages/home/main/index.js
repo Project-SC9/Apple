@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './index.css';
-import { Button, Carousel, Modal } from 'antd-mobile';
+import { Button, Modal, Carousel as CarouselMobile } from 'antd-mobile';
+import { Carousel } from 'antd';
 /**
  * 首页
  */
@@ -43,39 +44,39 @@ class Index extends Component {
 
         <div className={styles.main_content}>
           {/**图片区 */}
-          <Carousel
-            className={styles.swiper}
-            cellSpacing={20}
-            slideWidth={0.5}
-            autoplay={false}
-            infinite={false}
-            selectedIndex={1}
-            afterChange={index => this.setState({ slideIndex: index })}>
+          <Carousel className={styles.swiper} effect="fade" ref={el => (this.slider = el)}>
             {
               this.state.swiper.map((val, index) => {
                 return (
                   <div className={styles.swiper_content} key={index}>
                     <p>{val.title}</p>
                     <h3 text={val.text}>{val.text}</h3>
-                    <div className={styles.swiper_img}
-                      style={{
-                        display: 'block',
-                        position: 'relative',
-                        top: this.state.slideIndex === index ? 30 : 0,
-                      }}>
-                      {
-                        val.image.map((item, index) => { return (<img src={item} key={index} />) })
-                      }
-                    </div>
-
                   </div>
                 )
               })
             }
           </Carousel>
+
+          <CarouselMobile
+            className={styles.swiper_img}
+            cellSpacing={10}
+            slideWidth={0.5}
+            afterChange={index => { this.setState({ slideIndex: index }); this.slider && this.slider.innerSlider.slickGoTo(index) }}>
+            {
+              this.state.swiper.map((val, index) => {
+                return (
+                  <div key={index} className={styles.swiper_content}>
+                    {
+                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top' }} />) })
+                    }
+                  </div>
+                )
+              })
+            }
+          </CarouselMobile>
         </div>
         {
-          this.state.popup ? this.renderPopUpBoxPrompt() : null
+          !this.state.popup ? this.renderPopUpBoxPrompt() : null
         }
       </div>
     )
@@ -90,7 +91,7 @@ class Index extends Component {
         <Modal
           visible={this.state.popup}
           transparent
-          maskClosable={false}
+          maskClosable={true}
           onClose={() => this.setState({ popup: false })}
           wrapClassName={styles.popup_modal}>
           <div className={styles.modal_header}>

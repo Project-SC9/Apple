@@ -10,15 +10,11 @@ export class Index extends PureComponent {
             <div className={styles.footer}>
                 <div className={styles.search}>
                     <SearchBar
-                        placeholder="Search.."
-                        onSubmit={value => console.log(value, 'onSubmit')}
-                        onClear={value => console.log(value, 'onClear')}
-                        onFocus={() => console.log('onFocus')}
-                        onBlur={() => console.log('onBlur')}
-                        onCancel={() => console.log('onCancel')}
+                        placeholder="聊下状态，再看吃的"
                         onChange={this.searchChangedHandler}
                         showCancelButton={false}
                     />
+                    <img src={require('assets/image/chatbot.svg')} />
                 </div>
             </div>
         )

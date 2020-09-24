@@ -4,15 +4,16 @@ import styles from './index.css';
 
 export class Index extends PureComponent {
     state = {
-        data: ['Colors', 'Colors', 'Colors', "Colors", "Colors", "Colors", "Colors"],
+        data: ['宿醉', '夜猫', '路游', '宿醉', '夜猫', '路游', "夜猫"],
         imgHeight: 70,
+        imgurl: 'https://i.loli.net/2020/09/22/f5GV8zsLFdcD4xw.png'
     }
     render() {
         return (
             <Carousel
                 className={styles.space_carousel}
                 cellSpacing={10}
-                slideWidth='85px'
+                slideWidth={0.29}
                 autoplay={false}
                 dots={false}
                 infinite={false}
@@ -22,9 +23,9 @@ export class Index extends PureComponent {
                         return (
                             <div className={styles.carousel} key={index}>
                                 <div className={styles.carousel_img}>
-                                    <img src={require('assets/image/robot.png')} />
+                                    <img src={this.state.imgurl} />
+                                    <p>{val}</p>
                                 </div>
-                                <p>{val}</p>
                             </div>
                         )
                     })

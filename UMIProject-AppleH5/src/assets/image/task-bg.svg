@@ -1,0 +1,25 @@
+<svg width="202" height="202" viewBox="0 0 202 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.8" filter="url(#filter0_bd)">
+<ellipse cx="100.901" cy="97" rx="96.7033" ry="96.6667" fill="url(#paint0_radial)"/>
+</g>
+<defs>
+<filter id="filter0_bd" x="-2.80219" y="-6.66666" width="207.407" height="208.333" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImage" stdDeviation="3.5"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="effect1_backgroundBlur" result="effect2_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape"/>
+</filter>
+<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(172.11 33.7273) rotate(134.641) scale(224.785 198.557)">
+<stop offset="0.0730371" stop-color="#FDF7E2"/>
+<stop offset="0.567528" stop-color="#E4A7AD"/>
+<stop offset="0.797407" stop-color="#6C97C3"/>
+<stop offset="0.937635" stop-color="#307595"/>
+<stop offset="1" stop-color="#515B83"/>
+</radialGradient>
+</defs>
+</svg>

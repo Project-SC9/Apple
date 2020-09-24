@@ -15,7 +15,7 @@ class Index extends PureComponent {
   }
 
   componentDidMount() {
-
+    // <script>window.routerBase = window.location.pathname.split("/")[1];</script>
   }
 
 }
