@@ -14,7 +14,7 @@ export class Index extends PureComponent {
                         onChange={this.searchChangedHandler}
                         showCancelButton={false}
                     />
-                    <img src={require('assets/image/chatbot.svg')} />
+                    <img src="https://i.loli.net/2020/09/25/jGL2kAgpcqw3dsS.png" />
                 </div>
             </div>
         )

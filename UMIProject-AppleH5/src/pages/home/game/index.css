@@ -1,13 +1,22 @@
 .game {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #F2D6FF 0%, rgba(235, 67, 67, 0) 100%);
+}
+
+.game_back {
+  width: 100%;
+  height: 45px;
+  background: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
 }
 
 .main_top {
   width: 93%;
   margin: auto;
-  padding: 0.625rem 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,56 +24,67 @@
 }
 
 .main_top img {
-  width: 2rem;
+  width: 32px;
 }
 
 .main_top p {
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: normal;
-  font-size: 1.675rem;
-  line-height: 1.875rem;
+  font-size: 35px;
+  line-height: 30px;
   color: #673AB7;
+}
+
+.content {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.game_content {
+  margin-top: 40px;
+}
+
+.game_status {
+  background: linear-gradient(180deg, #F2D6FF 0%, rgba(235, 67, 67, 0) 100%);
 }
 
 /* 弹出框 */
 .modal_header {
-  width: 12.5rem;
-  height: 12.5rem;
+  width: 93%;
   margin: auto;
-  position: fixed;
-}
-
-.modal_header_img {
-  width: 10.5rem;
-  height: 10.5rem;
-  background: url('../../../assets/image/task-bg.svg') no-repeat;
-  background-size: 100% 100%;
-  position: absolute;
-  top: -13%;
-  left: 38%;
 }
 
 .modal_header img {
-  width: 90%;
+  width: 50%;
+  padding-top: 3.41%;
 }
 
+.modal_header p {
+  position: absolute;
+  right: 8%;
+  top: 1%;
+  font-size: 17px;
+  color: #9C9C9C;
+}
+
+.modal_content_award,
 .modal_content {
-  margin: auto;
-  position: relative;
-  top: 43%;
+  margin: 5% auto;
 }
 
+.modal_header h2,
+.modal_content_award h2,
 .modal_content h2 {
   margin: 5% auto;
   font-family: 'ZCOOL KuaiLe';
   font-style: normal;
   font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 1.875rem;
+  font-size: 28px;
+  line-height: 30px;
   text-align: center;
   color: #673AB7;
-  letter-spacing: 0.125rem;
+  letter-spacing: 2px;
 }
 
 .modal_content p {
@@ -72,37 +92,38 @@
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: normal;
-  font-size: 1rem;
-  line-height: 1rem;
+  font-size: 16px;
+  line-height: 16px;
   text-align: center;
   color: #673AB7;
   margin-bottom: 12%;
 }
 
+.modal_content_award :global .am-button,
 .modal_content :global .am-button {
   width: 68%;
-  height: 2.5rem;
-  margin: auto;
+  height: 40px;
+  margin: 14px auto;
   background: #673AB7;
-  border-radius: 2.625rem;
-  -webkit-border-radius: 2.625rem;
-  -moz-border-radius: 2.625rem;
-  -ms-border-radius: 2.625rem;
-  -o-border-radius: 2.625rem;
+  border-radius: 42px;
+  -webkit-border-radius: 42px;
+  -moz-border-radius: 42px;
+  -ms-border-radius: 42px;
+  -o-border-radius: 42px;
   font-family: "PingFang SC";
   font-style: normal;
   font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 2;
+  font-size: 24px;
+  line-height: 40px;
   align-items: center;
   text-align: center;
   color: #FFFFFF;
 }
 
 .popup_modal :global .am-modal-transparent {
-  width: 80%;
-  height: 51%;
-  background: url('../../../assets/image/base.svg') no-repeat;
+  width: 372px;
+  height: 400px;
+  background: url('../../../assets/image/base.png') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -116,12 +137,200 @@
 }
 
 /* 内容 */
-
 .content_task {
+  width: 95%;
+  margin: auto;
   display: flex;
   flex-direction: row;
 }
 
-.content_task img {
+.content_task_right,
+.content_task_left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.task_list img {
   width: 100%;
+  margin: 2% auto;
+}
+
+.task_list {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+
+.task_title {
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  left: 4%;
+  bottom: 18px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 27px;
+  -webkit-border-radius: 27px;
+  -moz-border-radius: 27px;
+  -ms-border-radius: 27px;
+  -o-border-radius: 27px;
+}
+
+.star_fill {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  color: #F9BB4B;
+  font-size: 27px;
+  line-height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.star_fill_toogle {
+  display: none;
+}
+
+/* 奖励 */
+.modal_content_award ul {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 9.6px;
+}
+
+.modal_content_award ul li {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_content_award ul li p {
+  font-family: "PingFang HK";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 22px;
+  color: #929292;
+  margin-bottom: 5.04px;
+  flex: 1;
+}
+
+.modal_content_award ul li:nth-child(1) p:nth-child(1) {
+  border-right: 1px solid #929292;
+  padding-right: 5px;
+}
+
+.modal_content_award ul li:nth-child(1) {
+  /* width: 83%; */
+  margin: auto;
+}
+
+.mark_hint {
+  font-family: "PingFang HK";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 15px;
+  color: #673AB7;
+  margin-bottom: 0;
+}
+
+.mark_hint span {
+  margin-right: 4.8px;
+}
+
+/* 我的奖励 */
+.popup_reward {
+  height: 220px;
+  background: #FFFFFF;
+  border: 4px solid #673AB7;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.space_carousel {
+  width: 97% !important;
+  height: 250px !important;
+  padding: 16px 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.space_carousel :global .slider-decorator-0 {
+  display: none;
+}
+
+.space_carousel :global .slider-list {
+  height: 256px !important;
+}
+
+.carousel_ul {
+  width: 95% !important;
+}
+
+:global .am-modal-mask {
+  background: transparent;
+}
+
+.user_reward :global .am-modal-transparent {
+  width: 350px;
+  height: 400px;
+  background: url('../../../assets/image/base.png') no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 44px;
+  /* right: 28px; */
+}
+
+.user_reward :global .am-modal-transparent .am-modal-content .am-modal-body,
+.user_reward :global .am-modal-transparent .am-modal-content {
+  padding: 0;
+}
+
+.user_reward :global .am-modal-content {
+  background: transparent;
+}
+
+.modal_content_award h3 {
+  margin: 5% auto;
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #A4A4A4;
+}
+
+.modal_content_award h4 {
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #929292;
+  margin: 20px auto
 }

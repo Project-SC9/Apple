@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Carousel } from 'antd-mobile';
 import styles from './index.css';
-
+/**
+ * 分类栏
+ */
 export class Index extends PureComponent {
     state = {
         data: ['宿醉', '夜猫', '路游', '宿醉', '夜猫', '路游', "夜猫"],
@@ -13,7 +15,7 @@ export class Index extends PureComponent {
             <Carousel
                 className={styles.space_carousel}
                 cellSpacing={10}
-                slideWidth={0.29}
+                slideWidth={0.25}
                 autoplay={false}
                 dots={false}
                 infinite={false}

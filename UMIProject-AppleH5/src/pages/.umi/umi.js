@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import findRoute, {
   getUrlQuery,
 } from 'E:/Apple/Apple/UMIProject-AppleH5/node_modules/umi-build-dev/lib/findRoute.js';
+import '../../../node_modules/umi-plugin-hd/template/index.js';
+import FastClick from '../../../node_modules/fastclick/lib/fastclick.js';
 
 // runtime plugins
 const plugins = require('umi/_runtimePlugin');
@@ -25,6 +27,15 @@ plugins.init({
 });
 plugins.use(require('../../../node_modules/umi-plugin-dva/lib/runtime'));
 plugins.use(require('@/app'));
+
+// Initialize fastclick
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    FastClick.attach(document.body);
+  },
+  false,
+);
 
 const app = require('@tmp/dva')._onCreate();
 window.g_app = app;

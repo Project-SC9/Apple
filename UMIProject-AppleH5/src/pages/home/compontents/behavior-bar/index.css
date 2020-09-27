@@ -1,0 +1,97 @@
+.behavior_bar {
+  width: 73%;
+  height: 77px;
+  position: fixed;
+  bottom: 13%;
+  right: -10%;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 73px;
+  object-fit: contain;
+}
+
+.bottom_bar {
+  width: 92%;
+  height: 77px;
+  line-height: 77px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bottom_bar_img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.bottom_bar_img img {
+  width: 100%;
+  height: 100%;
+  margin-top: -11.2px;
+}
+
+.bar_title {
+  line-height: 1.87;
+}
+
+.bar_title h3 {
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  color: #FFFFFF;
+}
+
+.bar_title p {
+  font-size: 20px;
+  font-weight: 300;
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.progress {
+  position: relative;
+}
+
+.progress img {
+  width: 40px;
+  height: 40px;
+}
+
+.bar_icon {
+  position: absolute;
+  top: 25%;
+  left: 19%;
+  color: #fff;
+  font-size: 37px;
+  font-weight: bold;
+}
+
+.bottom_bar :global .ant-progress-circle-trail {
+  stroke: rgba(43, 43, 43, 0.7);
+}
+
+.bottom_bar :global .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: #fff
+}
+
+.bottom_bar :global .ant-progress-circle .ant-progress-inner {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+.progress :global .ant-progress-circle .ant-progress-text {
+  display: none;
+}

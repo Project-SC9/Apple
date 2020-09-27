@@ -13,22 +13,34 @@ class Index extends Component {
       {
         title: '拔草下一个',
         text: '人气美食',
-        image: ['https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png', 'https://i.loli.net/2020/09/20/kj6Ga9QNnKO8XWA.png', 'https://i.loli.net/2020/09/20/GXtQrpUbkMEwsY8.png', 'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png'],
+        image: ['https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
+          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
+          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+          'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png'],
       },
       {
         title: '发现当地',
         text: '特色美食',
-        image: ['https://i.loli.net/2020/09/20/kj6Ga9QNnKO8XWA.png', 'https://i.loli.net/2020/09/20/owyeBOSnK8cAhiX.png', 'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png', 'https://i.loli.net/2020/09/20/kj6Ga9QNnKO8XWA.png'],
+        image: ['https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
+          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
+          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
+          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png'],
       },
       {
         title: '还没想好',
         text: '要吃什么?',
-        image: ['https://i.loli.net/2020/09/20/owyeBOSnK8cAhiX.png', 'https://i.loli.net/2020/09/20/kj6Ga9QNnKO8XWA.png', 'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png', 'https://i.loli.net/2020/09/20/GXtQrpUbkMEwsY8.png'],
+        image: ['https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
+          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
+          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png'],
       },
       {
         title: '发现附近',
         text: '美食优惠',
-        image: ['https://i.loli.net/2020/09/20/TFXPpQuWz7BIyAN.png', 'https://i.loli.net/2020/09/20/GXtQrpUbkMEwsY8.png', 'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png', 'https://i.loli.net/2020/09/20/owyeBOSnK8cAhiX.png'],
+        image: ['https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+          'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
+          'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
+          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png'],
       },
     ],
     slideIndex: 1,
@@ -44,7 +56,7 @@ class Index extends Component {
 
         <div className={styles.main_content}>
           {/**图片区 */}
-          <Carousel className={styles.swiper} effect="fade" ref={el => (this.slider = el)}>
+          <Carousel className={styles.swiper} effect="fade" ref={el => (this.slider = el)} afterChange={(current) => this.setState({ slideIndex: current })}>
             {
               this.state.swiper.map((val, index) => {
                 return (
@@ -59,15 +71,16 @@ class Index extends Component {
 
           <CarouselMobile
             className={styles.swiper_img}
-            cellSpacing={10}
+            cellSpacing={5}
             slideWidth={0.5}
+            selectedIndex={this.state.slideIndex}
             afterChange={index => { this.setState({ slideIndex: index }); this.slider && this.slider.innerSlider.slickGoTo(index) }}>
             {
               this.state.swiper.map((val, index) => {
                 return (
                   <div key={index} className={styles.swiper_content}>
                     {
-                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top' }} />) })
+                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '90%', verticalAlign: 'top' }} />) })
                     }
                   </div>
                 )
@@ -76,7 +89,7 @@ class Index extends Component {
           </CarouselMobile>
         </div>
         {
-          !this.state.popup ? this.renderPopUpBoxPrompt() : null
+          !!this.state.popup ? this.renderPopUpBoxPrompt() : null
         }
       </div>
     )
@@ -94,19 +107,22 @@ class Index extends Component {
           maskClosable={true}
           onClose={() => this.setState({ popup: false })}
           wrapClassName={styles.popup_modal}>
-          <div className={styles.modal_header}>
-            <img src={require('assets/image/logo.png')} />
-            <p onClick={() => this.setState({ popup: false })}>x</p>
-          </div>
-          <div className={styles.modal_content}>
-            <img src={require('assets/image/smartphone.png')} />
-            <h2>扫描酒店内Juuuce二维码，玩游戏得奖励。</h2>
-            <Button onClick={() => this.setState({ popup: false })}>我知道了</Button>
+          <div className={styles.popup_box}>
+            <div className={styles.modal_header}>
+              <img src={require('assets/image/logo.png')} />
+              { /**<p onClick={() => this.setState({ popup: false })}>x</p>*/}
+            </div>
+            <div className={styles.modal_content}>
+              <img src={require('assets/image/smartphone.png')} />
+              <h2>扫描酒店内Juuuce二维码，玩游戏得奖励。</h2>
+              <Button onClick={() => this.setState({ popup: false })}>我知道了</Button>
+            </div>
           </div>
         </Modal>
       </div>
     )
   }
+
   WrapTouchStartHandler = (e) => {
     // wrapProps = {{ onTouchStart: this.WrapTouchStartHandler }}
     // fix touch to scroll background page on iOS
@@ -121,6 +137,7 @@ class Index extends Component {
 
   componentDidMount() {
     // console.log(this.props.location.query.total)
+    this.slider && this.slider.innerSlider.slickGoTo(this.state.slideIndex)
   }
 }
 

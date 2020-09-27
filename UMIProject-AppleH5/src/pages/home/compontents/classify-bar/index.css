@@ -1,13 +1,13 @@
 /* 走马灯 */
 .space_carousel {
-  padding: 1rem 0rem;
+  padding: 16px 0;
   overflow: hidden;
   touch-action: none;
 }
 
 .carousel {
   width: 91%;
-  height: 3rem;
+  height: 48px;
   margin: auto;
   background: url('assets/image/border.svg') no-repeat;
   background-size: 100% 100%;
@@ -15,40 +15,44 @@
 
 .carousel_img {
   width: 85%;
-  height: auto;
+  height: 100%;
+  line-height: 100%;
   margin: auto;
-  border-radius: 0.625rem;
+  border-radius: 10px;
   background-color: transparent;
-  padding-top: 8%;
+  padding-top: 6%;
+  padding-bottom: 4%;
   vertical-align: middle;
   text-align: center;
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
-  -webkit-border-radius: 0.625rem;
-  -moz-border-radius: 0.625rem;
-  -ms-border-radius: 0.625rem;
-  -o-border-radius: 0.625rem;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 .carousel_img img {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
 }
 
 .carousel p {
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: normal;
-  font-size: 1.375rem;
+  font-size: 34px;
   color: #000000;
+  margin-right: 13px;
+  line-height: 1.5;
 }
 
 .space_carousel :global .slider-frame {
-  transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -webkit-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -moz-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -ms-transform: translate3d(-1.25rem, 0px, 0px) !important;
-  -o-transform: translate3d(-1.25rem, 0px, 0px) !important;
+  transform: translate3d(-20px, 0px, 0px) !important;
+  -webkit-transform: translate3d(-20px, 0px, 0px) !important;
+  -moz-transform: translate3d(-20px, 0px, 0px) !important;
+  -ms-transform: translate3d(-20px, 0px, 0px) !important;
+  -o-transform: translate3d(-20px, 0px, 0px) !important;
 }
