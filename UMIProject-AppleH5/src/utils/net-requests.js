@@ -12,7 +12,7 @@ import {
 
 import moment from 'moment';
 
-import { MERCHANT_NUMBER } from 'constants/business-identifiers';
+// import { MERCHANT_NUMBER } from 'constants/business-identifiers';
 
 /**
  * 路由跳转
@@ -88,11 +88,11 @@ const _jsonHandlerMiddleware = async (ctx, next) => {
  */
 const _authHandlerMiddle = async (ctx, next) => {
   const { player } = window.g_app._store.getState();
-  const { auth: { playerUserId, username, token } } = player;
+  // const { auth: { playerUserId, username, token } } = player;
 
-  if (!playerUserId || !username || !token) {
-    throw { response: { 'status': 401 } };
-  }
+  // if (!playerUserId || !username || !token) {
+  //   throw { response: { 'status': 401 } };
+  // }
 
   await next();
 };

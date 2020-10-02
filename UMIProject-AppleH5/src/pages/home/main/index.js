@@ -2,49 +2,31 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './index.css';
-import { Button, Modal, Carousel as CarouselMobile } from 'antd-mobile';
+import { swiperMainList, swiperMainTitle } from 'assets/locus';
+
+import { Button, Modal } from 'antd-mobile';
 import { Carousel } from 'antd';
+import ReactSwipes from 'react-swipes'
 /**
  * 首页
  */
 class Index extends Component {
   state = {
-    swiper: [
-      {
-        title: '拔草下一个',
-        text: '人气美食',
-        image: ['https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
-          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
-          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-          'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png'],
-      },
-      {
-        title: '发现当地',
-        text: '特色美食',
-        image: ['https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
-          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
-          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png'],
-      },
-      {
-        title: '还没想好',
-        text: '要吃什么?',
-        image: ['https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-          'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
-          'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png'],
-      },
-      {
-        title: '发现附近',
-        text: '美食优惠',
-        image: ['https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-          'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-          'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
-          'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png'],
-      },
-    ],
     slideIndex: 1,
-    popup: true
+    popup: false
+  }
+  opt = {
+    distance: 425, // 每次移动的距离，卡片的真实宽度
+    currentPoint: 0,// 初始位置，默认从0即第一个元素开始
+    swTouchend: (ev) => {
+      let data = {
+        moved: ev.moved,
+        originalPoint: ev.originalPoint,
+        newPoint: ev.newPoint,
+        cancelled: ev.cancelled
+      }
+      this.slider && this.slider.innerSlider.slickGoTo(ev.newPoint)
+    }
   }
   render() {
     return (
@@ -58,7 +40,7 @@ class Index extends Component {
           {/**图片区 */}
           <Carousel className={styles.swiper} effect="fade" ref={el => (this.slider = el)} afterChange={(current) => this.setState({ slideIndex: current })}>
             {
-              this.state.swiper.map((val, index) => {
+              swiperMainTitle.map((val, index) => {
                 return (
                   <div className={styles.swiper_content} key={index}>
                     <p>{val.title}</p>
@@ -69,24 +51,19 @@ class Index extends Component {
             }
           </Carousel>
 
-          <CarouselMobile
-            className={styles.swiper_img}
-            cellSpacing={5}
-            slideWidth={0.5}
-            selectedIndex={this.state.slideIndex}
-            afterChange={index => { this.setState({ slideIndex: index }); this.slider && this.slider.innerSlider.slickGoTo(index) }}>
-            {
-              this.state.swiper.map((val, index) => {
-                return (
-                  <div key={index} className={styles.swiper_content}>
+          <div className={styles.viewport}>
+            <div className={styles.flipsnap}>
+              <ReactSwipes className={styles.card_slide} options={this.opt}>
+                {swiperMainList.map((val, index) => (
+                  <div key={index} className={styles.carousel}>
                     {
-                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '90%', verticalAlign: 'top' }} />) })
+                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top', }} />) })
                     }
                   </div>
-                )
-              })
-            }
-          </CarouselMobile>
+                ))}
+              </ReactSwipes>
+            </div>
+          </div>
         </div>
         {
           !!this.state.popup ? this.renderPopUpBoxPrompt() : null
@@ -94,7 +71,6 @@ class Index extends Component {
       </div>
     )
   }
-
   /**
    * 用户输入网址弹出框提示
    */
@@ -136,8 +112,10 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.location.query.total)
     this.slider && this.slider.innerSlider.slickGoTo(this.state.slideIndex)
+    if (this.props.location.query.uid == undefined) {
+      this.state.popup = true
+    }
   }
 }
 

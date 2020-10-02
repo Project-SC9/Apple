@@ -83,7 +83,7 @@ div:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #b5b5b5;
+  background-color: transparent;
   height: 50px;
   border-radius: 4px;
 }

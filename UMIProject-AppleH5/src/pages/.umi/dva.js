@@ -21,6 +21,7 @@ export function _onCreate() {
   });
   
   app.model({ namespace: 'index', ...(require('E:/Apple/Apple/UMIProject-AppleH5/src/models/index.js').default) });
+app.model({ namespace: 'index', ...(require('E:/Apple/Apple/UMIProject-AppleH5/src/pages/home/models/index.js').default) });
   return app;
 }
 

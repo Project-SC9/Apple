@@ -1,21 +1,10 @@
-.behavior_bar {
-  width: 73%;
-  height: 77px;
-  position: fixed;
-  bottom: 13%;
-  right: -10%;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 73px;
-  object-fit: contain;
-}
-
 .bottom_bar {
-  width: 92%;
+  width: 100%;
   height: 77px;
   line-height: 77px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -36,7 +25,8 @@
 .bottom_bar_img img {
   width: 100%;
   height: 100%;
-  margin-top: -11.2px;
+  margin-top: -0.3rem;
+  border-radius: 50%;
 }
 
 .bar_title {
@@ -45,19 +35,23 @@
 
 .bar_title h3 {
   font-family: "ZCOOL KuaiLe";
-  font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  font-size: 0.4rem;
   color: #FFFFFF;
 }
 
 .bar_title p {
-  font-size: 20px;
-  font-weight: 300;
   font-family: "ZCOOL KuaiLe";
+  font-weight: normal;
+  font-stretch: normal;
   font-style: normal;
-  font-size: 20px;
-  line-height: 20px;
+  letter-spacing: normal;
+  font-size: 0.4rem;
+  line-height: 1.5;
   color: #FFFFFF;
 }
 
@@ -84,7 +78,7 @@
 }
 
 .bottom_bar :global .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
-  stroke: #fff
+  stroke: #854aef
 }
 
 .bottom_bar :global .ant-progress-circle .ant-progress-inner {

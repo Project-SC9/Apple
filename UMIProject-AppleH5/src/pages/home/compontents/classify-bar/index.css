@@ -1,20 +1,57 @@
 /* 走马灯 */
+.viewport {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  /* padding: 30px 0; */
+  touch-action: manipulation;
+}
+
+.flipsnap {
+  width: 830px;
+  padding-left: 0px;
+  touch-action: manipulation;
+}
+
+.flipsnap:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
 .space_carousel {
   padding: 16px 0;
   overflow: hidden;
-  touch-action: none;
+  /* touch-action: none; */
+  touch-action: manipulation;
 }
 
 .carousel {
-  width: 91%;
-  height: 48px;
-  margin: auto;
+  width: 108px;
+  height: 45px;
+  object-fit: contain;
+  margin-right: 10px;
+  text-align: center;
+  float: left;
+  color: #666;
+  box-sizing: border-box;
   background: url('assets/image/border.svg') no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+.carousel:last-child {
+  margin-right: 0;
+}
+
+.carousel:nth-child(1) {
+  margin-left: 10px;
 }
 
 .carousel_img {
-  width: 85%;
+  width: 100%;
   height: 100%;
   line-height: 100%;
   margin: auto;
@@ -27,7 +64,7 @@
   display: flex;
   flex-direction: row;
   align-content: center;
-  justify-content: space-between;
+  justify-content: space-around;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -42,11 +79,11 @@
 .carousel p {
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
-  font-weight: normal;
-  font-size: 34px;
+  font-weight: bold;
+  font-size: 0.4rem;
   color: #000000;
-  margin-right: 13px;
-  line-height: 1.5;
+  margin-right: 0.27083rem;
+  line-height: 1.7;
 }
 
 .space_carousel :global .slider-frame {

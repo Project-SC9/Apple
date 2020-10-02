@@ -12945,7 +12945,7 @@ react-dev-utils@9.0.1:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dom@^16.13.1, react-dom@^16.8.6:
+react-dom@^16.13.1, react-dom@^16.2.0, react-dom@^16.8.6:
   version "16.13.1"
   resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.13.1.tgz?cache=0&sync_timestamp=1596828326067&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
   integrity sha1-wb03MxoEhsB47lTEdAcgmTsuDn8=
@@ -13094,6 +13094,15 @@ react-slick@~0.25.2:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-swipes@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/react-swipes/download/react-swipes-1.1.0.tgz#667e9de652fd4b6b993502a800c67d554300943c"
+  integrity sha1-Zn6d5lL9S2uZNQKoAMZ9VUMAlDw=
+  dependencies:
+    prop-types "^15.6.1"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.13.1:
   version "16.13.1"
   resolved "https://registry.npm.taobao.org/react-test-renderer/download/react-test-renderer-16.13.1.tgz#de25ea358d9012606de51e012d9742e7f0deabc1"
@@ -13112,7 +13121,7 @@ react-tween-state@^0.1.5:
     raf "^3.1.0"
     tween-functions "^1.0.1"
 
-react@^16.13.1, react@^16.8.6:
+react@^16.13.1, react@^16.2.0, react@^16.8.6:
   version "16.13.1"
   resolved "https://registry.npm.taobao.org/react/download/react-16.13.1.tgz?cache=0&sync_timestamp=1596828325529&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha1-LoGIIvGpdDEiwGPWQQ2FweOv5I4=

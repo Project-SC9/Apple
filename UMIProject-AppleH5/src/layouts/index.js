@@ -7,16 +7,18 @@ import styles from './index.css';
  * 全局的布局
  */
 class Index extends Component {
+
 	render() {
 		const { children } = this.props;
 		return (
 			<div> {children} </div>
-		);
+		)
 	}
-
 	componentDidMount() {
 		document.title = 'Apple'
 	}
+
+
 
 }
 

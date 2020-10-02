@@ -5,8 +5,7 @@
 
 .game_back {
   width: 100%;
-  height: 45px;
-  background: #FFFFFF;
+  background: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,6 +20,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 0.2rem;
 }
 
 .main_top img {
@@ -28,36 +28,52 @@
 }
 
 .main_top p {
-  font-family: "ZCOOL KuaiLe";
+  font-family: ZCOOLKuaiLe;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-stretch: normal;
   font-style: normal;
-  font-weight: normal;
-  font-size: 35px;
-  line-height: 30px;
-  color: #673AB7;
+  line-height: normal;
+  color: #673ab7;
 }
 
 .content {
   width: 100%;
+  margin-top: 120px;
   margin-bottom: 60px;
 }
 
-.game_content {
-  margin-top: 40px;
+.game_status {
+  height: 2.5rem;
+  background-image: linear-gradient(to bottom, #f6c4f4, #ffefef 90%, rgba(255, 255, 255, 0));
 }
 
-.game_status {
-  background: linear-gradient(180deg, #F2D6FF 0%, rgba(235, 67, 67, 0) 100%);
+.behavior_bar {
+  width: 67%;
+  position: fixed;
+  bottom: 2.41667rem;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  border-top-left-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
 }
 
 /* 弹出框 */
 .modal_header {
-  width: 93%;
+  width: 100%;
   margin: auto;
 }
 
-.modal_header img {
-  width: 50%;
-  padding-top: 3.41%;
+.modal_header_img {
+  width: 100%;
+  position: absolute;
+}
+
+.modal_header_img img {
+  width: 4rem;
+  height: 4rem;
+  margin-top: -0.4rem;
 }
 
 .modal_header p {
@@ -68,40 +84,85 @@
   color: #9C9C9C;
 }
 
-.modal_content_award,
+.modal_logo {
+  width: 3.89583rem;
+  height: 0.91667rem;
+  object-fit: contain;
+  margin-top: 0.3rem;
+}
+
+.award_logo {
+  width: 105px;
+  height: 105px;
+  object-fit: contain;
+}
+
 .modal_content {
+  width: 100%;
+  position: absolute;
+  bottom: 0.15rem;
   margin: 5% auto;
 }
 
+.modal_content_award {
+  margin-top: 7.5%;
+}
+
+.modal_content_award h2 {
+  font-size: 0.55rem;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+  color: #673AB7;
+  letter-spacing: 2px;
+  margin-bottom: 0.2rem;
+}
+
 .modal_header h2,
-.modal_content_award h2,
 .modal_content h2 {
   margin: 5% auto;
   font-family: 'ZCOOL KuaiLe';
   font-style: normal;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 0.7rem;
   line-height: 30px;
   text-align: center;
   color: #673AB7;
   letter-spacing: 2px;
+  margin-bottom: 0.2rem;
+}
+
+.modal_content_award .award_title {
+  margin-top: 2%;
+  margin-bottom: 3%;
+  font-family: "ZCOOLKuaiLe";
+  font-weight: bold;
+  font-size: 0.55rem;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #673ab7;
 }
 
 .modal_content p {
   margin: 2% auto;
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 16px;
+  font-weight: 600;
+  font-size: 0.32rem;
+  line-height: 0.33333rem;
   text-align: center;
   color: #673AB7;
-  margin-bottom: 12%;
+  margin-bottom: 10%;
 }
 
 .modal_content_award :global .am-button,
 .modal_content :global .am-button {
-  width: 68%;
+  width: 80%;
   height: 40px;
   margin: 14px auto;
   background: #673AB7;
@@ -113,16 +174,31 @@
   font-family: "PingFang SC";
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 50px;
   line-height: 40px;
   align-items: center;
   text-align: center;
   color: #FFFFFF;
 }
 
+.modal_content_award :global .am-button {
+  font-size: 0.42rem;
+  margin-bottom: 0.1rem;
+}
+
+.popup_modal {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
 .popup_modal :global .am-modal-transparent {
-  width: 372px;
+  width: 300px;
   height: 400px;
+}
+
+.popup_modal :global .am-modal-transparent .am-modal-content .am-modal-body {
+  width: 300px;
+  height: 375px;
+  margin-top: 1.35em;
   background: url('../../../assets/image/base.png') no-repeat;
   background-size: 100% 100%;
 }
@@ -138,7 +214,7 @@
 
 /* 内容 */
 .content_task {
-  width: 95%;
+  width: 98%;
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -153,7 +229,6 @@
 
 .task_list img {
   width: 100%;
-  margin: 2% auto;
 }
 
 .task_list {
@@ -161,6 +236,7 @@
   vertical-align: middle;
   text-align: center;
   position: relative;
+  margin-bottom: 2%;
 }
 
 .task_title {
@@ -171,11 +247,11 @@
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   color: #FFFFFF;
   left: 4%;
-  bottom: 18px;
+  bottom: 12px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 27px;
   -webkit-border-radius: 27px;
@@ -185,15 +261,15 @@
 }
 
 .star_fill {
-  width: 40px;
-  height: 40px;
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
   position: absolute;
-  left: 12px;
-  top: 14px;
+  left: 0.25rem;
+  top: 0.1rem;
   color: #F9BB4B;
-  font-size: 27px;
-  line-height: 40px;
+  font-size: 0.5rem;
+  line-height: 0.7rem;
   background: rgba(0, 0, 0, 0.5);
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -228,7 +304,7 @@
   font-family: "PingFang HK";
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 33px;
   line-height: 22px;
   color: #929292;
   margin-bottom: 5.04px;
@@ -236,7 +312,7 @@
 }
 
 .modal_content_award ul li:nth-child(1) p:nth-child(1) {
-  border-right: 1px solid #929292;
+  border-right: 3px solid #929292;
   padding-right: 5px;
 }
 
@@ -248,8 +324,8 @@
 .mark_hint {
   font-family: "PingFang HK";
   font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  font-weight: 500;
+  font-size: 0.22rem;
   line-height: 15px;
   color: #673AB7;
   margin-bottom: 0;
@@ -259,22 +335,38 @@
   margin-right: 4.8px;
 }
 
+.awardall_title {
+  margin-top: 9%;
+  margin-bottom: 4%;
+  font-family: "ZCOOLKuaiLe";
+  font-size: 0.5rem;
+  font-weight: bolder;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #673ab7;
+}
+
+.modal_content_text {
+  font-family: "ZCOOLKuaiLe";
+  font-size: 0.3rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #929292;
+}
+
 /* 我的奖励 */
 .popup_reward {
-  height: 220px;
+  /* height: 220px; */
   background: #FFFFFF;
   border: 4px solid #673AB7;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-}
-
-.space_carousel {
-  width: 97% !important;
-  height: 250px !important;
-  padding: 16px 0;
-  overflow: hidden;
-  touch-action: none;
 }
 
 .space_carousel :global .slider-decorator-0 {
@@ -286,16 +378,24 @@
 }
 
 .carousel_ul {
-  width: 95% !important;
+  width: 77% !important;
 }
 
 :global .am-modal-mask {
   background: transparent;
 }
 
+.user_reward {
+  animation: show-item 2s ease-in forwards;
+}
+
+.user_reward_an {
+  animation: hide-item 2s ease-out forwards;
+}
+
 .user_reward :global .am-modal-transparent {
   width: 350px;
-  height: 400px;
+  /* height: 375px; */
   background: url('../../../assets/image/base.png') no-repeat;
   background-size: 100% 100%;
   position: absolute;
@@ -313,14 +413,15 @@
 }
 
 .modal_content_award h3 {
-  margin: 5% auto;
+  font-size: 0.55rem;
+  margin-top: 2%;
+  margin-bottom: 2%;
   font-family: 'ZCOOL KuaiLe';
   font-style: normal;
   font-weight: bold;
-  font-size: 28px;
-  line-height: 30px;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 0.04167rem;
+  margin-bottom: 0.2rem;
   color: #A4A4A4;
 }
 
@@ -328,9 +429,85 @@
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 0.4rem;
   line-height: 22px;
   text-align: center;
   color: #929292;
   margin: 20px auto
+}
+
+.transitionName {
+  animation: show-item 2s ease-in forwards;
+}
+
+@keyframes show-item {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide-item {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}
+
+
+.viewport {
+  width: 94%;
+  overflow: hidden;
+  margin: 0 auto;
+  /* padding: 30px 0; */
+  touch-action: none;
+  margin-top: 5%;
+  margin-bottom: 6%;
+}
+
+.flipsnap {
+  width: 800px;
+  padding-left: 0px;
+  touch-action: none;
+}
+
+.flipsnap:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+.card_slide {
+  touch-action: none;
+}
+
+.popup_reward {
+  width: 180px;
+  height: 4.7rem;
+  margin-left: 20px;
+  text-align: center;
+  float: left;
+  color: #666;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+.popup_reward:last-child {
+  margin-right: 0;
 }
