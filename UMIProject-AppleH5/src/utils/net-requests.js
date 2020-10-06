@@ -105,12 +105,21 @@ export const GETRequest = (url, params) => {
   return request.get(url, { params });
 };
 
+// /**
+//  * 普通的post请求
+//  */
+// export const POSTRequest = (url, params) => {
+//   const request = extend({ ..._commonNetRequestConfigs, requestType: 'json' });
+//   request.use(_jsonHandlerMiddleware);
+//   request.use(_cipherHandlerMiddleware);
+//   return request.post(url, { data: json });
+// };
+
 /**
  * 普通的post请求
  */
 export const POSTRequest = (url, params) => {
   const request = extend({ ..._commonNetRequestConfigs, requestType: 'json' });
-  request.use(_jsonHandlerMiddleware);
-  request.use(_cipherHandlerMiddleware);
-  return request.post(url, { data: json });
+  // request.use(_jsonHandlerMiddleware);
+  return request.post(url, { data: params });
 };

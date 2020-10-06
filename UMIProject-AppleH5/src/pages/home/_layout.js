@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import withRouter from 'umi/withRouter';
 import styles from './_layout.css';
+
+import { Modal, Button } from 'antd';
 let u = navigator.userAgent;
+let ua = navigator.userAgent,
+  isWindowsPhone = /(?:Windows Phone)/.test(ua),
+  isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+  isAndroid = /(?:Android)/.test(ua),
+  isFireFox = /(?:Firefox)/.test(ua),
+  isChrome = /(?:Chrome|CriOS)/.test(ua),
+  isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+  isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+  isPc = !isPhone && !isAndroid && !isSymbian;
 /**
  * 布局
  */
@@ -19,25 +30,30 @@ class Index extends Component {
       iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
       iPad: u.indexOf('iPad') > -1, //是否iPad
       webApp: u.indexOf('Safari') == -1,//是否web应该程序，没有头部与底部
-      google: u.indexOf('Chrome') > -1
-    }
+      google: u.indexOf('Chrome') > -1,
+      isTablet: isTablet,
+      isPhone: isPhone,
+      isAndroid: isAndroid,
+      isPc: isPc
+    },
   }
 
   render() {
     const { children } = this.props;
     const { browser } = this.state;
-    // if (browser.android == false && browser.iPhone == false) {
-    // 	return (
-    // 		<div>
-    // 			请前往手机端哦
-    // 		</div>
-    // 	);
-    // }
-    // if (window.orientation == 90 || window.orientation == -90) {
-    // 	return (
-    // 		<div>竖屏效果更好哦 </div>
-    // 	)
-    // }
+    if (window.screen.width > 450) {
+      return (<div>{this.renderModal()}</div>);
+    }
+
+    if (browser.android == false && browser.iPhone == false) {
+      return (<div> { this.renderModal()} </div>);
+    }
+
+    if (window.orientation == 90 || window.orientation == -90) {
+      return (
+        <div className={styles.orientation_text}><h2>竖屏效果更好哦</h2> </div>
+      )
+    }
     return (
       <div className={styles.wrapper} ref={component => this.wrapperRef = component}>
         {children}
@@ -45,6 +61,30 @@ class Index extends Component {
     );
   }
 
+  renderModal = () => {
+    return (
+      <Modal
+        title=""
+        centered
+        visible={true}
+        closable={false}
+        footer={null}
+        wrapClassName={styles.modal_hint}
+      >
+        <div className={styles.hint_box}>
+          <div className={styles.hint_header}>
+            <img src={require('assets/image/logo.png')} />
+          </div>
+          <div className={styles.hint_content}>
+            <img src={require('assets/image/smartphone.svg')} />
+            <h2>现仅支持手机版</h2>
+            <p>请使用手机扫码进入赢取奖励</p>
+            <Button onClick={this.windowCloseClickedHandler}>我知道了</Button>
+          </div>
+        </div>
+      </Modal>
+    )
+  }
   /**
  * 屏幕方向
  */
@@ -55,9 +95,14 @@ class Index extends Component {
     window.location.reload()
   }
 
+  windowCloseClickedHandler = () => {
+    // window.location.href = "about:blank";
+    window.location.href = "https://www.baidu.com/";
+    window.close();
+  }
 
   componentDidMount() {
-
+    // this.screenDirectionHandler()
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", this.screenDirectionHandler, false)
 
   }

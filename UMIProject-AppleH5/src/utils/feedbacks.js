@@ -15,44 +15,44 @@ Toast.config({ duration: 2, mask: true });
  */
 const feedbackEventEmitter = new EventEmitter();
 
-/**
- * Toast.success()提示
- */
-feedbackEventEmitter.addListener('feedback.event.toast.success', (content, resolve) => {
-  Toast.success(content);
-});
+// /**
+//  * Toast.success()提示
+//  */
+// feedbackEventEmitter.addListener('feedback.event.toast.success', (content, resolve) => {
+//   Toast.success(content);
+// });
 
-export const toastSuccess = (content) => {
-  return new Promise((resolve) => {
-    feedbackEventEmitter.emit('feedback.event.toast.success', content, resolve);
-  });
-}
+// export const toastSuccess = (content) => {
+//   return new Promise((resolve) => {
+//     feedbackEventEmitter.emit('feedback.event.toast.success', content, resolve);
+//   });
+// }
 
-/**
- * Toast.info()提示
- */
-feedbackEventEmitter.addListener('feedback.event.toast.info', (content, resolve) => {
-  Toast.info(content);
-});
+// /**
+//  * Toast.info()提示
+//  */
+// feedbackEventEmitter.addListener('feedback.event.toast.info', (content, resolve) => {
+//   Toast.info(content);
+// });
 
-export const toastInfo = (content) => {
-  return new Promise((resolve) => {
-    feedbackEventEmitter.emit('feedback.event.toast.info', content, resolve);
-  });
-}
+// export const toastInfo = (content) => {
+//   return new Promise((resolve) => {
+//     feedbackEventEmitter.emit('feedback.event.toast.info', content, resolve);
+//   });
+// }
 
-/**
- * Toast.fail()提示
- */
-feedbackEventEmitter.addListener('feedback.event.toast.fail', (content, resolve) => {
-  Toast.fail(content);
-});
+// /**
+//  * Toast.fail()提示
+//  */
+// feedbackEventEmitter.addListener('feedback.event.toast.fail', (content, resolve) => {
+//   Toast.fail(content);
+// });
 
-export const toastFail = (content) => {
-  return new Promise((resolve) => {
-    feedbackEventEmitter.emit('feedback.event.toast.fail', content, resolve);
-  });
-}
+// export const toastFail = (content) => {
+//   return new Promise((resolve) => {
+//     feedbackEventEmitter.emit('feedback.event.toast.fail', content, resolve);
+//   });
+// }
 
 /**
  * modal.success()提示

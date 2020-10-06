@@ -1,4 +1,115 @@
-.wrapper {
-  margin: 0 auto;
-  background-color: #ffffff;
-}
+ .wrapper {
+   margin: 0 auto;
+   background-color: #ffffff;
+ }
+
+ .modal_hint :global .ant-modal {
+   width: 2.301rem !important;
+   /* height: 2.5rem; */
+   object-fit: contain;
+   opacity: 0.95;
+   background: url('../../assets/image/base.png') no-repeat;
+   background-size: 100% 100%;
+   padding-bottom: 0;
+ }
+
+ .modal_hint :global .ant-modal-content {
+   background: transparent;
+   box-shadow: none;
+ }
+
+ .modal_hint :global .ant-modal-body {
+   padding: 0;
+ }
+
+ .hint_header {
+   width: 100%;
+   margin: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .hint_header img {
+   width: 1.25rem;
+   height: 0.5rem;
+   object-fit: contain;
+ }
+
+ .hint_content {
+   width: 78%;
+   margin: auto;
+   vertical-align: middle;
+   text-align: center;
+   margin-bottom: 3%;
+   margin-top: 0.13583rem;
+ }
+
+ .hint_content img {
+   width: 0.727rem;
+   height: 0.727rem;
+   object-fit: contain;
+ }
+
+ .hint_content p,
+ .hint_content h2 {
+   width: 90%;
+   margin: 5% auto;
+   line-height: 0.6875rem;
+   text-align: center;
+   color: #673AB7;
+   letter-spacing: 0.04167rem;
+   font-family: "ZCOOL KuaiLe";
+   font-weight: bolder;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   margin-top: 0.1rem;
+ }
+
+ .hint_content h2 {
+   font-size: 0.15rem;
+ }
+
+ .hint_content p {
+   font-size: 0.1rem;
+ }
+
+ .hint_content button:hover,
+ .hint_content button:focus,
+ .hint_content button {
+   width: 1.65rem;
+   height: 0.23rem;
+   margin: 9% auto;
+   background: #673AB7;
+   border-radius: 0.42rem;
+   -webkit-border-radius: 0.42rem;
+   -moz-border-radius: 0.42rem;
+   -ms-border-radius: 0.42rem;
+   -o-border-radius: 0.42rem;
+   line-height: 0.23rem;
+   align-items: center;
+   text-align: center;
+   color: #FFFFFF;
+   /* margin-bottom: 0.52083rem; */
+   border: 0;
+   padding: 0;
+   outline: none;
+   box-shadow: none;
+ }
+
+ .orientation_text {
+   width: 100%;
+   height: 3rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-content: center;
+   font-size: 0.6rem;
+ }
+
+ .orientation_text h2 {
+   color: #673AB7;
+   line-height: 4.5;
+ }

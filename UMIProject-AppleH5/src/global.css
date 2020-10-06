@@ -92,3 +92,7 @@ div:focus {
   width: 8px;
   height: 8px;
 }
+
+input {
+  color: #000;
+}

@@ -8,7 +8,7 @@
 .main_top {
   width: 100%;
   margin: auto;
-  padding-top: 0;
+  padding-top: 1.6%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,6 +24,7 @@
   width: 187px;
   height: 44px;
   object-fit: contain;
+  margin-left: 10px;
 }
 
 .main_come_button,
@@ -51,11 +52,13 @@
 
 .main_content {
   position: relative;
+  top: 60px;
+  /* position: relative;
   top: 0;
   bottom: 0;
   min-height: 704px;
-  margin-bottom: 120px;
-  margin-top: 80px;
+  /* margin-bottom: 120px; */
+  /* margin-top: 80px;  */
 }
 
 /* 轮播 */
@@ -66,9 +69,9 @@
 }
 
 .swiper_content p {
-  font-size: 0.485rem;
+  font-size: 0.4rem;
   font-family: "MicrosoftYaHei";
-  font-weight: 400;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -82,7 +85,7 @@
   margin-bottom: 0.25rem;
   background-image: linear-gradient(to top, #fd8383, #72cdff);
   font-family: "MicrosoftYaHei";
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -93,15 +96,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* .swiper_content h3:before {
-  content: attr(text);
-  position: absolute;
-  z-index: 10;
-  color: #72cdff;
-  mask: linear-gradient(to left, #72cdff, transparent);
-  -webkit-mask: linear-gradient(to left, #72cdff, transparent);
-} */
-
 .main :global .ant-carousel .slick-dots-bottom {
   bottom: 0;
 }
@@ -109,8 +103,8 @@
 .swiper_img {
   width: 60%;
   margin: 5% auto;
-  /* touch-action: none; */
-  touch-action: manipulation;
+  touch-action: none;
+  /* touch-action: manipulation; */
 }
 
 .swiper_img img {
@@ -151,14 +145,15 @@
 
 .viewport {
   width: 100%;
+  /* max-height: 11rem; */
   overflow: hidden;
   margin: 0 auto;
   /* padding: 30px 0; */
-  touch-action: none;
+  touch-action: manipulation;
 }
 
 .flipsnap {
-  width: 1500px;
+  width: 750px;
   padding-left: 0px;
   touch-action: manipulation;
 }
@@ -182,8 +177,8 @@
 }
 
 .carousel {
-  width: 175px;
-  height: 600px;
+  width: 140px;
+  max-height: 10rem;
   overflow: scroll;
   /* margin-right: 10px; */
   text-align: center;
@@ -208,7 +203,7 @@
 }
 
 .carousel:nth-child(1) {
-  margin-top: 100px;
+  margin-top: 20%;
 }
 
 .carousel:nth-child(2) {
@@ -216,15 +211,15 @@
 }
 
 .carousel:nth-child(3) {
-  margin-top: 60px !important;
+  margin-top: 40px !important;
 }
 
 .carousel:nth-child(4) {
-  margin-top: 100px !important;
+  margin-top: 25% !important;
 }
 
 .carousel:nth-child(5) {
-  margin-top: 150px !important;
+  margin-top: 70px !important;
 }
 
 .carousel:nth-child(6) {
@@ -232,17 +227,83 @@
 }
 
 .carousel:nth-child(7) {
-  margin-top: 120px !important;
+  margin-top: 100px !important;
 }
 
-/* 
+.main :global .swiper-wrapper {
+  max-height: 9.3rem;
+}
+
+@media(min-device-width:320px) {
+  .swiper_content h3 {
+    font-size: 0.5rem;
+  }
+
+  .swiper_content p {
+    font-size: 0.35rem;
+  }
+}
+
+@media(min-device-width:375px) {
+  .swiper_content h3 {
+    font-size: 0.6rem;
+  }
+
+  .swiper_content p {
+    font-size: 0.4rem;
+  }
+}
+
+@media (min-device-height:568px) {
+  .main :global .swiper-wrapper {
+    max-height: 8.2rem;
+  }
+}
+
+@media (min-device-height:667px) {
+  .main :global .swiper-wrapper {
+    max-height: 10rem;
+  }
+}
+
+@media (min-device-height:736px) {
+  .main :global .swiper-wrapper {
+    max-height: 11.3rem;
+  }
+
+  .carousel {
+    max-height: 11rem;
+  }
+}
+
+
+@media (min-device-height:812px) {
+  .main :global .swiper-wrapper {
+    max-height: 13rem;
+  }
+
+  .carousel {
+    max-height: 11.5rem;
+  }
+}
+
+/* @media (min-device-height:750px) {
+  .main :global .swiper-wrapper {
+    max-height: 640px;
+  }
+
+  .carousel {
+    max-height: 11rem;
+  }
+} */
+
 .main :global .slider-list {
   transform: none !important;
   -webkit-transform: none !important;
   -moz-transform: none !important;
   -ms-transform: none !important;
   -o-transform: none !important;
-} */
+}
 
 /* 弹出框 */
 .modal_header {
@@ -288,7 +349,7 @@
   text-align: center;
   color: #673AB7;
   letter-spacing: 2px;
-  font-family: "ZCOOLKuaiLe";
+  font-family: "ZCOOL KuaiLe";
   font-weight: bolder;
   font-stretch: normal;
   font-style: normal;
@@ -323,7 +384,7 @@
 }
 
 .popup_modal {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.55);
 }
 
 .popup_modal :global .am-modal-transparent {
@@ -349,21 +410,48 @@
   width: 300px;
   height: 380px;
   object-fit: contain;
-  opacity: 0.95;
-  border-radius: 16px;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-style: solid;
-  border-width: 0.07rem;
-  border-image-source: linear-gradient(to bottom, #dfd2e1, #709bcb, #4f5a82, #709ac8);
-  border-image-slice: 1;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
-    linear-gradient(to top, #dfd2e1, #709bcb, #4f5a82, #709ac8);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  opacity: 0.9;
+  background: url('../../../assets/image/base.png') no-repeat;
+  background-size: 100% 100%;
 }
 
 .popup_box {
   width: 100%;
   height: 100%;
+}
+
+.mask_white {
+  width: 100%;
+  height: 321px;
+  object-fit: contain;
+  background-image: linear-gradient(to top, #ffffff, rgba(255, 255, 255, 0));
+  position: fixed;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@media (min-device-width:320px) {
+  .popup_modal :global .am-modal-transparent .am-modal-content {
+    width: 95%;
+    margin: auto;
+    height: 94%;
+  }
+
+  .modal_content {
+    width: 85%;
+    margin-top: 35px;
+  }
+
+  .modal_content :global .am-button {
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-device-width:375px) {
+  .popup_modal :global .am-modal-transparent .am-modal-content {
+    width: 95%;
+    margin: auto;
+    height: 100%;
+  }
 }

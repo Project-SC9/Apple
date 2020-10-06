@@ -1,16 +1,17 @@
 .bottom_bar {
   width: 100%;
-  height: 77px;
-  line-height: 77px;
+  height: 64px;
+  line-height: 64px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .bottom_bar_img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   overflow: hidden;
   display: table-cell;
@@ -20,7 +21,51 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  position: absolute;
+  left: 6px;
 }
+
+.bar_right {
+  position: absolute;
+  right: 6px;
+}
+
+.bottom_bar_img img {
+  transition: all 1s ease-in;
+  animation: show 1s forwards;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.alert-exit {
+  opacity: 1;
+}
+
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
 
 .bottom_bar_img img {
   width: 100%;
@@ -88,4 +133,158 @@
 
 .progress :global .ant-progress-circle .ant-progress-text {
   display: none;
+}
+
+@media (min-device-width:320px) {
+  .bottom_bar {
+    width: 100%;
+    height: 60px;
+    line-height: 00px;
+  }
+
+  .bottom_bar :global .ant-progress-circle .ant-progress-inner {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .progress img {
+    width: 33px;
+    height: 33px;
+  }
+
+  .bar_icon {
+    position: absolute;
+    top: 15%;
+    left: 16%;
+  }
+
+  .bottom_bar_img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .bottom_bar_img img {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    -moz-border-radius: 32px;
+    -ms-border-radius: 32px;
+    -o-border-radius: 32px;
+  }
+
+  .bar_title {
+    line-height: 1.87;
+  }
+
+  .bar_title h3 {
+    font-size: 0.3rem;
+  }
+
+  .bar_title p {
+    font-size: 0.3rem;
+    line-height: 1.5;
+  }
+}
+
+@media (min-device-width:375px) {
+  .bottom_bar {
+    width: 100%;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .bottom_bar :global .ant-progress-circle .ant-progress-inner {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .progress img {
+    width: 33px;
+    height: 33px;
+  }
+
+  .bar_icon {
+    position: absolute;
+    top: 25%;
+    left: 17%;
+  }
+
+  .bottom_bar_img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .bottom_bar_img img {
+    width: 100%;
+    height: 100%;
+    margin-top: -15px;
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    -moz-border-radius: 32px;
+    -ms-border-radius: 32px;
+    -o-border-radius: 32px;
+  }
+
+  .bar_title {
+    line-height: 1.87;
+  }
+
+  .bar_title h3 {
+    font-size: 0.3rem;
+  }
+
+  .bar_title p {
+    font-size: 0.3rem;
+    line-height: 1.5;
+  }
+}
+
+@media (min-device-width:414px) {
+  .bottom_bar {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+  }
+
+  .bottom_bar :global .ant-progress-circle .ant-progress-inner {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .progress img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .bar_icon {
+    position: absolute;
+    top: 23%;
+    left: 17%;
+  }
+
+  .bottom_bar_img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .bottom_bar_img img {
+    width: 100%;
+    height: 100%;
+    margin-top: -20px;
+  }
+
+  .bar_title {
+    line-height: 1.87;
+  }
+
+  .bar_title h3 {
+    font-size: 0.35rem;
+  }
+
+  .bar_title p {
+    font-size: 0.35rem;
+    line-height: 1.5;
+  }
 }

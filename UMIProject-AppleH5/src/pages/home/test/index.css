@@ -1,0 +1,57 @@
+.waterfall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+  grid-gap: 0.25em;
+  grid-auto-flow: row dense;
+  grid-auto-rows: 20px;
+}
+
+.waterfall .item {
+  width: 100%;
+  /* background: #222; */
+  color: #ddd;
+}
+
+.waterfall .item:nth-of-type(3n+1) {
+  grid-row: auto / span 6;
+}
+
+.waterfall .item:nth-of-type(3n+2) {
+  grid-row: auto / span 7;
+}
+
+.waterfall .item:nth-of-type(3n+3) {
+  grid-row: auto / span 9;
+}
+
+.not_square_grid .am-grid-icon {
+  width: 40px;
+  height: 60px;
+}
+
+
+.pages_pinterest {
+  width: 99%;
+  height: 100%;
+  border: 2px solid red;
+  overflow: hidden;
+  overflow: auto;
+  box-sizing: border-box;
+
+}
+
+.pageshoc {
+  height: 100%;
+  margin: 0 auto;
+  background: red;
+}
+
+.imgBox {
+  width: 600px;
+  border: 2px solid red;
+  margin-bottom: 20px;
+}
+
+.imgBox img {
+  vertical-align: top;
+}

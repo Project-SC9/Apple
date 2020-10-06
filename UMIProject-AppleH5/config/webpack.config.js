@@ -19,7 +19,7 @@ function getModulePackageName(module) {
   return packageName;
 }
 
-export default (config, {webpack}) => {
+export default (config, { webpack }) => {
   // optimize chunks
   config.optimization
     .runtimeChunk(false) // share the same chunks across different modules

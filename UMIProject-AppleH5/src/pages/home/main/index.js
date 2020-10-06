@@ -1,76 +1,81 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import Link from 'umi/link';
+import { routerRedux } from 'dva';
+import withRouter from 'umi/withRouter';
 import styles from './index.css';
+import router from 'umi/router';
 import { swiperMainList, swiperMainTitle } from 'assets/locus';
-
 import { Button, Modal } from 'antd-mobile';
 import { Carousel } from 'antd';
 import ReactSwipes from 'react-swipes'
+import { GetTaskList, GameList, LogSave } from '@/services'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
+const TASK_TOTAL = 80
 /**
  * 首页
  */
 class Index extends Component {
   state = {
     slideIndex: 1,
-    popup: false
-  }
-  opt = {
-    distance: 425, // 每次移动的距离，卡片的真实宽度
-    currentPoint: 0,// 初始位置，默认从0即第一个元素开始
-    swTouchend: (ev) => {
-      let data = {
-        moved: ev.moved,
-        originalPoint: ev.originalPoint,
-        newPoint: ev.newPoint,
-        cancelled: ev.cancelled
-      }
-      this.slider && this.slider.innerSlider.slickGoTo(ev.newPoint)
-    }
+    popup: false,
+    activeIndex: 1,
   }
   render() {
     return (
-      <div className={styles.main}>
-        <div className={styles.main_top}>
-          <img src={require('assets/image/logo.png')} />
-          <Link to='/home/game'><button className={styles.main_come_button}>开始游戏</button></Link>
-        </div>
-
-        <div className={styles.main_content}>
-          {/**图片区 */}
-          <Carousel className={styles.swiper} effect="fade" ref={el => (this.slider = el)} afterChange={(current) => this.setState({ slideIndex: current })}>
-            {
-              swiperMainTitle.map((val, index) => {
-                return (
-                  <div className={styles.swiper_content} key={index}>
-                    <p>{val.title}</p>
-                    <h3 text={val.text}>{val.text}</h3>
-                  </div>
-                )
-              })
-            }
-          </Carousel>
-
-          <div className={styles.viewport}>
-            <div className={styles.flipsnap}>
-              <ReactSwipes className={styles.card_slide} options={this.opt}>
-                {swiperMainList.map((val, index) => (
-                  <div key={index} className={styles.carousel}>
-                    {
-                      val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top', }} />) })
-                    }
-                  </div>
-                ))}
-              </ReactSwipes>
-            </div>
+      <>
+        <div className={styles.main}>
+          <div className={styles.main_top}>
+            <img src={require('assets/image/logo.png')} />
+            <button className={styles.main_come_button} onClick={this.gameStartClickedHandler}>开始游戏</button>
           </div>
+
+          <div className={styles.main_content}>
+            {/**图片区 */}
+            <Carousel
+              className={styles.swiper} effect="fade" ref={el => (this.slider = el)}
+              afterChange={(current) => { this.setState({ slideIndex: current }); this.swiperRef && this.swiperRef.slideTo(current) }}>
+              {
+                swiperMainTitle.map((val, index) => {
+                  return (
+                    <div className={styles.swiper_content} key={index}>
+                      <p>{val.title}</p>
+                      <h3 text={val.text}>{val.text}</h3>
+                    </div>
+                  )
+                })
+              }
+            </Carousel>
+
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={2.8}
+              initialSlide={this.state.slideIndex}
+              className='swiper-container'
+              ref={component => this.swiperRef = component}
+              onSlideChange={(val) => this.slider && this.slider.innerSlider.slickGoTo(val.activeIndex)}
+            >
+              {swiperMainList.map((val, index) => (
+                <SwiperSlide key={index} className={styles.carousel}>
+                  {
+                    val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top', }} />) })
+                  }
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          {
+            !!this.state.popup ? this.renderPopUpBoxPrompt() : null
+          }
+
+
         </div>
-        {
-          !!this.state.popup ? this.renderPopUpBoxPrompt() : null
-        }
-      </div>
+        {/** 遮罩层  */}
+        <div className={styles.mask_white}></div>
+      </>
     )
   }
+
   /**
    * 用户输入网址弹出框提示
    */
@@ -99,6 +104,21 @@ class Index extends Component {
     )
   }
 
+  gameStartClickedHandler = () => {
+    const { dispatch, taskBar, taskImgData, taskArray, taskArrayAfter } = this.props;
+    if (this.props.location.query.uid == undefined) {
+      this.setState({
+        popup: true
+      })
+      return
+    }
+    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${this.props.location.query.tid}`)
+    // dispatch(routerRedux.replace({
+    //   pathname: `/home/game`,
+    //   query: { taskBar, taskImgData, taskArray, taskArrayAfter }
+    // }))
+  }
+
   WrapTouchStartHandler = (e) => {
     // wrapProps = {{ onTouchStart: this.WrapTouchStartHandler }}
     // fix touch to scroll background page on iOS
@@ -110,12 +130,82 @@ class Index extends Component {
       e.preventDefault();
     }
   }
+  /**
+   * 获取任务目标
+   */
+  _fetchTaskBar = () => {
+    const { dispatch } = this.props;
+    // 任务栏
+    dispatch({
+      type: "player/fetchTaskList",
+      payload: {
+        uid: this.props.location.query.uid,
+        tid: this.props.location.query.tid
+      }
+    })
+  }
 
-  componentDidMount() {
+  /**
+   * 图片列表
+   */
+  _fetchTaskImg = () => {
+    const { dispatch, taskBar } = this.props;
+    //图片列表
+    dispatch({
+      type: "player/fetchTaskImgData",
+      payload: {
+        uid: this.props.location.query.uid,
+        tid: taskBar.tid,
+        total: TASK_TOTAL
+      }
+    })
+  }
+
+  async componentDidMount() {
+    await this._fetchTaskBar()//获取加载
+    this._fetchTaskImg()
+
     this.slider && this.slider.innerSlider.slickGoTo(this.state.slideIndex)
     if (this.props.location.query.uid == undefined) {
-      this.state.popup = true
+      this.setState({
+        popup: true
+      })
+      return
     }
+    // console.log('1')
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'home/fetchTaskList',
+    //   payload: {
+    //     uid: "abx111",
+    //     tid: 123332,
+    //     total: 10,
+    //   },
+    // })
+
+    // GetTaskList('abx111', 123332)
+    //   .then((data) => {
+    //     console.log('任务栏目标获取')
+    //     console.log(data)
+    //   });
+
+    // GameList('abx111', 123332, 10)
+    //   .then((data) => {
+    //     console.log('图片列表查询')
+    //     console.log(data)
+    //   });
+    // "time": "20200909123111",
+    // LogSave('abx111', 123332, "close", "20200909123111")
+    //   .then((data) => {
+    //     console.log('ggg')
+    //     console.log(data)
+    //   });
+    // console.log("网页可见区域宽", document.body.clientHeight)
+    // console.log("网页正文全文宽：", document.body.scrollWidth)
+    // console.log("网页可见区域宽：", document.body.offsetWidth)
+    // console.log("网页被卷去的左：", document.body.scrollLeft)
+    console.log("屏幕分辨率的宽：", window.screen.width)
+    // console.log("屏幕可用工作区宽度：", window.screen.availWidth)
   }
 }
 
@@ -123,9 +213,13 @@ class Index extends Component {
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
+  const { taskBar, taskImgData, taskArray, taskArrayAfter } = state.player;
   return {
-    state
+    taskBar: taskBar,
+    taskImgData: taskImgData,
+    taskArray: taskArray,
+    taskArrayAfter: taskArrayAfter,
   };
 }
 
-export default connect(mapStateToProps)(Index);
+export default withRouter(connect(mapStateToProps)(Index))

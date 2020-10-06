@@ -44,6 +44,13 @@ const routes = [
             _title_default: 'Apple',
           },
           {
+            path: '/home/test',
+            component: require('../home/test/index').default,
+            exact: true,
+            _title: 'Apple',
+            _title_default: 'Apple',
+          },
+          {
             component: () =>
               React.createElement(
                 require('E:/Apple/Apple/UMIProject-AppleH5/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')

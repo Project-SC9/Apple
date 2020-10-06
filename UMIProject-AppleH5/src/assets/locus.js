@@ -1,7 +1,8 @@
 /** 首页轮播图片 */
 export const swiperMainList = [
     {
-        image: ['https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
+        image: [
+            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
             'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
             'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
             'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
@@ -21,7 +22,7 @@ export const swiperMainList = [
             'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',],
     },
     {
-        image: ['https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
+        image: ['https://i.loli.net/2020/10/04/r9cTf81z4v3bKLt.png',
             'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
             'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
             'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
@@ -31,7 +32,7 @@ export const swiperMainList = [
             'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',],
     },
     {
-        image: ['https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+        image: ['https://i.loli.net/2020/10/04/sfktzvRK7cpoxEG.png',
             'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
             'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
             'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
@@ -39,6 +40,16 @@ export const swiperMainList = [
             'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
             'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
             'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png'],
+    },
+    {
+        image: ['https://i.loli.net/2020/10/04/27W64fxbJt1SBVT.png',
+            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
+            'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
+            'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
+            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
+            'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
+            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',],
     },
     {
         image: ['https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
@@ -49,26 +60,6 @@ export const swiperMainList = [
             'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
             'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
             'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',],
-    },
-    {
-        image: ['https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
-            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-            'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
-            'https://i.loli.net/2020/09/25/GgWZfBpJclb6umv.png',
-            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-            'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',],
-    },
-    {
-        image: ['https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-            'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
-            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png',
-            'https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png',
-            'https://i.loli.net/2020/09/25/5PHyWdc6m2TLCZM.png',
-            'https://i.loli.net/2020/09/20/JCyk54i17WKxZMt.png',
-            'https://i.loli.net/2020/09/25/TFHIy9fSQa4V1KW.png'],
     },
 ]
 

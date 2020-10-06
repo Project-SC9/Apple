@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 0.2rem;
 }
 
@@ -28,9 +28,9 @@
 }
 
 .main_top p {
-  font-family: ZCOOLKuaiLe;
+  font-family: "ZCOOL KuaiLe";
   font-size: 0.5rem;
-  font-weight: 600;
+  font-weight: normal;
   letter-spacing: 2px;
   font-stretch: normal;
   font-style: normal;
@@ -52,164 +52,56 @@
 .behavior_bar {
   width: 67%;
   position: fixed;
-  bottom: 2.41667rem;
+  bottom: 1.41667rem;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   border-top-left-radius: 0.8rem;
   border-bottom-left-radius: 0.8rem;
 }
 
-/* 弹出框 */
-.modal_header {
-  width: 100%;
-  margin: auto;
+@media (min-device-width:320px) {
+  .behavior_bar {
+    width: 56%;
+  }
+
+  .game_status {
+    height: 1.8rem;
+  }
+
+  .main_top {
+    margin-bottom: 0;
+  }
+
+  .content {
+    margin-top: 1.9rem;
+  }
+
+  .task_list {
+    margin-bottom: 0.07rem;
+  }
 }
 
-.modal_header_img {
-  width: 100%;
-  position: absolute;
-}
+@media (min-device-width:375px) {
+  .behavior_bar {
+    width: 56%;
+    bottom: 1.8rem;
+  }
 
-.modal_header_img img {
-  width: 4rem;
-  height: 4rem;
-  margin-top: -0.4rem;
-}
+  .game_status {
+    height: 2.2rem;
+  }
 
-.modal_header p {
-  position: absolute;
-  right: 8%;
-  top: 1%;
-  font-size: 17px;
-  color: #9C9C9C;
-}
+  .main_top {
+    margin-bottom: 0.08rem;
+  }
 
-.modal_logo {
-  width: 3.89583rem;
-  height: 0.91667rem;
-  object-fit: contain;
-  margin-top: 0.3rem;
-}
+  .content {
+    margin-top: 2.3rem;
+  }
 
-.award_logo {
-  width: 105px;
-  height: 105px;
-  object-fit: contain;
-}
-
-.modal_content {
-  width: 100%;
-  position: absolute;
-  bottom: 0.15rem;
-  margin: 5% auto;
-}
-
-.modal_content_award {
-  margin-top: 7.5%;
-}
-
-.modal_content_award h2 {
-  font-size: 0.55rem;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  font-family: 'ZCOOL KuaiLe';
-  font-style: normal;
-  font-weight: bold;
-  text-align: center;
-  color: #673AB7;
-  letter-spacing: 2px;
-  margin-bottom: 0.2rem;
-}
-
-.modal_header h2,
-.modal_content h2 {
-  margin: 5% auto;
-  font-family: 'ZCOOL KuaiLe';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.7rem;
-  line-height: 30px;
-  text-align: center;
-  color: #673AB7;
-  letter-spacing: 2px;
-  margin-bottom: 0.2rem;
-}
-
-.modal_content_award .award_title {
-  margin-top: 2%;
-  margin-bottom: 3%;
-  font-family: "ZCOOLKuaiLe";
-  font-weight: bold;
-  font-size: 0.55rem;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #673ab7;
-}
-
-.modal_content p {
-  margin: 2% auto;
-  font-family: "ZCOOL KuaiLe";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 0.32rem;
-  line-height: 0.33333rem;
-  text-align: center;
-  color: #673AB7;
-  margin-bottom: 10%;
-}
-
-.modal_content_award :global .am-button,
-.modal_content :global .am-button {
-  width: 80%;
-  height: 40px;
-  margin: 14px auto;
-  background: #673AB7;
-  border-radius: 42px;
-  -webkit-border-radius: 42px;
-  -moz-border-radius: 42px;
-  -ms-border-radius: 42px;
-  -o-border-radius: 42px;
-  font-family: "PingFang SC";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 50px;
-  line-height: 40px;
-  align-items: center;
-  text-align: center;
-  color: #FFFFFF;
-}
-
-.modal_content_award :global .am-button {
-  font-size: 0.42rem;
-  margin-bottom: 0.1rem;
-}
-
-.popup_modal {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.popup_modal :global .am-modal-transparent {
-  width: 300px;
-  height: 400px;
-}
-
-.popup_modal :global .am-modal-transparent .am-modal-content .am-modal-body {
-  width: 300px;
-  height: 375px;
-  margin-top: 1.35em;
-  background: url('../../../assets/image/base.png') no-repeat;
-  background-size: 100% 100%;
-}
-
-.popup_modal :global .am-modal-transparent .am-modal-content .am-modal-body,
-.popup_modal :global .am-modal-transparent .am-modal-content {
-  padding: 0;
-}
-
-.popup_modal :global .am-modal-content {
-  background: transparent;
+  .task_list {
+    margin-bottom: 0.1rem;
+  }
 }
 
 /* 内容 */
@@ -229,14 +121,28 @@
 
 .task_list img {
   width: 100%;
+  border-radius: 6%;
+  margin-bottom: 2%;
+  -webkit-border-radius: 6%;
+  -moz-border-radius: 6%;
+  -ms-border-radius: 6%;
+  -o-border-radius: 6%;
+}
+
+.task_del {
+  animation: hide-item 1s ease-out forwards;
+  transition: all 1s ease-out;
 }
 
 .task_list {
-  display: table-cell;
+  /* display: table-cell;
   vertical-align: middle;
-  text-align: center;
+  text-align: center; */
+  width: 98%;
+  margin: auto;
   position: relative;
-  margin-bottom: 2%;
+  margin-bottom: 0.05rem;
+  transition: all 4s ease-in;
 }
 
 .task_title {
@@ -251,7 +157,7 @@
   text-align: center;
   color: #FFFFFF;
   left: 4%;
-  bottom: 12px;
+  bottom: 8px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 27px;
   -webkit-border-radius: 27px;
@@ -281,233 +187,26 @@
   display: none;
 }
 
-/* 奖励 */
-.modal_content_award ul {
-  width: 60%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 9.6px;
-}
-
-.modal_content_award ul li {
+.loading_down {
   width: 100%;
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  text-align: center;
   align-items: center;
+  justify-content: center;
 }
 
-.modal_content_award ul li p {
-  font-family: "PingFang HK";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 33px;
-  line-height: 22px;
-  color: #929292;
-  margin-bottom: 5.04px;
-  flex: 1;
+.loading_down img {
+  width: 0.6rem;
+  margin-bottom: 0.16rem;
 }
 
-.modal_content_award ul li:nth-child(1) p:nth-child(1) {
-  border-right: 3px solid #929292;
-  padding-right: 5px;
-}
-
-.modal_content_award ul li:nth-child(1) {
-  /* width: 83%; */
-  margin: auto;
-}
-
-.mark_hint {
-  font-family: "PingFang HK";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.22rem;
-  line-height: 15px;
-  color: #673AB7;
-  margin-bottom: 0;
-}
-
-.mark_hint span {
-  margin-right: 4.8px;
-}
-
-.awardall_title {
-  margin-top: 9%;
-  margin-bottom: 4%;
-  font-family: "ZCOOLKuaiLe";
-  font-size: 0.5rem;
-  font-weight: bolder;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #673ab7;
-}
-
-.modal_content_text {
-  font-family: "ZCOOLKuaiLe";
-  font-size: 0.3rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #929292;
-}
-
-/* 我的奖励 */
-.popup_reward {
-  /* height: 220px; */
-  background: #FFFFFF;
-  border: 4px solid #673AB7;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-
-.space_carousel :global .slider-decorator-0 {
-  display: none;
-}
-
-.space_carousel :global .slider-list {
-  height: 256px !important;
-}
-
-.carousel_ul {
-  width: 77% !important;
-}
-
-:global .am-modal-mask {
-  background: transparent;
-}
-
-.user_reward {
-  animation: show-item 2s ease-in forwards;
-}
-
-.user_reward_an {
-  animation: hide-item 2s ease-out forwards;
-}
-
-.user_reward :global .am-modal-transparent {
-  width: 350px;
-  /* height: 375px; */
-  background: url('../../../assets/image/base.png') no-repeat;
-  background-size: 100% 100%;
-  position: absolute;
-  top: 44px;
-  /* right: 28px; */
-}
-
-.user_reward :global .am-modal-transparent .am-modal-content .am-modal-body,
-.user_reward :global .am-modal-transparent .am-modal-content {
-  padding: 0;
-}
-
-.user_reward :global .am-modal-content {
-  background: transparent;
-}
-
-.modal_content_award h3 {
-  font-size: 0.55rem;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  font-family: 'ZCOOL KuaiLe';
-  font-style: normal;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 0.04167rem;
-  margin-bottom: 0.2rem;
-  color: #A4A4A4;
-}
-
-.modal_content_award h4 {
-  font-family: "ZCOOL KuaiLe";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.4rem;
-  line-height: 22px;
-  text-align: center;
-  color: #929292;
-  margin: 20px auto
-}
-
-.transitionName {
-  animation: show-item 2s ease-in forwards;
-}
-
-@keyframes show-item {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes hide-item {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 0.1;
-  }
-}
-
-
-.viewport {
-  width: 94%;
+.pages_pinterest {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  margin: 0 auto;
-  /* padding: 30px 0; */
-  touch-action: none;
-  margin-top: 5%;
-  margin-bottom: 6%;
-}
-
-.flipsnap {
-  width: 800px;
-  padding-left: 0px;
-  touch-action: none;
-}
-
-.flipsnap:after {
-  content: "";
-  display: block;
-  clear: both;
-  height: 0;
-}
-
-.card_slide {
-  touch-action: none;
-}
-
-.popup_reward {
-  width: 180px;
-  height: 4.7rem;
-  margin-left: 20px;
-  text-align: center;
-  float: left;
-  color: #666;
+  overflow: auto;
   box-sizing: border-box;
-  -webkit-overflow-scrolling: touch;
-  touch-action: manipulation;
-}
-
-.popup_reward:last-child {
-  margin-right: 0;
 }
