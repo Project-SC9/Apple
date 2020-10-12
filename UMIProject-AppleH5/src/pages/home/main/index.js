@@ -7,11 +7,12 @@ import router from 'umi/router';
 import { swiperMainList, swiperMainTitle } from 'assets/locus';
 import { Button, Modal } from 'antd-mobile';
 import { Carousel } from 'antd';
-import ReactSwipes from 'react-swipes'
-import { GetTaskList, GameList, LogSave } from '@/services'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.scss';
-const TASK_TOTAL = 80
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import moment from 'moment'
+const TASK_TOTAL = 160
 /**
  * 首页
  */
@@ -20,8 +21,18 @@ class Index extends Component {
     slideIndex: 1,
     popup: false,
     activeIndex: 1,
+    swiperObj: null
+  }
+  settings = {
+    // dots: true,
+    infinite: false,
+    // speed: 500,
+    slidesToShow: 2.7,
+    initialSlide: this.state.slideIndex
+    // slidesToScroll: 1
   }
   render() {
+    const { mainSwiperList } = this.props
     return (
       <>
         <div className={styles.main}>
@@ -34,11 +45,11 @@ class Index extends Component {
             {/**图片区 */}
             <Carousel
               className={styles.swiper} effect="fade" ref={el => (this.slider = el)}
-              afterChange={(current) => { this.setState({ slideIndex: current }); this.swiperRef && this.swiperRef.slideTo(current) }}>
+              afterChange={(current) => this.afterChangedhandler(current)}>
               {
                 swiperMainTitle.map((val, index) => {
                   return (
-                    <div className={styles.swiper_content} key={index}>
+                    <div className={styles.swiper_content} key={index} >
                       <p>{val.title}</p>
                       <h3 text={val.text}>{val.text}</h3>
                     </div>
@@ -47,22 +58,31 @@ class Index extends Component {
               }
             </Carousel>
 
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={2.8}
-              initialSlide={this.state.slideIndex}
-              className='swiper-container'
-              ref={component => this.swiperRef = component}
-              onSlideChange={(val) => this.slider && this.slider.innerSlider.slickGoTo(val.activeIndex)}
-            >
-              {swiperMainList.map((val, index) => (
-                <SwiperSlide key={index} className={styles.carousel}>
-                  {
-                    val.image.map((item, index) => { return (<img src={item} key={index} style={{ width: '100%', verticalAlign: 'top', }} />) })
-                  }
-                </SwiperSlide>
-              ))}
-            </Swiper>
+
+            <div className={styles.mainSwiper}>
+
+              <Slider {...this.settings} ref={el => this.swiperRef = el} afterChange={(index) => this.slider && this.slider.innerSlider.slickGoTo(index)}>
+                {mainSwiperList.map((val, index) => {
+                  return (
+                    <div style={{ touchAction: "none" }} key={index}>
+                      <div className={styles.carousel} onTouchStart={() => this.swiperTouchStartHandler(index)}>
+                        {
+                          val.map((item, index) => {
+                            return (
+                              <div key={index} className={styles.task_list}>
+                                <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: '100%', verticalAlign: 'top', }} />
+                                <p className={styles.task_title}>{item.desc}</p>
+                              </div>
+
+                            )
+                          })
+                        }
+                      </div>
+                    </div>
+                  )
+                })}
+              </Slider>
+            </div>
           </div>
           {
             !!this.state.popup ? this.renderPopUpBoxPrompt() : null
@@ -75,6 +95,9 @@ class Index extends Component {
       </>
     )
   }
+
+
+
 
   /**
    * 用户输入网址弹出框提示
@@ -104,6 +127,9 @@ class Index extends Component {
     )
   }
 
+  /**
+   * 开始游戏
+   */
   gameStartClickedHandler = () => {
     const { dispatch, taskBar, taskImgData, taskArray, taskArrayAfter } = this.props;
     if (this.props.location.query.uid == undefined) {
@@ -117,6 +143,20 @@ class Index extends Component {
     //   pathname: `/home/game`,
     //   query: { taskBar, taskImgData, taskArray, taskArrayAfter }
     // }))
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "点击开始游戏"
+    this._catchLogSave(newdate, cxt)
+  }
+
+  swiperTouchStartHandler = (idx) => {
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = `滑动第${idx}排`
+    this._catchLogSave(newdate, cxt)
+  }
+
+  afterChangedhandler = (current) => {
+    this.setState({ slideIndex: current });
+    this.swiperRef.slickGoTo(current)
   }
 
   WrapTouchStartHandler = (e) => {
@@ -155,57 +195,40 @@ class Index extends Component {
       type: "player/fetchTaskImgData",
       payload: {
         uid: this.props.location.query.uid,
-        tid: taskBar.tid,
+        tid: this.props.location.query.tid,
         total: TASK_TOTAL
+      }
+    })
+  }
+  //日志
+  _catchLogSave = (time, cxt) => {
+    const { dispatch, taskBar } = this.props;
+    dispatch({
+      type: "player/fetchLogSave",
+      payload: {
+        uid: this.props.location.query.uid,
+        tid: this.props.location.query.tid,
+        time: time,
+        log: cxt
       }
     })
   }
 
   async componentDidMount() {
-    await this._fetchTaskBar()//获取加载
-    this._fetchTaskImg()
-
     this.slider && this.slider.innerSlider.slickGoTo(this.state.slideIndex)
     if (this.props.location.query.uid == undefined) {
       this.setState({
         popup: true
       })
       return
+    } else {
+      await this._fetchTaskBar()//获取加载
+      this._fetchTaskImg()
     }
-    // console.log('1')
-    // const { dispatch } = this.props;
-    // dispatch({
-    //   type: 'home/fetchTaskList',
-    //   payload: {
-    //     uid: "abx111",
-    //     tid: 123332,
-    //     total: 10,
-    //   },
-    // })
 
-    // GetTaskList('abx111', 123332)
-    //   .then((data) => {
-    //     console.log('任务栏目标获取')
-    //     console.log(data)
-    //   });
-
-    // GameList('abx111', 123332, 10)
-    //   .then((data) => {
-    //     console.log('图片列表查询')
-    //     console.log(data)
-    //   });
-    // "time": "20200909123111",
-    // LogSave('abx111', 123332, "close", "20200909123111")
-    //   .then((data) => {
-    //     console.log('ggg')
-    //     console.log(data)
-    //   });
-    // console.log("网页可见区域宽", document.body.clientHeight)
-    // console.log("网页正文全文宽：", document.body.scrollWidth)
-    // console.log("网页可见区域宽：", document.body.offsetWidth)
-    // console.log("网页被卷去的左：", document.body.scrollLeft)
-    console.log("屏幕分辨率的宽：", window.screen.width)
-    // console.log("屏幕可用工作区宽度：", window.screen.availWidth)
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "打开网页"
+    await this._catchLogSave(newdate, cxt)
   }
 }
 
@@ -213,13 +236,20 @@ class Index extends Component {
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
-  const { taskBar, taskImgData, taskArray, taskArrayAfter } = state.player;
+  const { taskBar, taskImgData, taskArray, taskArrayAfter, mainSwiperList } = state.player;
   return {
     taskBar: taskBar,
     taskImgData: taskImgData,
     taskArray: taskArray,
     taskArrayAfter: taskArrayAfter,
+    mainSwiperList: mainSwiperList
   };
 }
 
 export default withRouter(connect(mapStateToProps)(Index))
+// console.log("网页可见区域宽", document.body.clientHeight)
+// console.log("网页正文全文宽：", document.body.scrollWidth)
+// console.log("网页可见区域宽：", document.body.offsetWidth)
+// console.log("网页被卷去的左：", document.body.scrollLeft)
+// console.log("屏幕分辨率的宽：", window.screen.width)
+// console.log("屏幕可用工作区宽度：", window.screen.availWidth)

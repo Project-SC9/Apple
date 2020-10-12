@@ -1,3 +1,15 @@
+ @font-face {
+   font-family: "PingFang SC";
+   src: url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.eot");
+   src: url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.woff") format("woff"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.svg#PingFang SC") format("svg");
+ }
+
+ @font-face {
+   font-family: "PingFang HK";
+   src: url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.eot");
+   src: url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.woff") format("woff"), url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/ee5e0963d4f220cba32a5765cc4f9772.svg#PingFang HK") format("svg");
+ }
+
  /* 弹出框 */
  .modal_header {
    width: 100%;
@@ -189,6 +201,10 @@
    flex: 1;
  }
 
+ .modal_content_award ul li:nth-child(2) p {
+   text-align: left;
+ }
+
  .modal_content_award ul li:nth-child(1) p:nth-child(1) {
    border-right: 3px solid #929292;
    padding-right: 5px;
@@ -365,7 +381,7 @@
  }
 
  .flipsnap {
-   width: 800px;
+   width: 2500px;
    padding-left: 0px;
    touch-action: none;
  }

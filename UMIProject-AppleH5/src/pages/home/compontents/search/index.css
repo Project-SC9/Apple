@@ -58,7 +58,7 @@
 
  .search :global .am-search-input .am-search-synthetic-ph {
    height: 100%;
-   line-height: 6.5;
+   line-height: 2.5;
    text-align: left;
  }
 

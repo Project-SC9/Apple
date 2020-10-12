@@ -6,7 +6,8 @@ export default {
      */
     define: {
         // 接口服务器地址
-        'process.env.apiServerAddr': 'http://localhost:8000/juuuce',
+        'process.env.apiServerUrl': 'http://localhost:8000',
+        'process.env.host': 'http://localhost:8000',
     },
 
     /** 代理配置 **/

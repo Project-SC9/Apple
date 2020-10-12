@@ -14,7 +14,7 @@ export class Index extends PureComponent {
                         id="search"
                         ref={component => this.searchBarRef = component}
                         placeholder="聊下状态，再看吃的"
-                        onChange={this.searchChangedHandler}
+                        // onChange={this.searchChangedHandler}
                         onSubmit={this.searchSubmitHandler}
                         onFocus={this.searchFocusHandler}
                         showCancelButton={false}
@@ -41,13 +41,13 @@ export class Index extends PureComponent {
             }
         })
     }
-    /**
-     * 搜索框字段改变事件
-     */
-    searchChangedHandler = (val) => {
-        const { onSearchChange } = this.props;
-        !!onSearchChange & onSearchChange(val)
-    }
+    // /**
+    //  * 搜索框字段改变事件
+    //  */
+    // searchChangedHandler = (val) => {
+    //     const { onSearchChange } = this.props;
+    //     !!onSearchChange & onSearchChange(val)
+    // }
 
     /**
      * 搜索框字段提交事件

@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "PingFang SC";
+  src: url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.eot");
+  src: url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.woff") format("woff"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/05e476e067ffef74ca5686f229c40a63.svg#PingFang SC") format("svg");
+}
+
+@font-face {
+  font-family: "Microsoft YaHei";
+  src: url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.eot");
+  src: url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.svg#Microsoft YaHei") format("svg");
+}
+
 .main {
   width: 100%;
   height: 100%;
@@ -37,7 +53,7 @@
   border: 0;
   border-radius: 1.8125rem;
   margin-right: 10px;
-  font-size: 0.32rem;
+  font-size: 0.3rem;
   font-weight: 300;
   font-stretch: normal;
   font-style: normal;
@@ -51,14 +67,9 @@
 }
 
 .main_content {
-  position: relative;
+  position: fixed;
   top: 60px;
-  /* position: relative;
-  top: 0;
-  bottom: 0;
-  min-height: 704px;
-  /* margin-bottom: 120px; */
-  /* margin-top: 80px;  */
+  width: 100%;
 }
 
 /* 轮播 */
@@ -70,7 +81,7 @@
 
 .swiper_content p {
   font-size: 0.4rem;
-  font-family: "MicrosoftYaHei";
+  font-family: "Microsoft YaHei";
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -84,7 +95,7 @@
   color: #fd8383;
   margin-bottom: 0.25rem;
   background-image: linear-gradient(to top, #fd8383, #72cdff);
-  font-family: "MicrosoftYaHei";
+  font-family: "Microsoft YaHei";
   font-size: 0.6rem;
   font-weight: normal;
   font-stretch: normal;
@@ -177,7 +188,7 @@
 }
 
 .carousel {
-  width: 140px;
+  width: 100%;
   max-height: 10rem;
   overflow: scroll;
   /* margin-right: 10px; */
@@ -187,7 +198,7 @@
   box-sizing: border-box;
   /* overflow-scrolling: touch; */
   /* -webkit-overflow-scrolling: touch; */
-  touch-action: manipulation;
+  touch-action: pan-down;
 }
 
 .carousel img {
@@ -197,41 +208,48 @@
   touch-action: manipulation;
 }
 
-.carousel:last-child {
+/* .mainSwiper :global .slick-initialized .slick-slide {
+  margin-right: 10px;
+}
+
+.mainSwiper :global .slick-initialized .slick-slide:last-child {
   margin-right: 0;
-  margin-top: 80px !important;
+} */
+
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(1) {
+  margin-top: 10% !important;
 }
 
-.carousel:nth-child(1) {
-  margin-top: 20%;
-}
-
-.carousel:nth-child(2) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(2) {
   margin-top: 150px !important;
 }
 
-.carousel:nth-child(3) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(3) {
   margin-top: 40px !important;
 }
 
-.carousel:nth-child(4) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(4) {
   margin-top: 25% !important;
 }
 
-.carousel:nth-child(5) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(5) {
   margin-top: 70px !important;
 }
 
-.carousel:nth-child(6) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(6) {
   margin-top: 50px !important;
 }
 
-.carousel:nth-child(7) {
+.mainSwiper :global .slick-initialized .slick-slide:nth-child(7) {
   margin-top: 100px !important;
 }
 
 .main :global .swiper-wrapper {
   max-height: 9.3rem;
+}
+
+.main :global .ant-carousel .slick-dots {
+  margin: 0;
 }
 
 @media(min-device-width:320px) {
@@ -242,6 +260,10 @@
   .swiper_content p {
     font-size: 0.35rem;
   }
+
+  .task_list {
+    margin-bottom: 0.07rem;
+  }
 }
 
 @media(min-device-width:375px) {
@@ -251,6 +273,10 @@
 
   .swiper_content p {
     font-size: 0.4rem;
+  }
+
+  .task_list {
+    margin-bottom: 0.1rem;
   }
 }
 
@@ -303,6 +329,45 @@
   -moz-transform: none !important;
   -ms-transform: none !important;
   -o-transform: none !important;
+}
+
+.task_list {
+  width: 98%;
+  margin: auto;
+  position: relative;
+  margin-bottom: 0.05rem;
+  transition: all 4s ease-in;
+}
+
+.task_list img {
+  width: 100%;
+  border-radius: 6%;
+  margin-bottom: 2%;
+  -webkit-border-radius: 6%;
+  -moz-border-radius: 6%;
+  -ms-border-radius: 6%;
+  -o-border-radius: 6%;
+}
+
+.task_title {
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: center;
+  color: #FFFFFF;
+  left: 4%;
+  bottom: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 27px;
+  -webkit-border-radius: 27px;
+  -moz-border-radius: 27px;
+  -ms-border-radius: 27px;
+  -o-border-radius: 27px;
 }
 
 /* 弹出框 */

@@ -740,6 +740,20 @@ export class Index extends Component {
 //         taskData: taskData,
 //     };
 // }
+//      <Swiper
+//     spaceBetween={0}
+//     slidesPerView={3.3}
+//     onSlideChange={(val) => this.slider && this.slider.innerSlider.slickGoTo(val.activeIndex)}
+// >
+//     {taskLabelData.map((val, index) => (
+//         <SwiperSlide key={index} className={styles.carousel} onClick={() => this.classifyBarClickedHandler(val)}>
+//             <div className={styles.carousel_img}>
+//                 <img src={require('assets/image/ellipse-tp.png')} />
+//                 <p>{val}</p>
+//             </div>
+//         </SwiperSlide>
+//     ))}
+// </Swiper>
 
 // export default connect(mapStateToProps)(Index)
 

@@ -41,19 +41,17 @@ class Index extends Component {
   render() {
     const { children } = this.props;
     const { browser } = this.state;
-    if (window.screen.width > 450) {
-      return (<div>{this.renderModal()}</div>);
-    }
-
-    if (browser.android == false && browser.iPhone == false) {
-      return (<div> { this.renderModal()} </div>);
-    }
-
     if (window.orientation == 90 || window.orientation == -90) {
       return (
         <div className={styles.orientation_text}><h2>竖屏效果更好哦</h2> </div>
       )
     }
+
+    if (browser.android == false && browser.iPhone == false && window.screen.width > 450) {
+      return (<div> { this.renderModal()} </div>);
+    }
+
+
     return (
       <div className={styles.wrapper} ref={component => this.wrapperRef = component}>
         {children}

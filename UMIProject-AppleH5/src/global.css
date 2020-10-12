@@ -1,3 +1,20 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url("https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf") format("woff"),
+    url("https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf") format("opentype"),
+    url("https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Microsoft YaHei";
+  src: url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.eot");
+  src: url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/e63653407669814f5b0eb9bbdc175f77.svg#Microsoft YaHei") format("svg");
+}
+
 html,
 body,
 #root {

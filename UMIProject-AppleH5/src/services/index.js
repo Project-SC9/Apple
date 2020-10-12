@@ -24,6 +24,6 @@ export const GameList = (uid, tid, total) => {
 /**
  * 用户日志采集【异步】
  */
-export const LogSave = (uid, tid, log, time) => {
-    return GETRequest(LOG_SAVE, { uid, tid, log, time });
+export const LogSave = (uid, tid, time, log,) => {
+    return GETRequest(LOG_SAVE, { uid, tid, time, log, });
 }

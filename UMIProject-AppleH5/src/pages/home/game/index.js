@@ -5,11 +5,8 @@ import ClassifyBar from '../compontents/classify-bar';
 import SearchBar from '../compontents/search';
 import BehaviorBar from '../compontents/behavior-bar';
 import ModalPopup from '../compontents/modal-popup';
-import ReactSwipes from 'react-swipes'
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-import { Button, Modal, Carousel } from 'antd-mobile';
+import moment from 'moment'
 import {
   StarFilled
 } from '@ant-design/icons';
@@ -18,7 +15,7 @@ import Masonry from 'masonry-layout'  //实现瀑布流
 import imagesloaded from 'imagesloaded' //监听图片加载
 import InfiniteScroll from 'react-infinite-scroller' //下拉加载
 
-const TASK_TOTAL = 80
+const TASK_TOTAL = 160
 /**
  * 游戏内容页
  */
@@ -47,13 +44,8 @@ export class Index extends Component {
       awardAllPopup: false,
       userRewardPopup: false,
       notificationPopup: false,
-
       taskImgurl: 'https://i.loli.net/2020/10/01/x4c3eSwDNRiK1Pk.png',
       awardImgurl: 'https://i.loli.net/2020/09/26/HYwPZ7FN8IckjO4.png',
-
-      assignmentSuccsess: ["面包炒蛋", "面包炒蛋", "面包炒蛋"],
-      assignmentSuccsessIndex: 3,
-      assignmentSuccsessValue: 0,
       behaviorImg: "",
       istoogle: -1,
       toogleStar: [],
@@ -71,13 +63,14 @@ export class Index extends Component {
       starImgCheck: [],
       imgDataList: props.taskArray,//前40张
       hasMore: true, // 是否开启下拉加载
+      scroller: false,
     }
   }
 
   render() {
     // if (this.state.imgDataList == "") { return <p>s</p> }
-    const { taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
-    const { taskBar, taskImgData, starImgCheck } = this.props;
+    const { scroller, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
+    const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList } = this.props;
     return (
       <div className={styles.game}>
         <div className={styles.game_back}>
@@ -87,7 +80,7 @@ export class Index extends Component {
               <div onClick={() => this.setState({ userRewardPopup: true })} > <img src={require('assets/image/info.png')} /></div>
             </div>
             <div className={styles.game_content}>
-              <ClassifyBar taskImgData={taskImgData} />
+              <ClassifyBar taskLabelData={taskLabelData} onClickClassifyBar={this.classifyBarClickedHandler} />
             </div>
           </div>
         </div>
@@ -98,19 +91,21 @@ export class Index extends Component {
           onTouchMove={this.navonTouchMoveHandler}
           onTouchStart={this.navonTouchStartHandler}
           onTouchEnd={this.navonTouchEndHandler}>
+          {this.renderGameContent()}
+        </div>
+        <div className={styles.loading_down}>
           {
-            this.state.searchImgDataList == '' ?
-              this.renderGameContent() : this.renderSearchContent()
+            !!scroller ? (<img src={require('assets/image/frame_up.png')} onClick={this.scrollBottomClickedHandler} />) : null
           }
         </div>
-        { /**<div className={styles.loading_down}><img src={require('assets/image/frame_up.png')} /></div>*/}
+
+
+
         {/** 行动栏 */}
-        <div className={styles.behavior_bar}>
+        <div className={styles.behavior_bar} ref={el => this.behaviorBar = el}>
           <BehaviorBar
             taskBar={taskBar}
-            starImgCheck={this.state.starImgCheck}
-            assignmentSuccsessIndex={this.state.assignmentSuccsessIndex}
-            assignmentSuccsessValue={this.state.assignmentSuccsessValue}
+            starImgCheck={starImgCheck}
           />
         </div>
         {/**底部搜索栏 */}
@@ -129,6 +124,7 @@ export class Index extends Component {
           onClickTaskPopUp={this.taskPopUpClickedHandler}
 
           awardPopup={awardPopup}
+          newAwardList={newAwardList}
           onClickAwardPopup={this.awardPopupClickedHandler}
 
           awardAllPopup={awardAllPopup}
@@ -138,16 +134,43 @@ export class Index extends Component {
           onClickNotificationPopup={this.notificationPopupClickedHandler}
 
           userRewardPopup={userRewardPopup}
+          awardList={awardList}
           onClickUserRewardPopup={this.userRewardPopupClickedHandler}
 
           taskImgurl={taskImgurl} />
       </div>
     )
   }
+  /**
+   * 发布任务
+   */
+  taskPopUpClickedHandler = () => {
+    this.setState({ taskPopup: false });
+    window.location.reload()
+  }
+  /**
+    * 任务完成点击事件
+    */
+  awardPopupClickedHandler = () => {
+    const { awardList, dispatch } = this.props;
+    this.setState({ awardPopup: false, taskPopup: true })
+    this._fetchTaskBar()//获取加载
+    this._fetchTaskImg()
+    if (awardList >= 6) {
+      this.setState({ awardAllPopup: true })
+    }
+    dispatch({
+      type: "player/starImgCheckUpdate",
+      payload: { starImgCheck: [] }
+    })
+  }
 
-  taskPopUpClickedHandler = () => { this.setState({ taskPopup: false }) }
-  awardPopupClickedHandler = () => { this.setState({ awardPopup: false, awardAllPopup: true }) }
-  awardAllPopupClickedHandler = () => { this.setState({ awardAllPopup: false }) }
+  awardAllPopupClickedHandler = () => {
+    this.setState({ awardAllPopup: false })
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "完成当日所有任务"
+    this._catchLogSave(newdate, cxt)
+  }
   notificationPopupClickedHandler = () => { this.setState({ notificationPopup: false }) }
   userRewardPopupClickedHandler = () => { this.setState({ userRewardPopup: false }) }
 
@@ -160,6 +183,7 @@ export class Index extends Component {
     // if (imgDataList == '') { return }
     return (
       <div className="pages_pinterest" className={styles.pages_pinterest}>
+        <div ref={el => { this.flyItem = el }} className={styles.fly_item}><img src={`http://babistep.com/media_static/${this.state.behaviorImg}`} /></div>
         {/* 下拉加载 */}
         <InfiniteScroll
           initialLoad={false} // 不让它进入直接加载
@@ -173,8 +197,8 @@ export class Index extends Component {
               imgDataList.map((item, index) => {
                 return (
                   <div key={index} className={'imgBox'} style={{ width: "50%" }}>
-                    <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)}>
-                      <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: "98%", height: "98%" }} />
+                    <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)} ref={component => this.btnCart = component}>
+                      <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: "98%", height: "98%" }} ref={component => this.behaviorUrl = component} />
                       <p className={styles.task_title}>{item.desc}</p>
                       <p className={item.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
                     </div>
@@ -182,12 +206,12 @@ export class Index extends Component {
                 )
               })
             }
+
           </div>
         </InfiniteScroll>
       </div>
     )
   }
-
 
   /**
    * 搜索内容展示
@@ -211,7 +235,7 @@ export class Index extends Component {
                   <div key={index} className={'imgBox'} style={{ width: "50%" }}>
                     <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)}>
                       <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} />
-                      <p className={styles.task_title}>{item.title}</p>
+                      <p className={styles.task_title}>{item.desc}</p>
                       <p className={item.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
                     </div>
                   </div>
@@ -228,12 +252,37 @@ export class Index extends Component {
    * 搜索框字段提交事件
    */
   searchSubmitHandler = (val) => {
+    const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
     if (val !== '') {
-      let newSearchImgDataList = this.state.imgDataList.filter(item => item.title == val)
+      let taskBarData = []
+      taskBarData.push(taskBar)
+      let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
+      let valKey = taskBarData.find(item => item.name == val)
+      let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
       this.setState({
-        searchImgDataList: newSearchImgDataList,
+        imgDataList: newSearchImgDataList,
       })
     }
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "使用搜索栏"
+    this._catchLogSave(newdate, cxt)
+  }
+
+  /**
+   * 分类栏点击事件
+   */
+  classifyBarClickedHandler = (val) => {
+    const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
+    if (val !== '') {
+      let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
+      let newSearchImgDataList = searchImgDataList.filter(item => item.label == val)
+      this.setState({
+        imgDataList: newSearchImgDataList,
+      })
+    }
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = `点击分类栏中${val}类框`
+    this._catchLogSave(newdate, cxt)
   }
 
   /**
@@ -255,16 +304,38 @@ export class Index extends Component {
    */
   loadMoreDataHandler = () => {
     const { imgDataList } = this.state
-    const { taskArrayAfter, starImgCheck } = this.props;
-    const taskImgDataLength = TASK_TOTAL + 1
+    const { taskArrayAfter, starImgCheck, taskArray } = this.props;
+    const taskImgDataLength = taskArray.length + taskArrayAfter.length + 1
+
     if (imgDataList.length < taskImgDataLength) {
-      const newImgData = [...imgDataList, ...taskArrayAfter, ...this.state.starImgCheck]
       this.setState({
+        scroller: true
+      })
+    }
+    if (imgDataList.length == (taskArray.length + taskArrayAfter.length)) {
+      this.setState({
+        scroller: false
+      })
+    }
+
+  }
+
+  scrollBottomClickedHandler = () => {
+    const { imgDataList } = this.state
+    const { taskArrayAfter, starImgCheck, taskArray } = this.props;
+    const taskImgDataLength = taskArray.length + taskArrayAfter.length + 1
+    if (imgDataList.length < taskImgDataLength) {
+      const newImgData = [...imgDataList, ...taskArrayAfter, ...starImgCheck]
+      this.setState({
+        scroller: false,
         imgDataList: newImgData //拼接每次加载的数据 arr是我自定义的数据
       }, () => {
         this.imagesOnload() // 每次获取完数据 触发
       })
     }
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "下拉刷新页面"
+    this._catchLogSave(newdate, cxt)
   }
 
   /**
@@ -283,60 +354,136 @@ export class Index extends Component {
    * 任务图片点击事件 
    */
   taskImageClickedHandler = (item, index) => {
-    const { assignmentSuccsessIndex } = this.state;
-    const { taskBar, taskImgData, dispatch } = this.props;
+    // const { assignmentSuccsessIndex } = this.state;
+    const { taskBar, taskImgData, dispatch, starImgCheck, awardList, newAwardList } = this.props;
     let assignmentArr = this.state.assignmentList;
     let taskImageIndexArray = this.state.taskImageIndexArray;
     let taskBarGobal = taskBar.gobal + 1
     if (taskImageIndexArray.length > taskBarGobal) { return }
+    if (awardList == 6) {
+      this.setState({ awardAllPopup: true })
+      return
+    }
     if (item.key == taskBar.key) {
-      item.checked = true;
+      this.state.behaviorImg = item.url;
+      this.animatedClickedHandler()
+      item.checked = true; //选中star
       assignmentArr.push(item.key);
       taskImageIndexArray.push(item.pid)
       taskImageIndexArray = [...new Set(taskImageIndexArray)]
       assignmentArr = [...assignmentArr];
       taskImageIndexArray = [...taskImageIndexArray]
       let toogleStar = this.state.toogleStar;
-      // this.state.behaviorImg = item.imgurl
       toogleStar.push(item.pid)
       toogleStar = [...toogleStar]
-      this.setState({
-        assignmentSuccsessValue: taskImageIndexArray.length
-      })
-      this.state.starImgCheck.push(item);
 
-      if (taskImageIndexArray.length == taskBar.goal) {
-        this.setState({ awardPopup: true });
-        return
-      }
-      // console.log("taskImageIndexArray", taskImageIndexArray)
-      // console.log("assignmentSuccsessValue", this.state.assignmentSuccsessValue)
-      // console.log("assignmentArr", assignmentArr)
-      // console.log("toogleStar", toogleStar)
-
-      // let starImgCheckList = []
-      // starImgCheckList.push(item)
-
-      // const { dispatch, starImgCheck } = this.props;
-
-      // dispatch({ type: 'player/starImgCheckUpdate', payload: { ...starImgCheck, ...starImgCheckList } })
 
       const id2 = Number(item.pid)
       const ToDoList = JSON.parse(JSON.stringify([...this.state.imgDataList]))
+      // filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
       let newTaskData = ToDoList.filter(item => item.pid !== id2);
 
+      if (starImgCheck.length <= taskBar.goal) {
+        starImgCheck.push(item)
+        dispatch({
+          type: "player/starImgCheckUpdate",
+          payload: { starImgCheck: starImgCheck }
+        })
+      }
+      //日志
+      if (starImgCheck.length < taskBar.goal) {
+        let newdate = moment().format('YYYYMMDDHHmmss')
+        let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
+        this._catchLogSave(newdate, cxt)
+      }
+      // 当前任务完成
+      if ((starImgCheck.length) == taskBar.goal) {
+
+        const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
+        const number = this.props.location.query.uid //酒店房间号 
+        const title = "奖励名称X" //酒店
+
+        const newAwardDateList = { date, number, title, get: 1 }
+
+        awardList.push(newAwardDateList)
+        dispatch({
+          type: "player/awardListUpdate",
+          payload: { awardList: awardList }
+        })
+
+        dispatch({
+          type: "player/newAwardListUpdate",
+          payload: { ...newAwardList, ...newAwardDateList }
+        })
+        this.setState({ awardPopup: true });
+
+        let newdate = moment().format('YYYYMMDDHHmmss')
+        let cxt = `点击最后一张（任务正确）图片`
+        this._catchLogSave(newdate, cxt)
+        return
+      }
       this.setState({
-        //filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
         imgDataList: newTaskData,
       }, () => { this.imagesOnload() })
     }
+
     if (item.key !== taskBar.key) {
+
       this.state.notificationData.push(item)
-      if (this.state.notificationData.length > 3) {
+      if (this.state.notificationData.length < 3) {
+        let newdate = moment().format('YYYYMMDDHHmmss')
+        let cxt = `点击第${this.state.notificationData.length}张（任务不正确）图片`
+        this._catchLogSave(newdate, cxt)
+      }
+      if (this.state.notificationData.length >= 3) {
+        let newdate = moment().format('YYYYMMDDHHmmss')
+        let cxt = `点击最后一张（任务不正确）图片`
+        this._catchLogSave(newdate, cxt)
         this.setState({ notificationPopup: true })
+        return
       }
     }
+  }
 
+  animatedClickedHandler = () => {
+    let eleBtn = this.btnCart;
+    let eleFlyItem = this.flyItem;
+    let eleFlyImg = this.behaviorUrl;
+    let eleCart = this.behaviorBar;
+
+    let isRunning = false;
+    // eleBtn.addEventListener('click', function () {
+    // 现在按钮距离购物车的距离
+    let boundBtn = eleBtn.getBoundingClientRect();
+    let boundCart = eleCart.getBoundingClientRect();
+
+    // 中心点的水平垂直距离
+    let offsetX = boundCart.left / 8;
+    let offsetY = boundCart.top / 2.3;
+    // 页面滚动尺寸
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+    let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+    if (isRunning == false) {
+      // 购物车图形出现与初始定位
+      eleFlyItem.style.display = 'block';
+      // eleFlyItem.style.left = ((boundBtn.left + scrollLeft + document.body.clientWidth / 2) / 100) + 'px';
+      // eleFlyItem.style.top = ((boundBtn.top + scrollTop + document.body.clientHeight / 2) / 100) + 'px';
+      eleFlyItem.style.left = "50%";
+      eleFlyItem.style.top = "50%";
+
+      // 开始动画
+      eleFlyItem.style.transform = `translate(${offsetX}px,${offsetY}px)`;
+
+      // 动画标志量
+      isRunning = true;
+      setTimeout(function () {
+        eleFlyItem.style.display = '';
+        eleFlyItem.style.transform = 'translateX(0)';
+        eleFlyImg.style.transform = 'translateY(0)';
+        isRunning = false;
+      }, 1000);
+    }
+    // });
   }
 
   /** 滑动开始事件 */
@@ -346,6 +493,7 @@ export class Index extends Component {
       firstY: e.targetTouches[0].clientY,
     })
   }
+
   /** 滑动移动事件 */
   navonTouchMoveHandler = (e) => {
     this.setState({
@@ -375,13 +523,13 @@ export class Index extends Component {
    * 获取任务目标
    */
   _fetchTaskBar = () => {
-    const { dispatch } = this.props;
+    const { dispatch, taskBar } = this.props;
     // 任务栏
     dispatch({
       type: "player/fetchTaskList",
       payload: {
         uid: this.props.location.query.uid,
-        tid: this.props.location.query.tid
+        tid: taskBar.tid
       }
     })
   }
@@ -402,11 +550,24 @@ export class Index extends Component {
     })
   }
 
+  //日志
+  _catchLogSave = (time, cxt) => {
+    const { dispatch, taskBar } = this.props;
+    dispatch({
+      type: "player/fetchLogSave",
+      payload: {
+        uid: this.props.location.query.uid,
+        tid: taskBar.tid,
+        time: time,
+        log: cxt
+      }
+    })
+  }
 
   async componentDidMount() {
     // await this._fetchTaskBar()//获取加载
     // this._fetchTaskImg()
-    // console.log(this.props)
+
     this.imagesOnload()//图片加载
     window.addEventListener("resize", function () {
       // 解决键盘弹起后遮挡输入框的问题
@@ -423,14 +584,16 @@ export class Index extends Component {
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
-  const { taskBar, taskImgData, taskArray, taskArrayAfter, starImgCheck } = state.player;
-
+  const { taskBar, taskImgData, taskArray, taskArrayAfter, starImgCheck, awardList, taskLabelData, newAwardList } = state.player;
   return {
     taskBar: taskBar,
     taskImgData: taskImgData,
+    taskLabelData: taskLabelData,
     taskArray: taskArray,
     taskArrayAfter: taskArrayAfter,
-    starImgCheck: starImgCheck
+    starImgCheck: starImgCheck,
+    awardList: awardList,
+    newAwardList: newAwardList
   };
 }
 

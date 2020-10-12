@@ -41,18 +41,18 @@ const feedbackEventEmitter = new EventEmitter();
 //   });
 // }
 
-// /**
-//  * Toast.fail()提示
-//  */
-// feedbackEventEmitter.addListener('feedback.event.toast.fail', (content, resolve) => {
-//   Toast.fail(content);
-// });
+/**
+ * Toast.fail()提示
+ */
+feedbackEventEmitter.addListener('feedback.event.toast.fail', (content, resolve) => {
+  Toast.fail(content);
+});
 
-// export const toastFail = (content) => {
-//   return new Promise((resolve) => {
-//     feedbackEventEmitter.emit('feedback.event.toast.fail', content, resolve);
-//   });
-// }
+export const toastFail = (content) => {
+  return new Promise((resolve) => {
+    feedbackEventEmitter.emit('feedback.event.toast.fail', content, resolve);
+  });
+}
 
 /**
  * modal.success()提示
@@ -116,22 +116,22 @@ export const modalConfirm = (title, content) => {
   });
 }
 
-/**
- * modalMobile.alert()提示：小型对话框
- */
-feedbackEventEmitter.addListener('feedback.event.modalMobile.alert', (title, content, resolve) => {
-  ModalMobile.alert({
-    title: title,
-    content: content,
-    okText: "OK",
-    cancelText: "Cancel",
-    onCancel: () => resolve(CONFIRM_MODAL_CANCEL),
-    onOk: () => resolve(CONFIRM_MODAL_OK),
-  });
-});
+// /**
+//  * modalMobile.alert()提示：小型对话框
+//  */
+// feedbackEventEmitter.addListener('feedback.event.modalMobile.alert', (title, content, resolve) => {
+//   ModalMobile.alert({
+//     title: title,
+//     content: content,
+//     okText: "OK",
+//     cancelText: "Cancel",
+//     onCancel: () => resolve(CONFIRM_MODAL_CANCEL),
+//     onOk: () => resolve(CONFIRM_MODAL_OK),
+//   });
+// });
 
-export const modalMobileAlert = (title, content) => {
-  return new Promise((resolve) => {
-    feedbackEventEmitter.emit('feedback.event.modalMobile.alert', title, content, resolve);
-  });
-}
+// export const modalMobileAlert = (title, content) => {
+//   return new Promise((resolve) => {
+//     feedbackEventEmitter.emit('feedback.event.modalMobile.alert', title, content, resolve);
+//   });
+// }

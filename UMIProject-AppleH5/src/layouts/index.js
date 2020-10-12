@@ -18,8 +18,10 @@ class Index extends Component {
 	componentWillMount() {
 		document.title = 'juuuce.com'
 		this._reduxPersistor = persistStore(window.g_app._store);
-		console.log(this._reduxPersistor)
+		// console.log(this._reduxPersistor)
+		// console.log(window.g_app._store)
 		window._reduxPersistor = this._reduxPersistor;
+		window.addEventListener('beforeunload', this.beforeunload);
 	}
 
 	render() {
@@ -32,10 +34,11 @@ class Index extends Component {
 			</PersistGate>
 		)
 	}
-
-
-
-
+	componentDidMount() {
+		window.setInterval(() => {
+			localStorage.clear();
+		}, 43200000)
+	}
 }
 
 const mapStateToProps = (state) => {

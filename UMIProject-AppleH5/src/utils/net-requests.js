@@ -2,7 +2,7 @@
  * 作为整个系统的网络请求库
  */
 import { extend } from 'umi-request';
-import { modalError, modalMobileAlert } from 'utils/feedbacks';
+import { modalError, toastFail } from 'utils/feedbacks';
 
 import {
   aes192CBCEncrypt,
@@ -40,10 +40,28 @@ const _netErrorHandler = async (error) => {
   let errorMsg = !response.status ? codeMessageMap['500'] : codeMessageMap[response.status] || response.statusText;
 
   // 2、提示错误信息
-  await modalMobileAlert(errorMsg);
+  await toastFail(errorMsg);
 
   // 3、抛出错误异常
   throw { errorMsg };
+};
+
+/**
+ * 异常处理程序
+ */
+const errorHandler = error => {
+  const { response } = error;
+
+  if (response && response.status) {
+    const errorText = codeMessage[response.status] || response.statusText;
+    const { status, url } = response;
+    notification.error({
+      message: `请求错误 ${status}: ${url}`,
+      description: errorText,
+    });
+  }
+
+  return response;
 };
 
 const _commonNetRequestConfigs = {
@@ -63,6 +81,7 @@ const _commonNetRequestConfigs = {
   charset: 'utf8',
   /** 异常处理 **/
   errorHandler: _netErrorHandler,
+  crossDomain: true,
 };
 
 /**
@@ -101,7 +120,13 @@ const _authHandlerMiddle = async (ctx, next) => {
  * 普通的get请求
  */
 export const GETRequest = (url, params) => {
-  const request = extend({ ..._commonNetRequestConfigs });
+  const request = extend({
+    ..._commonNetRequestConfigs, headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+      // Authorization: authorization(noAuth),
+      "Content-Security-Policy": "upgrade-insecure-requests"
+    } });
   return request.get(url, { params });
 };
 
