@@ -15,6 +15,8 @@ import Masonry from 'masonry-layout'  //实现瀑布流
 import imagesloaded from 'imagesloaded' //监听图片加载
 import InfiniteScroll from 'react-infinite-scroller' //下拉加载
 
+import { spin } from 'antd-mobile';
+
 const TASK_TOTAL = 160
 /**
  * 游戏内容页
@@ -64,12 +66,16 @@ export class Index extends Component {
       imgDataList: props.taskArray,//前40张
       hasMore: true, // 是否开启下拉加载
       scroller: false,
+
+      refreshing: false,
+      down: true,
+      height: document.documentElement.clientHeight,
     }
   }
 
   render() {
     // if (this.state.imgDataList == "") { return <p>s</p> }
-    const { scroller, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
+    const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
     const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList } = this.props;
     return (
       <div className={styles.game}>
@@ -91,15 +97,12 @@ export class Index extends Component {
           onTouchMove={this.navonTouchMoveHandler}
           onTouchStart={this.navonTouchStartHandler}
           onTouchEnd={this.navonTouchEndHandler}>
-          {this.renderGameContent()}
-        </div>
-        <div className={styles.loading_down}>
+          <div className={styles.pullTodown}><img src={require('assets/image/frame_up.png')} /></div>
           {
-            !!scroller ? (<img src={require('assets/image/frame_up.png')} onClick={this.scrollBottomClickedHandler} />) : null
+            searchImgDataList == ""
+              ? this.renderGameContent() : this.renderSearchContent()
           }
         </div>
-
-
 
         {/** 行动栏 */}
         <div className={styles.behavior_bar} ref={el => this.behaviorBar = el}>
@@ -145,9 +148,10 @@ export class Index extends Component {
    * 发布任务
    */
   taskPopUpClickedHandler = () => {
-    this.setState({ taskPopup: false });
+    this.setState({ taskPopup: false, starImgCheck: [] });
     window.location.reload()
   }
+
   /**
     * 任务完成点击事件
     */
@@ -179,16 +183,24 @@ export class Index extends Component {
    * 游戏内容展示
    */
   renderGameContent = () => {
-    const { imgDataList, hasMore } = this.state
+    const { imgDataList, hasMore, scroller } = this.state
     // if (imgDataList == '') { return }
     return (
-      <div className="pages_pinterest" className={styles.pages_pinterest}>
+      <div className="pages_pinterest" className={styles.pages_pinterest} onTouchMove={this.pullToRefreshMoveHandler}>
         <div ref={el => { this.flyItem = el }} className={styles.fly_item}><img src={`http://babistep.com/media_static/${this.state.behaviorImg}`} /></div>
+
         {/* 下拉加载 */}
         <InfiniteScroll
           initialLoad={false} // 不让它进入直接加载
           pageStart={1} // 设置初始化请求的页数
           loadMore={this.loadMoreDataHandler}  // 监听的ajax请求
+          loader={
+            <div className={styles.loading_down} key={0}>
+              {
+                scroller ? (<p>加载完毕</p>) : (<img src={require('assets/image/frame_up.png')} />)
+              }
+            </div>
+          }
           hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
           useWindow={true} // 不监听 window 滚动条
         >
@@ -198,7 +210,7 @@ export class Index extends Component {
                 return (
                   <div key={index} className={'imgBox'} style={{ width: "50%" }}>
                     <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)} ref={component => this.btnCart = component}>
-                      <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: "98%", height: "98%" }} ref={component => this.behaviorUrl = component} />
+                      <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} ref={component => this.behaviorUrl = component} />
                       <p className={styles.task_title}>{item.desc}</p>
                       <p className={item.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
                     </div>
@@ -209,13 +221,14 @@ export class Index extends Component {
 
           </div>
         </InfiniteScroll>
+
       </div>
     )
   }
 
-  /**
-   * 搜索内容展示
-   */
+  // /**
+  //  * 搜索内容展示
+  //  */
   renderSearchContent = () => {
     const { searchImgDataList, hasMore } = this.state
     return (
@@ -226,7 +239,7 @@ export class Index extends Component {
           pageStart={1} // 设置初始化请求的页数
           loadMore={this.loadMoreDataHandler}  // 监听的ajax请求
           hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
-          useWindow={true} // 不监听 window 滚动条
+          useWindow={false} // 不监听 window 滚动条
         >
           <div className={"pages_hoc"} style={{ margin: "auto" }}>
             {
@@ -258,11 +271,19 @@ export class Index extends Component {
       taskBarData.push(taskBar)
       let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
       let valKey = taskBarData.find(item => item.name == val)
+
       let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+
+      const hash = {};
+      const newArray = newSearchImgDataList.reduce((item, next) => {
+        hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+        return item;
+      }, [])
       this.setState({
-        imgDataList: newSearchImgDataList,
-      })
+        searchImgDataList: newArray,
+      }, () => this.imagesOnload())
     }
+
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = "使用搜索栏"
     this._catchLogSave(newdate, cxt)
@@ -277,12 +298,33 @@ export class Index extends Component {
       let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
       let newSearchImgDataList = searchImgDataList.filter(item => item.label == val)
       this.setState({
-        imgDataList: newSearchImgDataList,
-      })
+        searchImgDataList: newSearchImgDataList,
+      }, () => this.imagesOnload())
     }
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = `点击分类栏中${val}类框`
     this._catchLogSave(newdate, cxt)
+  }
+  /**
+   * 下滑
+   */
+  pullToRefreshMoveHandler = (e) => {
+    this.setState({
+      endX: e.changedTouches[0].clientX,
+      endY: e.changedTouches[0].clientY,
+    });
+    let moveX = this.state.endX - this.state.firstX;
+    let moveY = this.state.endY - this.state.firstY;
+
+    if (Math.abs(moveX) > 50 || Math.abs(moveY) > 50) {
+      if (moveY > 0) {
+        document.getElementsByClassName(styles.pullTodown)[0].style.display = ""
+        document.getElementsByClassName(styles.pages_pinterest)[0].style.marginTop = "50%"
+      } else {
+        document.getElementsByClassName(styles.pullTodown)[0].style.display = "none"
+        document.getElementsByClassName(styles.pages_pinterest)[0].style.marginTop = ""
+      }
+    }
   }
 
   /**
@@ -306,17 +348,24 @@ export class Index extends Component {
     const { imgDataList } = this.state
     const { taskArrayAfter, starImgCheck, taskArray } = this.props;
     const taskImgDataLength = taskArray.length + taskArrayAfter.length + 1
-
-    if (imgDataList.length < taskImgDataLength) {
+    // 超过80条数据 不继续监听下拉事件
+    if (imgDataList.length >= taskImgDataLength) {
       this.setState({
         scroller: true
       })
+      return
     }
-    if (imgDataList.length == (taskArray.length + taskArrayAfter.length)) {
+    if (imgDataList.length < taskImgDataLength) {
+      const newImgData = [...imgDataList, ...taskArrayAfter, ...starImgCheck]
       this.setState({
-        scroller: false
+        imgDataList: newImgData
+      }, () => {
+        this.imagesOnload() // 每次获取完数据 触发
       })
     }
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "下拉刷新页面"
+    this._catchLogSave(newdate, cxt)
 
   }
 
@@ -344,7 +393,7 @@ export class Index extends Component {
   imagesOnload = () => {
     const elLoad = imagesloaded('.pages_hoc')  //获取下拉加载里面的第一个盒子
     //always 图片已全部加载，或被确认加载失败
-    elLoad.on('always', () => {
+    elLoad.on('progress', () => {
       // 调用瀑布流
       this.advanceWidth()
     })
@@ -366,7 +415,7 @@ export class Index extends Component {
     }
     if (item.key == taskBar.key) {
       this.state.behaviorImg = item.url;
-      this.animatedClickedHandler()
+      // this.animatedClickedHandler()
       item.checked = true; //选中star
       assignmentArr.push(item.key);
       taskImageIndexArray.push(item.pid)
@@ -385,9 +434,14 @@ export class Index extends Component {
 
       if (starImgCheck.length <= taskBar.goal) {
         starImgCheck.push(item)
+        const hash = {};
+        const newstarImgCheck = starImgCheck.reduce((item, next) => {
+          hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+          return item;
+        }, [])
         dispatch({
           type: "player/starImgCheckUpdate",
-          payload: { starImgCheck: starImgCheck }
+          payload: { starImgCheck: newstarImgCheck }
         })
       }
       //日志

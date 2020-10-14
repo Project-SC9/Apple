@@ -69,7 +69,7 @@ export class Index extends PureComponent {
           wrapClassName={styles.popup_modal_task}>
           <div className={styles.modal_header}>
             <div className={styles.modal_header_img}>
-              <img src={taskImgurl} />
+              <img src={require("assets/image/mianb.png")} />
             </div>
           </div>
           <div className={styles.modal_content}>
@@ -112,7 +112,6 @@ export class Index extends PureComponent {
             <Button onClick={this.awardPopupClickedHandler}>我知道了</Button>
             <p className={styles.mark_hint}><ExclamationCircleFilled />请截图，并到酒店前台领取奖励</p>
           </div>
-
         </Modal>
       </div>
     )

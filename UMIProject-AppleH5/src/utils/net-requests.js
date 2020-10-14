@@ -121,12 +121,8 @@ const _authHandlerMiddle = async (ctx, next) => {
  */
 export const GETRequest = (url, params) => {
   const request = extend({
-    ..._commonNetRequestConfigs, headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json; charset=utf-8',
-      // Authorization: authorization(noAuth),
-      "Content-Security-Policy": "upgrade-insecure-requests"
-    } });
+    ..._commonNetRequestConfigs,
+  });
   return request.get(url, { params });
 };
 
@@ -139,6 +135,12 @@ export const GETRequest = (url, params) => {
 //   request.use(_cipherHandlerMiddleware);
 //   return request.post(url, { data: json });
 // };
+// headers: {
+//   Accept: 'application/json',
+//     'Content-Type': 'application/json; charset=utf-8',
+//       // Authorization: authorization(noAuth),
+//       "Content-Security-Policy": "upgrade-insecure-requests"
+// }
 
 /**
  * 普通的post请求

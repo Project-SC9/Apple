@@ -247,9 +247,3 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps)(Index))
-// console.log("网页可见区域宽", document.body.clientHeight)
-// console.log("网页正文全文宽：", document.body.scrollWidth)
-// console.log("网页可见区域宽：", document.body.offsetWidth)
-// console.log("网页被卷去的左：", document.body.scrollLeft)
-// console.log("屏幕分辨率的宽：", window.screen.width)
-// console.log("屏幕可用工作区宽度：", window.screen.availWidth)

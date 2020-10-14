@@ -303,7 +303,7 @@ export class Index extends Component {
             gutter: 0,
             cols: 2
         });
-        console.log()
+        // console.log()
     }
 
 

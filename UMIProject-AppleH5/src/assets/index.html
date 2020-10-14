@@ -53,11 +53,11 @@
             // 现在按钮距离购物车的距离
             let boundBtn = eleBtn.getBoundingClientRect();
             let boundCart = eleCart.getBoundingClientRect();
-            console.log(boundCart)
+            // console.log(boundCart)
             // 中心点的水平垂直距离
             let offsetX = boundCart.left + boundCart.width / 2 - (boundBtn.left + boundBtn.width / 2);
             let offsetY = boundCart.top + boundCart.height / 2 - (boundBtn.top + boundBtn.height / 2);
-            console.log(offsetX)
+            // console.log(offsetX)
             // 页面滚动尺寸
             let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
             let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0;

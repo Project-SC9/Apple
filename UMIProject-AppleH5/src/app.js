@@ -25,7 +25,7 @@ export const dva = {
     // onAction: createLogger(),
     onError(err) {
       err.preventDefault()
-      console.log('XXXXXXXXXX')
+      // console.log('XXXXXXXXXX')
       console.error(err)
     },
     onReducer(reducer) {
