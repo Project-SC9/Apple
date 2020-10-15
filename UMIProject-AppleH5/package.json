@@ -16,6 +16,7 @@
     "crypto-js": "^4.0.0",
     "dva": "^2.6.0-beta.6",
     "imagesloaded": "^4.1.4",
+    "iscroll-luo": "^1.2.3",
     "lodash": "^4.17.15",
     "masonry-layout": "^4.2.2",
     "moment": "^2.24.0",

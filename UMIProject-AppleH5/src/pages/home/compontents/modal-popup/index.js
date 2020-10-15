@@ -6,6 +6,11 @@ import {
 } from '@ant-design/icons';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ReactSwipes from 'react-swipes'
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 /**
  * 弹出框组件库
  */
@@ -69,7 +74,8 @@ export class Index extends PureComponent {
           wrapClassName={styles.popup_modal_task}>
           <div className={styles.modal_header}>
             <div className={styles.modal_header_img}>
-              <img src={require("assets/image/mianb.png")} />
+              {/*<img src={require("assets/image/mianb.png")} />*/}
+              <img src={taskImgurl} />
             </div>
           </div>
           <div className={styles.modal_content}>
@@ -190,9 +196,13 @@ export class Index extends PureComponent {
    * 我的奖励弹出框
    */
   renderUserReward = () => {
-    let opt = {
-      distance: 280, // 每次移动的距离，卡片的真实宽度
-      currentPoint: 0,// 初始位置，默认从0即第一个元素开始
+    let settings = {
+      // dots: true,
+      infinite: false,
+      speed: 500,
+      centerPadding: 50,
+      slidesToShow: 1.6,
+      slidesToScroll: 1.6,
     }
     const { userRewardPopup, awardList } = this.props;
     return (
@@ -210,45 +220,42 @@ export class Index extends PureComponent {
               <h2 style={{ fontSize: "0.6rem", marginTop: "2%", marginBottom: "2%" }}>我的奖励</h2>
             </div>
 
-            <div className={styles.viewport}>
-              <div className={styles.flipsnap}>
-                <ReactSwipes className={styles.card_slide} options={opt}>
-                  {
-                    awardList == "" ?
-                      (
-                        <div className={styles.popup_reward}>
-                          <div className={styles.modal_content_award}>
-                            <img src={require('assets/image/group.png')} style={{ width: '44%' }} />
-                            <h3>奖励名称</h3>
-                            <h4>还未获得</h4>
+            {
+              awardList == "" ?
+                (
+                  <Slider {...settings} className={styles.card_slide} >
+                    <div className={styles.popup_reward}>
+                      <div className={styles.modal_content_award}>
+                        <img src={require('assets/image/group.png')} style={{ width: '44%', margin: "auto" }} />
+                        <h3>奖励名称</h3>
+                        <h4>还未获得</h4>
+                      </div>
+                    </div>
+                  </Slider>
+                ) : (
+                  <Slider {...settings} className={styles.card_slide} >
+                    {
+                      awardList.map((val, index) => {
+                        return (
+                          <div className={styles.popup_reward} key={index}>
+                            <div className={styles.modal_content_award}>
+                              <img src={require('assets/image/trophy.png')} style={{ width: '44%', margin: "auto" }} />
+                              <h2>{val.title}</h2>
+                              <ul className={styles.carousel_ul}>
+                                <li> <p>酒店名称</p><p>{val.number}</p> </li>
+                                <li> <p>{val.date}</p> </li>
+                              </ul>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <>
-                          {
-                            awardList.map((val, index) => {
-                              return (
-                                <div className={styles.popup_reward} key={index}>
-                                  <div className={styles.modal_content_award}>
-                                    <img src={require('assets/image/trophy.png')} style={{ width: '44%' }} />
-                                    <h2>{val.title}</h2>
-                                    <ul className={styles.carousel_ul}>
-                                      <li> <p>酒店名称</p><p>{val.number}</p> </li>
-                                      <li> <p>{val.date}</p> </li>
-                                    </ul>
-                                  </div>
+                        )
+                      })
+                    }
+                  </Slider>
+                )
+            }
 
-                                </div>
-                              )
-                            })
-                          }
-                        </>
-                      )
-                  }
 
-                </ReactSwipes>
-              </div>
-            </div>
+
           </Modal>
         </CSSTransition>
 

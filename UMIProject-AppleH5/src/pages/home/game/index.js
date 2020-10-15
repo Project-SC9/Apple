@@ -14,8 +14,7 @@ import {
 import Masonry from 'masonry-layout'  //实现瀑布流
 import imagesloaded from 'imagesloaded' //监听图片加载
 import InfiniteScroll from 'react-infinite-scroller' //下拉加载
-
-import { spin } from 'antd-mobile';
+import Luo from 'iscroll-luo';
 
 const TASK_TOTAL = 160
 /**
@@ -73,6 +72,18 @@ export class Index extends Component {
     }
   }
 
+  options = {
+    backgroundColor: '#ffffff',	//# 背景颜色，是滑动底层的背景颜色
+    fontColor: '#000', 		//# 文字颜色，是下拉刷新、上拉加载那些文字的颜色
+    beyondHeight: 150,		//# 超过此长度后触发下拉或上拉, 单位px
+    pulldownInfo: '下拉刷新',
+    pulldownReadyInfo: '松开刷新',
+    pulldowningInfo: '刷新中…',
+    pullupInfo: '',
+    pullupReadyInfo: '',
+    pullupingInfo: '',
+  }
+
   render() {
     // if (this.state.imgDataList == "") { return <p>s</p> }
     const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
@@ -98,10 +109,20 @@ export class Index extends Component {
           onTouchStart={this.navonTouchStartHandler}
           onTouchEnd={this.navonTouchEndHandler}>
           <div className={styles.pullTodown}><img src={require('assets/image/frame_up.png')} /></div>
-          {
-            searchImgDataList == ""
-              ? this.renderGameContent() : this.renderSearchContent()
-          }
+          < div style={{ position: 'relative', height: '1000vh' }}>
+            <Luo
+              id='id'
+              className={styles.luo}
+              onDown={() => this.onDown()}
+              options={this.options}
+            >
+              {
+                searchImgDataList == ""
+                  ? this.renderGameContent() : this.renderSearchContent()
+              }
+            </Luo>
+          </div>
+
         </div>
 
         {/** 行动栏 */}
@@ -116,7 +137,7 @@ export class Index extends Component {
           this.state.moveUp ?
             (
               <div className={styles.search} >
-                <SearchBar onSearchChange={this.searchChangedHandler} onSearchSubmit={this.searchSubmitHandler} />
+                <SearchBar onSearchChange={this.searchChangedHandler} onSearchSubmit={this.searchSubmitHandler} onClickSubmit={this.searchClickedHandler} />
               </div>
             ) : null
         }
@@ -160,7 +181,7 @@ export class Index extends Component {
     this.setState({ awardPopup: false, taskPopup: true })
     this._fetchTaskBar()//获取加载
     this._fetchTaskImg()
-    if (awardList >= 6) {
+    if (awardList.length >= 6) {
       this.setState({ awardAllPopup: true })
     }
     dispatch({
@@ -186,7 +207,7 @@ export class Index extends Component {
     const { imgDataList, hasMore, scroller } = this.state
     // if (imgDataList == '') { return }
     return (
-      <div className="pages_pinterest" className={styles.pages_pinterest} onTouchMove={this.pullToRefreshMoveHandler}>
+      <div className="pages_pinterest" className={styles.pages_pinterest}>
         <div ref={el => { this.flyItem = el }} className={styles.fly_item}><img src={`http://babistep.com/media_static/${this.state.behaviorImg}`} /></div>
 
         {/* 下拉加载 */}
@@ -289,6 +310,31 @@ export class Index extends Component {
     this._catchLogSave(newdate, cxt)
   }
 
+  searchClickedHandler = (val) => {
+    const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
+    if (val !== '') {
+      let taskBarData = []
+      taskBarData.push(taskBar)
+      let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
+      let valKey = taskBarData.find(item => item.desc == val)
+
+      let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+
+      const hash = {};
+      const newArray = newSearchImgDataList.reduce((item, next) => {
+        hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+        return item;
+      }, [])
+      this.setState({
+        searchImgDataList: newArray,
+      }, () => this.imagesOnload())
+    }
+
+    let newdate = moment().format('YYYYMMDDHHmmss')
+    let cxt = "使用搜索栏"
+    this._catchLogSave(newdate, cxt)
+  }
+
   /**
    * 分类栏点击事件
    */
@@ -305,27 +351,6 @@ export class Index extends Component {
     let cxt = `点击分类栏中${val}类框`
     this._catchLogSave(newdate, cxt)
   }
-  /**
-   * 下滑
-   */
-  pullToRefreshMoveHandler = (e) => {
-    this.setState({
-      endX: e.changedTouches[0].clientX,
-      endY: e.changedTouches[0].clientY,
-    });
-    let moveX = this.state.endX - this.state.firstX;
-    let moveY = this.state.endY - this.state.firstY;
-
-    if (Math.abs(moveX) > 50 || Math.abs(moveY) > 50) {
-      if (moveY > 0) {
-        document.getElementsByClassName(styles.pullTodown)[0].style.display = ""
-        document.getElementsByClassName(styles.pages_pinterest)[0].style.marginTop = "50%"
-      } else {
-        document.getElementsByClassName(styles.pullTodown)[0].style.display = "none"
-        document.getElementsByClassName(styles.pages_pinterest)[0].style.marginTop = ""
-      }
-    }
-  }
 
   /**
    * 瀑布流
@@ -338,6 +363,13 @@ export class Index extends Component {
       fitWidth: true, // 设置网格容器宽度等于网格宽度
       gutter: 0,
       cols: 2
+    });
+  }
+
+  /** 下拉刷新 **/
+  onDown() {
+    this.setState({
+      imgDataList: this.state.imgDataList
     });
   }
 
@@ -408,10 +440,11 @@ export class Index extends Component {
     let assignmentArr = this.state.assignmentList;
     let taskImageIndexArray = this.state.taskImageIndexArray;
     let taskBarGobal = taskBar.gobal + 1
-    if (taskImageIndexArray.length > taskBarGobal) { return }
-    if (awardList == 6) {
+    if (taskImageIndexArray.length > taskBarGobal) { return false }
+
+    if (awardList.length >= 6) {
       this.setState({ awardAllPopup: true })
-      return
+      return false
     }
     if (item.key == taskBar.key) {
       this.state.behaviorImg = item.url;
@@ -426,7 +459,6 @@ export class Index extends Component {
       toogleStar.push(item.pid)
       toogleStar = [...toogleStar]
 
-
       const id2 = Number(item.pid)
       const ToDoList = JSON.parse(JSON.stringify([...this.state.imgDataList]))
       // filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
@@ -434,48 +466,52 @@ export class Index extends Component {
 
       if (starImgCheck.length <= taskBar.goal) {
         starImgCheck.push(item)
+
         const hash = {};
         const newstarImgCheck = starImgCheck.reduce((item, next) => {
           hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
           return item;
         }, [])
+
         dispatch({
           type: "player/starImgCheckUpdate",
           payload: { starImgCheck: newstarImgCheck }
         })
+        // 当前任务完成
+        if (newstarImgCheck.length === taskBar.goal) {
+
+          const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
+          const number = this.props.location.query.uid //酒店房间号 
+          const title = "奖励名称X" //酒店
+
+          const newAwardDateList = { date, number, title, get: 1 }
+
+          awardList.push(newAwardDateList)
+          dispatch({
+            type: "player/awardListUpdate",
+            payload: { awardList: awardList }
+          })
+
+          dispatch({
+            type: "player/newAwardListUpdate",
+            payload: { ...newAwardList, ...newAwardDateList }
+          })
+          let newdate = moment().format('YYYYMMDDHHmmss')
+          let cxt = `点击最后一张（任务正确）图片`
+          this._catchLogSave(newdate, cxt)
+
+          this.setState({ awardPopup: true });
+          return false
+        }
       }
+
       //日志
       if (starImgCheck.length < taskBar.goal) {
         let newdate = moment().format('YYYYMMDDHHmmss')
         let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
         this._catchLogSave(newdate, cxt)
       }
-      // 当前任务完成
-      if ((starImgCheck.length) == taskBar.goal) {
 
-        const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
-        const number = this.props.location.query.uid //酒店房间号 
-        const title = "奖励名称X" //酒店
-
-        const newAwardDateList = { date, number, title, get: 1 }
-
-        awardList.push(newAwardDateList)
-        dispatch({
-          type: "player/awardListUpdate",
-          payload: { awardList: awardList }
-        })
-
-        dispatch({
-          type: "player/newAwardListUpdate",
-          payload: { ...newAwardList, ...newAwardDateList }
-        })
-        this.setState({ awardPopup: true });
-
-        let newdate = moment().format('YYYYMMDDHHmmss')
-        let cxt = `点击最后一张（任务正确）图片`
-        this._catchLogSave(newdate, cxt)
-        return
-      }
       this.setState({
         imgDataList: newTaskData,
       }, () => { this.imagesOnload() })

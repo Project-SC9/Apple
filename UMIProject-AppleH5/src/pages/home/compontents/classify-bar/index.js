@@ -17,7 +17,9 @@ export class Index extends PureComponent {
     settings = {
         // dots: true,
         infinite: false,
-        slidesToShow: 3.4,
+        speed: 500,
+        slidesToShow: 3.7,
+        slidesToScroll: 2.5
     }
     render() {
         const { taskLabelData } = this.props

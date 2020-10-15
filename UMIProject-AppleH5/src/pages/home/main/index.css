@@ -325,12 +325,14 @@
 
 .task_list img {
   width: 100%;
-  border-radius: 6%;
-  margin-bottom: 2%;
-  -webkit-border-radius: 6%;
-  -moz-border-radius: 6%;
-  -ms-border-radius: 6%;
-  -o-border-radius: 6%;
+  border-radius: 8px;
+  /*margin-bottom: 2%;
+  */
+  -webkit-border-radius: 0.2rem;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 
 .task_title {
@@ -422,6 +424,11 @@
   text-align: center;
   color: #FFFFFF;
   margin-bottom: 25px;
+  font-family: "PingFang SC";
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
 }
 
 .modal_content :global .am-button span {

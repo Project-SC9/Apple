@@ -382,11 +382,13 @@
 }
 
 .card_slide {
+  width: 97%;
   touch-action: none;
+  margin-bottom: 0.5rem
 }
 
 .popup_reward {
-  width: 180px;
+  width: 87% !important;
   height: 4.7rem;
   margin-left: 20px;
   text-align: center;
@@ -428,7 +430,7 @@
   }
 
   .modal_content_award h2 {
-    font-size: 0.45rem;
+    font-size: 0.4rem;
   }
 
   .user_reward .carousel_ul {
@@ -440,7 +442,7 @@
   }
 
   .user_reward .popup_reward {
-    height: 3.7rem;
+    height: auto;
   }
 
   .user_reward .modal_content_award h3 {
@@ -459,8 +461,8 @@
   }
 
   .popup_modal_award :global .am-modal-transparent .am-modal-content .am-modal-body {
-    width: 290px;
-    height: 375px;
+    width: 310px;
+    height: 400px;
     margin: auto;
     opacity: 0.9;
   }
@@ -471,7 +473,7 @@
   }
 
   .modal_content_text {
-    font-size: 0.25rem;
+    font-size: 0.27rem;
   }
 
   .modal_content_award .award_title {

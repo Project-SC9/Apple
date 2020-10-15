@@ -5,7 +5,9 @@ import { SearchBar } from 'antd-mobile';
  * 搜索栏
  */
 export class Index extends PureComponent {
-
+    state = {
+        searchValue: ''
+    }
     render() {
         return (
             <div className={styles.footer} >
@@ -14,12 +16,12 @@ export class Index extends PureComponent {
                         id="search"
                         ref={component => this.searchBarRef = component}
                         placeholder="聊下状态，再看吃的"
-                        // onChange={this.searchChangedHandler}
+                        onChange={this.searchChangedHandler}
                         onSubmit={this.searchSubmitHandler}
                         onFocus={this.searchFocusHandler}
                         showCancelButton={false}
                     />
-                    <img src={require('assets/image/chatbot.png')} />
+                    <img src={require('assets/image/chatbot.png')} onClick={this.searchClickedHandler} />
                 </div>
             </div>
         )
@@ -41,13 +43,12 @@ export class Index extends PureComponent {
             }
         })
     }
-    // /**
-    //  * 搜索框字段改变事件
-    //  */
-    // searchChangedHandler = (val) => {
-    //     const { onSearchChange } = this.props;
-    //     !!onSearchChange & onSearchChange(val)
-    // }
+    /**
+     * 搜索框字段改变事件
+     */
+    searchChangedHandler = (val) => {
+        this.state.searchValue = val
+    }
 
     /**
      * 搜索框字段提交事件
@@ -58,6 +59,15 @@ export class Index extends PureComponent {
         const focus = document.documentElement.getElementsByClassName(styles.footer)
 
         focus[0].style.bottom = '0'
+    }
+
+    searchClickedHandler = () => {
+        let val = this.state.searchValue
+        const { onClickSubmit } = this.props;
+        !!onClickSubmit && onClickSubmit(val)
+        const focus = document.documentElement.getElementsByClassName(styles.footer)
+        focus[0].style.bottom = '0'
+
     }
 
     //在组件的did生命周期函数中加入

@@ -121,7 +121,7 @@
 
 .task_list img {
   width: 100%;
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
 }
 
 .task_del {
@@ -133,10 +133,18 @@
   width: 98%;
   margin: auto;
   position: relative;
-  margin-bottom: 0.05rem;
+  margin-bottom: 0.1rem;
   transition: all 4s ease-in;
-  border-radius: 10%;
+  border-radius: 8px;
   overflow: hidden;
+  -webkit-transition: all 4s ease-in;
+  -moz-transition: all 4s ease-in;
+  -ms-transition: all 4s ease-in;
+  -o-transition: all 4s ease-in;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 .task_title {
@@ -250,3 +258,35 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
 }
+
+
+.luo :global .scroller-pullDown,
+.luo :global .scroller-pullUp {
+  height: 0.3rem !important;
+  line-height: 0.3rem !important;
+  font-size: 0.3rem !important;
+  /* background: url('../../../assets/image/frame_up.png') no-repeat; */
+}
+
+.luo :global .scroller-pullDown {
+  top: -42px !important;
+  user-select: none;
+}
+
+.luo :global .scroller-pullDown .icon img,
+.luo :global .scroller-pullUp .icon img {
+  width: 0.3rem !important;
+  height: auto;
+  display: none;
+}
+
+/* .luo :global .sl_down {
+  height: 0.3rem !important;
+  line-height: 0.3rem !important;
+  font-size: 0.3rem !important;
+  top: -24px !important;
+}
+
+.luo :global .sl_down>img {
+  width: 0.3rem !important;
+} */
