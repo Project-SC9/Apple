@@ -5,8 +5,8 @@
 /**
  * 服务器地址(开发)
  */
-const BASE_HOST_URL = process.env.apiServerUrl;
-// const BASE_HOST_URL = "http://juuuce.com";
+// const BASE_HOST_URL = process.env.apiServerUrl;
+const BASE_HOST_URL = "http://juuuce.com";
 
 /**
  * 服务器路径
