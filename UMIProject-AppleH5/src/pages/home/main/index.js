@@ -61,7 +61,7 @@ class Index extends Component {
 
             <div className={styles.mainSwiper}>
 
-              <Slider {...this.settings} ref={el => this.swiperRef = el} afterChange={(index) => this.slider && this.slider.innerSlider.slickGoTo(index)}>
+              <Slider {...this.settings} ref={el => this.swiperRef = el} afterChange={(index) => { this.slider && this.slider.innerSlider.slickGoTo(parseInt(index)); }}>
                 {mainSwiperList.map((val, index) => {
                   return (
                     <div style={{ touchAction: "none" }} key={index}>
@@ -95,9 +95,6 @@ class Index extends Component {
       </>
     )
   }
-
-
-
 
   /**
    * 用户输入网址弹出框提示

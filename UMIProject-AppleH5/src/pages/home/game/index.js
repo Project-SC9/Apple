@@ -14,9 +14,8 @@ import {
 import Masonry from 'masonry-layout'  //实现瀑布流
 import imagesloaded from 'imagesloaded' //监听图片加载
 import InfiniteScroll from 'react-infinite-scroller' //下拉加载
-import Luo from 'iscroll-luo';
 
-const TASK_TOTAL = 160
+const TASK_TOTAL = 180
 /**
  * 游戏内容页
  */
@@ -72,18 +71,6 @@ export class Index extends Component {
     }
   }
 
-  options = {
-    backgroundColor: '#ffffff',	//# 背景颜色，是滑动底层的背景颜色
-    fontColor: '#000', 		//# 文字颜色，是下拉刷新、上拉加载那些文字的颜色
-    beyondHeight: 150,		//# 超过此长度后触发下拉或上拉, 单位px
-    pulldownInfo: '下拉刷新',
-    pulldownReadyInfo: '松开刷新',
-    pulldowningInfo: '刷新中…',
-    pullupInfo: '',
-    pullupReadyInfo: '',
-    pullupingInfo: '',
-  }
-
   render() {
     // if (this.state.imgDataList == "") { return <p>s</p> }
     const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
@@ -109,20 +96,10 @@ export class Index extends Component {
           onTouchStart={this.navonTouchStartHandler}
           onTouchEnd={this.navonTouchEndHandler}>
           <div className={styles.pullTodown}><img src={require('assets/image/frame_up.png')} /></div>
-          < div style={{ position: 'relative', height: '1000vh' }}>
-            <Luo
-              id='id'
-              className={styles.luo}
-              onDown={() => this.onDown()}
-              options={this.options}
-            >
-              {
-                searchImgDataList == ""
-                  ? this.renderGameContent() : this.renderSearchContent()
-              }
-            </Luo>
-          </div>
-
+          {
+            searchImgDataList == ""
+              ? this.renderGameContent() : this.renderSearchContent()
+          }
         </div>
 
         {/** 行动栏 */}
@@ -288,52 +265,106 @@ export class Index extends Component {
   searchSubmitHandler = (val) => {
     const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
     if (val !== '') {
+
       let taskBarData = []
-      taskBarData.push(taskBar)
       let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
+
+      taskBarData.push(taskBar)
       let valKey = taskBarData.find(item => item.name == val)
+      let valKeyDesc = searchImgDataList.find(item => item.desc == val)
 
-      let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+      let result = taskBarData.some(item => {
+        if (item.name == val) {
+          return true
+        }
+      })
+      if (result) {
+        let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+        const hash = {};
+        const newArray = newSearchImgDataList.reduce((item, next) => {
+          hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+          return item;
+        }, [])
+        this.setState({
+          searchImgDataList: newArray,
+        }, () => this.imagesOnload())
+      }
 
-      const hash = {};
-      const newArray = newSearchImgDataList.reduce((item, next) => {
-        hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
-        return item;
-      }, [])
-      this.setState({
-        searchImgDataList: newArray,
-      }, () => this.imagesOnload())
+      let resultDesc = searchImgDataList.some(item => {
+        if (item.desc == val) {
+          return true
+        }
+      })
+
+      if (resultDesc) {
+        let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKeyDesc.key)
+        const hash = {};
+        const newArray = newSearchImgDataList.reduce((item, next) => {
+          hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+          return item;
+        }, [])
+        this.setState({
+          searchImgDataList: newArray,
+        }, () => this.imagesOnload())
+      }
     }
 
     let newdate = moment().format('YYYYMMDDHHmmss')
-    let cxt = "使用搜索栏"
+    let cxt = `搜索${val}`
     this._catchLogSave(newdate, cxt)
   }
 
-  searchClickedHandler = (val) => {
-    const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
-    if (val !== '') {
-      let taskBarData = []
-      taskBarData.push(taskBar)
-      let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
-      let valKey = taskBarData.find(item => item.desc == val)
+  // searchClickedHandler   = (val) => {
+  //     const { taskBar, starImgCheck, taskArrayAfter, taskArray } = this.props;
+  //     if (val !== '') {
 
-      let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+  //       let taskBarData = []
+  //       let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
 
-      const hash = {};
-      const newArray = newSearchImgDataList.reduce((item, next) => {
-        hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
-        return item;
-      }, [])
-      this.setState({
-        searchImgDataList: newArray,
-      }, () => this.imagesOnload())
-    }
+  //       taskBarData.push(taskBar)
+  //       let valKey = taskBarData.find(item => item.name == val)
+  //       let valKeyDesc = searchImgDataList.find(item => item.desc == val)
 
-    let newdate = moment().format('YYYYMMDDHHmmss')
-    let cxt = "使用搜索栏"
-    this._catchLogSave(newdate, cxt)
-  }
+  //       let result = taskBarData.some(item => {
+  //         if (item.name == val) {
+  //           return true
+  //         }
+  //       })
+  //       if (result) {
+  //         let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKey.key)
+  //         const hash = {};
+  //         const newArray = newSearchImgDataList.reduce((item, next) => {
+  //           hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+  //           return item;
+  //         }, [])
+  //         this.setState({
+  //           searchImgDataList: newArray,
+  //         }, () => this.imagesOnload())
+  //       }
+
+  //       let resultDesc = searchImgDataList.some(item => {
+  //         if (item.desc == val) {
+  //           return true
+  //         }
+  //       })
+
+  //       if (resultDesc) {
+  //         let newSearchImgDataList = searchImgDataList.filter(item => item.key == valKeyDesc.key)
+  //         const hash = {};
+  //         const newArray = newSearchImgDataList.reduce((item, next) => {
+  //           hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+  //           return item;
+  //         }, [])
+  //         this.setState({
+  //           searchImgDataList: newArray,
+  //         }, () => this.imagesOnload())
+  //       }
+  //     }
+
+  //     let newdate = moment().format('YYYYMMDDHHmmss')
+  //     let cxt = `搜索${val}`
+  //     this._catchLogSave(newdate, cxt)
+  //   }
 
   /**
    * 分类栏点击事件
@@ -367,7 +398,7 @@ export class Index extends Component {
   }
 
   /** 下拉刷新 **/
-  onDown() {
+  onDown = () => {
     this.setState({
       imgDataList: this.state.imgDataList
     });
@@ -442,79 +473,83 @@ export class Index extends Component {
     let taskBarGobal = taskBar.gobal + 1
     if (taskImageIndexArray.length > taskBarGobal) { return false }
 
-    if (awardList.length >= 6) {
+    if (awardList.length >= 4) {
       this.setState({ awardAllPopup: true })
       return false
     }
-    if (item.key == taskBar.key) {
-      this.state.behaviorImg = item.url;
-      // this.animatedClickedHandler()
-      item.checked = true; //选中star
-      assignmentArr.push(item.key);
-      taskImageIndexArray.push(item.pid)
-      taskImageIndexArray = [...new Set(taskImageIndexArray)]
-      assignmentArr = [...assignmentArr];
-      taskImageIndexArray = [...taskImageIndexArray]
-      let toogleStar = this.state.toogleStar;
-      toogleStar.push(item.pid)
-      toogleStar = [...toogleStar]
+    if (awardList.length < 4) {
+      if (item.key == taskBar.key) {
+        this.state.behaviorImg = item.url;
+        // this.animatedClickedHandler()
+        item.checked = true; //选中star
+        assignmentArr.push(item.key);
+        taskImageIndexArray.push(item.pid)
+        taskImageIndexArray = [...new Set(taskImageIndexArray)]
+        assignmentArr = [...assignmentArr];
+        taskImageIndexArray = [...taskImageIndexArray]
+        let toogleStar = this.state.toogleStar;
+        toogleStar.push(item.pid)
+        toogleStar = [...toogleStar]
 
-      const id2 = Number(item.pid)
-      const ToDoList = JSON.parse(JSON.stringify([...this.state.imgDataList]))
-      // filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
-      let newTaskData = ToDoList.filter(item => item.pid !== id2);
+        const id2 = Number(item.pid)
+        const ToDoList = JSON.parse(JSON.stringify([...this.state.imgDataList]))
+        // filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
+        let newTaskData = ToDoList.filter(item => item.pid !== id2);
 
-      if (starImgCheck.length <= taskBar.goal) {
-        starImgCheck.push(item)
+        if (starImgCheck.length <= taskBar.goal) {
+          starImgCheck.push(item)
 
-        const hash = {};
-        const newstarImgCheck = starImgCheck.reduce((item, next) => {
-          hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
-          return item;
-        }, [])
-
-        dispatch({
-          type: "player/starImgCheckUpdate",
-          payload: { starImgCheck: newstarImgCheck }
-        })
-        // 当前任务完成
-        if (newstarImgCheck.length === taskBar.goal) {
-
-          const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
-          const number = this.props.location.query.uid //酒店房间号 
-          const title = "奖励名称X" //酒店
-
-          const newAwardDateList = { date, number, title, get: 1 }
-
-          awardList.push(newAwardDateList)
-          dispatch({
-            type: "player/awardListUpdate",
-            payload: { awardList: awardList }
-          })
+          const hash = {};
+          const newstarImgCheck = starImgCheck.reduce((item, next) => {
+            hash[next.pid] ? '' : hash[next.pid] = true && item.push(next);
+            return item;
+          }, [])
 
           dispatch({
-            type: "player/newAwardListUpdate",
-            payload: { ...newAwardList, ...newAwardDateList }
+            type: "player/starImgCheckUpdate",
+            payload: { starImgCheck: newstarImgCheck }
           })
-          let newdate = moment().format('YYYYMMDDHHmmss')
-          let cxt = `点击最后一张（任务正确）图片`
-          this._catchLogSave(newdate, cxt)
+          // 当前任务完成
+          if (newstarImgCheck.length === taskBar.goal) {
 
-          this.setState({ awardPopup: true });
-          return false
+            const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
+            const number = this.props.location.query.uid //酒店房间号 
+            const title = "奖励名称X" //酒店
+
+            const newAwardDateList = { date, number, title, get: 1 }
+
+            awardList.push(newAwardDateList)
+
+            dispatch({
+              type: "player/awardListUpdate",
+              payload: { awardList: awardList }
+            })
+
+            dispatch({
+              type: "player/newAwardListUpdate",
+              payload: { ...newAwardList, ...newAwardDateList }
+            })
+            let newdate = moment().format('YYYYMMDDHHmmss')
+            let cxt = `点击最后一张（任务正确）图片`
+            this._catchLogSave(newdate, cxt)
+
+            this.setState({ awardPopup: true });
+            return false
+          }
         }
+
+        //日志
+        if (starImgCheck.length < taskBar.goal) {
+          let newdate = moment().format('YYYYMMDDHHmmss')
+          let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
+          this._catchLogSave(newdate, cxt)
+        }
+
+        this.setState({
+          imgDataList: newTaskData,
+        }, () => { this.imagesOnload() })
       }
 
-      //日志
-      if (starImgCheck.length < taskBar.goal) {
-        let newdate = moment().format('YYYYMMDDHHmmss')
-        let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
-        this._catchLogSave(newdate, cxt)
-      }
-
-      this.setState({
-        imgDataList: newTaskData,
-      }, () => { this.imagesOnload() })
     }
 
     if (item.key !== taskBar.key) {

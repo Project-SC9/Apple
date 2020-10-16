@@ -96,3 +96,15 @@ div:focus {
 input {
   color: #000;
 }
+
+.ant-spin-dot i {
+  background-color: #fff;
+}
+
+.ant-spin-text {
+  color: #fff;
+}
+
+.ant-spin-nested-loading>div>.ant-spin {
+  opacity: 0.8;
+}

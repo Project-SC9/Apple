@@ -12,25 +12,22 @@ import { Spin } from 'antd';
 class Index extends Component {
 	_reduxPersistor = null;
 
-	componentDidMount() {
-	}
 
 	componentWillMount() {
 		document.title = 'juuuce.com'
 		this._reduxPersistor = persistStore(window.g_app._store);
-		// console.log(this._reduxPersistor)
-		// console.log(window.g_app._store)
 		window._reduxPersistor = this._reduxPersistor;
 		window.addEventListener('beforeunload', this.beforeunload);
 	}
 
 	render() {
-		const { children } = this.props;
+		const { children, isLoading } = this.props;
 		return (
 
 			<PersistGate loading={null} persistor={this._reduxPersistor}>
-
-				{children}
+				<Spin spinning={isLoading} size="large" tip="加载中..." delay={5}>
+					{children}
+				</Spin>
 			</PersistGate>
 		)
 	}
@@ -42,8 +39,12 @@ class Index extends Component {
 }
 
 const mapStateToProps = (state) => {
+	let isLoading = state.loading.global;
+	if (state.loading.effects['player/fetchLogSave']) {
+		isLoading = false;
+	}
 	return {
-		state,
+		isLoading,
 	}
 }
 

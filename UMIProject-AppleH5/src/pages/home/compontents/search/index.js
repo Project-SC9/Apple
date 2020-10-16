@@ -63,8 +63,10 @@ export class Index extends PureComponent {
 
     searchClickedHandler = () => {
         let val = this.state.searchValue
-        const { onClickSubmit } = this.props;
-        !!onClickSubmit && onClickSubmit(val)
+        // const { onClickSubmit } = this.props;
+        // !!onClickSubmit && onClickSubmit(val)
+        const { onSearchSubmit } = this.props;
+        !!onSearchSubmit && onSearchSubmit(val)
         const focus = document.documentElement.getElementsByClassName(styles.footer)
         focus[0].style.bottom = '0'
 

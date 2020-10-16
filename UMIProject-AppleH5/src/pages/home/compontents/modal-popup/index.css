@@ -186,6 +186,7 @@
   line-height: 22px;
   color: #929292;
   margin-bottom: 5.04px;
+  letter-spacing: 0.02rem;
   flex: 1;
 }
 
@@ -382,7 +383,8 @@
 }
 
 .card_slide {
-  width: 97%;
+  width: 93%;
+  margin: auto;
   touch-action: none;
   margin-bottom: 0.5rem
 }

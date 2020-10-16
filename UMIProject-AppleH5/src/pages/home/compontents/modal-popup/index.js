@@ -81,7 +81,7 @@ export class Index extends PureComponent {
           <div className={styles.modal_content}>
             <h2>{taskBar.name}</h2>
             <p>找到并点击{taskBar.goal}张对应的图片</p>
-            <Button onClick={this.taskPopUpClickedHandler}>OK</Button>
+            <Button onClick={this.taskPopUpClickedHandler}>我知道了</Button>
           </div>
         </Modal>
       </div>

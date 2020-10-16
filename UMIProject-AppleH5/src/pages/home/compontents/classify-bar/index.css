@@ -73,7 +73,7 @@
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: normal;
-  font-size: 0.33rem;
+  font-size: 0.3rem;
   color: #000000;
   /* margin-left: 0.27083rem; */
   line-height: 1.5;
@@ -124,7 +124,7 @@
   } */
 
   .carousel .carousel_img p {
-    margin-left: 0px;
+    margin-left: 0.25rem;
   }
 }
 
