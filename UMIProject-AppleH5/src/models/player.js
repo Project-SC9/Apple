@@ -1,13 +1,24 @@
 /**
  * 游戏列表state状态
  */
-import { GetTaskList, GameList, LogSave } from '@/services'
+import { GetTaskList, GameList, LogSave, TaskLimit } from '@/services'
+
+function GetQueryValue(queryName) {
+    var query = decodeURI(window.location.hash);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == queryName) { return pair[1]; }
+    }
+    return null;
+}
+const taskId = GetQueryValue('tid')
 export default {
     namespace: 'player',
 
     state: {
         //任务栏目标
-        taskBar: {},
+        taskBar: [],
         taskLabelData: [],
         //图片获取
         taskImgData: [],
@@ -19,27 +30,32 @@ export default {
         //正确选中
         starImgCheck: [],
         //我的奖励
-        // awardList: [
-        //     {
-        //         title: "奖励名称",
-        //         name: "还未获得",
-        //         get: 0,
-        //     },
-        // ],
         awardList: [],
         newAwardList: {
             title: "",
             name: "",
             date: ""
         },
-        logSave: ""
+        logSave: "",
+        taskType: 0,
+        taskNumber: 0,
+        localUid: taskId
     },
 
     effects: {
         //任务栏目标
-        *fetchTaskList({ payload: { uid, tid } }, { call, put }) {
-            const { data: taskBar } = yield call(GetTaskList, uid, tid);
-            yield put({ type: "fetchTaskListUpdate", payload: { taskBar } })
+        *fetchTaskList({ payload: { uid, tid, type } }, { call, put }) {
+            const tastList = [];
+            const { data: taskBarobj } = yield call(GetTaskList, uid, tid, type);
+            tastList.push(taskBarobj)
+            // console.log(JSON.parse(localStorage.getItem('persist:root')).player)
+            yield put({ type: "fetchTaskListUpdate", payload: { tastList } })
+        },
+
+        // 每天任务上限值获取
+        *fetchTaskLimit({ payload: { uid } }, { call, put }) {
+            const { data: { task_limit: taskNumber } } = yield call(TaskLimit, uid);
+            yield put({ type: "fetchTaskLimitUpdate", payload: { taskNumber } })
         },
         //图片获取
         *fetchTaskImgData({ payload: { uid, tid, total } }, { call, put }) {
@@ -72,10 +88,11 @@ export default {
     },
 
     reducers: {
-        fetchTaskListUpdate(state, { payload: { taskBar } }) {
+        fetchTaskListUpdate(state, { payload: { tastList } }) {
             return {
                 ...state,
-                taskBar,
+                taskBar: [...tastList],
+                localUid: tastList[tastList.length - 1].tid
             }
         },
         fetchTaskImgDataUpdate(state, { payload: { taskLabelData, newTaskImgData, taskArray, swiperArray } }) {
@@ -117,6 +134,19 @@ export default {
             return {
                 ...state,
                 newAwardList: newAwardList,
+            }
+        },
+        taskNumberUpdate(state) {
+            return {
+                ...state,
+                taskType: 1,
+            }
+        },
+
+        fetchTaskLimitUpdate(state, { payload: { taskNumber } }) {
+            return {
+                ...state,
+                taskNumber,
             }
         }
     },

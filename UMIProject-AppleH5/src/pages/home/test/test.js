@@ -1,71 +1,173 @@
-import React, { Component } from 'react'
-import Luo from 'iscroll-luo';
-export class test extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [1, 2, 3]
-        };
-    }
 
-    /** 下拉刷新 **/
-    onDown() {
-        this.setState({
-            data: [1, 2, 3]
-        });
-        /** 注意此处，就算没有数据或接口调用失败等情况，也要刷一下原始数据，Luo内部才知道状态更新了 **/
-    }
+// import React, { Component } from 'react';
+// import styles from './index.css';
+// import { connect } from 'react-redux'
+// import ClassifyBar from '../compontents/classify-bar';
+// import SearchBar from '../compontents/search';
+// import BehaviorBar from '../compontents/behavior-bar';
+// import ModalPopup from '../compontents/modal-popup';
+// import { PullToRefresh, ListView, Button } from 'antd-mobile';
+// import { BackTop } from 'antd';
+// import ReactDOM from 'react-dom';
+// import moment from 'moment'
+// import {
+//     StarFilled
+// } from '@ant-design/icons';
 
-    options = {
-        backgroundColor: '#f5f5f5',	//# 背景颜色，是滑动底层的背景颜色
-        fontColor: 'red', 		//# 文字颜色，是下拉刷新、上拉加载那些文字的颜色
-        fontSize: 24,
-        beyondHeight: 100,		//# 超过此长度后触发下拉或上拉, 单位px
-        pulldownInfo: '下拉刷新',	    // # 下拉刷新的文字
-        //pulldownReadyInfo: '松开刷新',	//# 触发下拉刷新的文字
-        pulldownReadyInfo: '松开刷新',	//# 触发下拉刷新的文字
-        pulldowningInfo: '刷新中…',//	# 正在刷新中的文字
-        pullupingInfo: '加载中…',	//# 正在加载中的文字
-    }
+// import Masonry from 'masonry-layout'  //实现瀑布流
+// import imagesloaded from 'imagesloaded' //监听图片加载
+// import InfiniteScroll from 'react-infinite-scroller' //下拉加载
 
-    render() {
-        return (
+// const TASK_TOTAL = 180
 
-            < div style={{ position: 'relative', height: '100vh' }}>
-                <Luo
-                    id='id'
-                    onDown={() => this.onDown()}
-                    options={this.options}
-                >
-                    {
-                        this.state.data.map((v, i) => <div key={i}>{v}</div>)
-                    }
-                </Luo>
-            </div>
-        )
-    }
-}
+// const data = [
+//     {
+//         img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+//         title: 'Meet hotel',
+//         des: '不是所有的兼职汪都需要风吹日晒',
+//     },
+//     {
+//         img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
+//         title: 'McDonald\'s invites you',
+//         des: '不是所有的兼职汪都需要风吹日晒',
+//     },
+//     {
+//         img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
+//         title: 'Eat the week',
+//         des: '不是所有的兼职汪都需要风吹日晒',
+//     },
+// ];
 
-// .iscroll - luo - box.sl_scroller.scroller - pullDown, .iscroll - luo - box.sl_scroller.scroller - pullUp {
-//     height: 0.3rem;
-//     line - height: 0.3rem;
-//     font - size: 0.3rem;
-//     text - align: center;
-//     position: absolute;
-//     left: 0px;
-//     width: 100 %;
-//     overflow: hidden;
+// const NUM_ROWS = 20;
+// let pageIndex = 0;
+
+
+// export class test extends Component {
+
+//     constructor(props) {
+//         super(props);
+//         const dataSource = new ListView.DataSource({
+//             rowHasChanged: (row1, row2) => row1 !== row2,
+//         });
+
+//         this.state = {
+//             dataSource,
+//             refreshing: true,
+//             isLoading: true,
+//             height: document.documentElement.clientHeight,
+//             useBodyScroll: false,
+//         };
+//     }
+//     render() {
+
+//         let index = data.length - 1;
+//         const row = (rowData, sectionID, rowID) => {
+//             if (index < 0) {
+//                 index = data.length - 1;
+//             }
+//             const obj = data[index--];
+//             return (
+//                 <div key={rowID}
+//                     style={{
+//                         padding: '0 15px',
+//                         backgroundColor: 'white',
+//                     }}
+//                 >
+//                     <div style={{ height: '50px', lineHeight: '50px', color: '#888', fontSize: '18px', borderBottom: '1px solid #ddd' }}>
+//                         {obj.title}
+//                     </div>
+//                 </div>
+//             );
+//         };
+//         return (
+//             <div>
+
+
+//                 <ListView
+//                     key={this.state.useBodyScroll ? '0' : '1'}
+//                     ref={el => this.lv = el}
+//                     dataSource={this.state.dataSource}
+//                     renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
+//                         {this.state.isLoading ? 'Loading...' : 'Loaded'}
+//                     </div>)}
+//                     renderRow={row}
+//                     useBodyScroll={this.state.useBodyScroll}
+//                     style={this.state.useBodyScroll ? {} : {
+//                         height: this.state.height,
+//                         border: '1px solid #ddd',
+//                         margin: '5px 0',
+//                     }}
+//                     pullToRefresh={<PullToRefresh
+//                         refreshing={this.state.refreshing}
+//                         onRefresh={this.onRefresh}
+//                     />}
+//                     onEndReached={this.onEndReached}
+//                     pageSize={5}
+//                 />
+//             </div>
+//         )
+//     }
+
+//     componentDidUpdate() {
+//         if (this.state.useBodyScroll) {
+//             document.body.style.overflow = 'auto';
+//         } else {
+//             document.body.style.overflow = 'hidden';
+//         }
+//     }
+//     componentDidMount() {
+//         const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
+
+//         setTimeout(() => {
+//             this.setState({
+//                 dataSource: this.state.dataSource.cloneWithRows(genData()),
+//                 height: hei,
+//                 refreshing: false,
+//                 isLoading: false,
+//             });
+//         }, 1500);
+//     }
+//     onRefresh = () => {
+//         this.setState({ refreshing: true, isLoading: true });
+//         // simulate initial Ajax
+//         setTimeout(() => {
+//             this.rData = genData();
+//             this.setState({
+//                 dataSource: this.state.dataSource.cloneWithRows(this.rData),
+//                 refreshing: false,
+//                 isLoading: false,
+//             });
+//         }, 600);
+//     };
+//     onEndReached = (event) => {
+//         // load new data
+//         // hasMore: from backend data, indicates whether it is the last page, here is false
+//         if (this.state.isLoading && !this.state.hasMore) {
+//             return;
+//         }
+//         console.log('reach end', event);
+//         this.setState({ isLoading: true });
+//         setTimeout(() => {
+//             this.rData = [...this.rData, ...genData(++pageIndex)];
+//             this.setState({
+//                 dataSource: this.state.dataSource.cloneWithRows(this.rData),
+//                 isLoading: false,
+//             });
+//         }, 1000);
+//     };
+// }
+// const mapStateToProps = (state) => {
+//     const { taskBar, taskImgData, taskArray, taskArrayAfter, starImgCheck, awardList, taskLabelData, newAwardList } = state.player;
+//     return {
+//         taskBar: taskBar,
+//         taskImgData: taskImgData,
+//         taskLabelData: taskLabelData,
+//         taskArray: taskArray,
+//         taskArrayAfter: taskArrayAfter,
+//         starImgCheck: starImgCheck,
+//         awardList: awardList,
+//         newAwardList: newAwardList
+//     };
 // }
 
-// .iscroll - luo - box.sl_scroller.scroller - pullDown {
-//     top: -42px;
-//     -webkit - user - select: none;
-//     user - select: none;
-// }
-
-// .iscroll - luo - box.sl_scroller.scroller - pullDown.icon img, .iscroll - luo - box.sl_scroller.scroller - pullUp.icon img {
-//     width: 0.3rem;
-//     height: auto;
-// }
-
-export default test
+// export default connect(mapStateToProps)(Index)

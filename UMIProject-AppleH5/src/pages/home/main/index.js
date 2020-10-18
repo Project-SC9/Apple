@@ -70,7 +70,7 @@ class Index extends Component {
                           val.map((item, index) => {
                             return (
                               <div key={index} className={styles.task_list}>
-                                <img src={`http://babistep.com/media_static/${item.url}`} style={{ width: '100%', verticalAlign: 'top', }} />
+                                <img src={`http://juuuce.com/media_static/${item.url}`} style={{ width: '100%', verticalAlign: 'top', }} />
                                 <p className={styles.task_title}>{item.desc}</p>
                               </div>
 
@@ -135,7 +135,7 @@ class Index extends Component {
       })
       return
     }
-    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${this.props.location.query.tid}`)
+    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${taskBar[taskBar.length - 1].tid}`)
     // dispatch(routerRedux.replace({
     //   pathname: `/home/game`,
     //   query: { taskBar, taskImgData, taskArray, taskArrayAfter }
@@ -171,13 +171,14 @@ class Index extends Component {
    * 获取任务目标
    */
   _fetchTaskBar = () => {
-    const { dispatch } = this.props;
+    const { dispatch, localUid } = this.props;
     // 任务栏
     dispatch({
       type: "player/fetchTaskList",
       payload: {
         uid: this.props.location.query.uid,
-        tid: this.props.location.query.tid
+        tid: Number(localUid),
+        type: this.props.taskType,
       }
     })
   }
@@ -186,33 +187,44 @@ class Index extends Component {
    * 图片列表
    */
   _fetchTaskImg = () => {
-    const { dispatch, taskBar } = this.props;
+    const { dispatch, localUid } = this.props;
     //图片列表
     dispatch({
       type: "player/fetchTaskImgData",
       payload: {
         uid: this.props.location.query.uid,
-        tid: this.props.location.query.tid,
+        tid: Number(localUid),
         total: TASK_TOTAL
       }
     })
   }
   //日志
   _catchLogSave = (time, cxt) => {
-    const { dispatch, taskBar } = this.props;
+    const { dispatch, localUid } = this.props;
     dispatch({
       type: "player/fetchLogSave",
       payload: {
         uid: this.props.location.query.uid,
-        tid: this.props.location.query.tid,
+        tid: Number(localUid),
         time: time,
         log: cxt
       }
     })
   }
 
+  _fetchTaskLimit = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "player/fetchTaskLimit",
+      payload: {
+        uid: this.props.location.query.uid,
+      }
+    })
+  }
+
   async componentDidMount() {
     this.slider && this.slider.innerSlider.slickGoTo(this.state.slideIndex)
+
     if (this.props.location.query.uid == undefined) {
       this.setState({
         popup: true
@@ -221,25 +233,29 @@ class Index extends Component {
     } else {
       await this._fetchTaskBar()//获取加载
       this._fetchTaskImg()
+      this._fetchTaskLimit()
     }
 
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = "打开网页"
     await this._catchLogSave(newdate, cxt)
   }
+
 }
 
 /**
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
-  const { taskBar, taskImgData, taskArray, taskArrayAfter, mainSwiperList } = state.player;
+  const { taskBar, taskImgData, taskArray, taskArrayAfter, mainSwiperList, taskType, localUid } = state.player;
   return {
     taskBar: taskBar,
     taskImgData: taskImgData,
     taskArray: taskArray,
     taskArrayAfter: taskArrayAfter,
-    mainSwiperList: mainSwiperList
+    mainSwiperList: mainSwiperList,
+    taskType: taskType,
+    localUid: localUid,
   };
 }
 

@@ -755,6 +755,47 @@ export class Index extends Component {
 //     ))}
 // </Swiper>
 
+
+//   animatedClickedHandler = () => {
+//     let eleBtn = this.btnCart;
+//     let eleFlyItem = this.flyItem;
+//     let eleFlyImg = this.behaviorUrl;
+//     let eleCart = this.behaviorBar;
+
+//     let isRunning = false;
+//     // eleBtn.addEventListener('click', function () {
+//     // 现在按钮距离购物车的距离
+//     let boundBtn = eleBtn.getBoundingClientRect();
+//     let boundCart = eleCart.getBoundingClientRect();
+
+//     // 中心点的水平垂直距离
+//     let offsetX = boundCart.left / 8;
+//     let offsetY = boundCart.top / 2.3;
+//     // 页面滚动尺寸
+//     let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+//     let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+//     if (isRunning == false) {
+//       // 购物车图形出现与初始定位
+//       eleFlyItem.style.display = 'block';
+//       // eleFlyItem.style.left = ((boundBtn.left + scrollLeft + document.body.clientWidth / 2) / 100) + 'px';
+//       // eleFlyItem.style.top = ((boundBtn.top + scrollTop + document.body.clientHeight / 2) / 100) + 'px';
+//       eleFlyItem.style.left = "50%";
+//       eleFlyItem.style.top = "50%";
+
+//       // 开始动画
+//       eleFlyItem.style.transform = `translate(${offsetX}px,${offsetY}px)`;
+
+//       // 动画标志量
+//       isRunning = true;
+//       setTimeout(function () {
+//         eleFlyItem.style.display = '';
+//         eleFlyItem.style.transform = 'translateX(0)';
+//         eleFlyImg.style.transform = 'translateY(0)';
+//         isRunning = false;
+//       }, 1000);
+//     }
+//     // });
+//   }
 // export default connect(mapStateToProps)(Index)
 
 

@@ -24,16 +24,19 @@ export class Index extends PureComponent {
     render() {
         const { taskLabelData } = this.props
         return (
-            <Slider {...this.settings} ref={el => this.swiperRef = el} afterChange={(index) => this.slider && this.slider.innerSlider.slickGoTo(index)}>
-                {taskLabelData.map((val, index) => (
-                    <div key={index} className={styles.carousel} onClick={() => this.classifyBarClickedHandler(val)}>
-                        <div className={styles.carousel_img}>
-                            <img src={require('assets/image/ellipse-tp.png')} />
-                            <p>{val}</p>
+            <div className={styles.nSlider}>
+
+                <Slider {...this.settings} ref={el => this.swiperRef = el} afterChange={(index) => this.slider && this.slider.innerSlider.slickGoTo(index)}>
+                    {taskLabelData.map((val, index) => (
+                        <div key={index} className={styles.carousel} onClick={() => this.classifyBarClickedHandler(val)}>
+                            <div className={styles.carousel_img}>
+                                <img src={require('assets/image/ellipse-tp.png')} />
+                                <p>{val}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
+                    ))}
+                </Slider>
+            </div>
         )
     }
 

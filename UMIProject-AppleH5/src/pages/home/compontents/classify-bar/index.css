@@ -123,6 +123,10 @@
     margin: auto;
   } */
 
+  .nSlider :global .slick-initialized .slick-slide {
+    width: 2rem !important;
+  }
+
   .carousel .carousel_img p {
     margin-left: 0.25rem;
   }
@@ -130,10 +134,10 @@
 
 
 @media (min-device-width:414px) {
-  .carousel {
-    /* width: 2.55rem !important; */
-    /* margin-right: 4px;
-    margin-left: 4px; */
+
+  .slick-initialized .slick-slide {
+    display: block;
+    width: 2rem !important;
   }
 
   /* .carousel:last-child {

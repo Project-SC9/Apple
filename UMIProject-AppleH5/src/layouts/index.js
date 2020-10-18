@@ -12,7 +12,6 @@ import { Spin } from 'antd';
 class Index extends Component {
 	_reduxPersistor = null;
 
-
 	componentWillMount() {
 		document.title = 'juuuce.com'
 		this._reduxPersistor = persistStore(window.g_app._store);
@@ -32,9 +31,15 @@ class Index extends Component {
 		)
 	}
 	componentDidMount() {
+		const { dispatch } = this.props
 		window.setInterval(() => {
 			localStorage.clear();
-		}, 43200000)
+		}, 172800000)
+
+		setInterval(() => {
+			dispatch({ type: "player/taskNumberUpdate" })
+		}, 10000)
+
 	}
 }
 

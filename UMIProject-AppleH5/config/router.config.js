@@ -23,10 +23,10 @@ export default [
             path: '/home/game',
             component: './home/game/index',
           },
-          // {
-          //   path: '/home/test',
-          //   component: './home/test/test',
-          // },
+          {
+            path: '/home/test',
+            component: './home/test/test',
+          },
         ],
       },
     ],

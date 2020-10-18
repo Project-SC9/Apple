@@ -27,7 +27,7 @@ export class Index extends PureComponent {
                                     unmountOnExit//动画完成后DOM被移除
                                     appear={true}
                                     key={true}>
-                                    <img src={`http://babistep.com/media_static/${starImgCheck[starImgCheckLength - 1].url}`} />
+                                    <img src={`http://juuuce.com/media_static/${starImgCheck[starImgCheckLength - 1].url}`} />
                                 </CSSTransition>
                             </SwitchTransition>)}
                 </div>

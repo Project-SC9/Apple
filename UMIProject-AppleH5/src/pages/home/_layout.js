@@ -80,7 +80,8 @@ class Index extends Component {
             <img src={require('assets/image/smartphone.svg')} />
             <h2>现仅支持手机版</h2>
             <p>请使用手机扫码进入赢取奖励</p>
-            <Button onClick={this.windowCloseClickedHandler}>我知道了</Button>
+
+            <p className={styles.button} onClick={this.windowCloseClickedHandler}>我知道了</p>
           </div>
         </div>
       </Modal>

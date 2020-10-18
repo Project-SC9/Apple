@@ -12,6 +12,25 @@
   z-index: 9;
 }
 
+.backtop {
+  width: 1rem;
+  height: 1rem;
+  background: #ffffff75;
+  border: 1px solid;
+  border-radius: 50%;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 1.8rem;
+  left: 0.2rem;
+}
+
+.backtop img {
+  width: 84%;
+}
+
 .main_top {
   width: 93%;
   margin: auto;
@@ -41,7 +60,7 @@
 .content {
   width: 100%;
   margin-top: 120px;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 }
 
 .game_status {
@@ -122,6 +141,7 @@
 .task_list img {
   width: 100%;
   /* margin-bottom: 2%; */
+  border-radius: 0.08rem;
 }
 
 .task_del {
@@ -136,7 +156,7 @@
   margin-bottom: 0.1rem;
   transition: all 4s ease-in;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
   -webkit-transition: all 4s ease-in;
   -moz-transition: all 4s ease-in;
   -ms-transition: all 4s ease-in;
@@ -201,6 +221,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10%;
 }
 
 .loading_down img {
@@ -210,9 +231,8 @@
 
 .pages_pinterest {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  overflow: auto;
+  /* height: 100%; */
+  min-height: 20rem;
   box-sizing: border-box;
 }
 
