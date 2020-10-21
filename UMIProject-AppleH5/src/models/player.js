@@ -18,7 +18,7 @@ export default {
 
     state: {
         //任务栏目标
-        taskBar: [],
+        taskBar: {},
         taskLabelData: [],
         //图片获取
         taskImgData: [],
@@ -45,10 +45,7 @@ export default {
     effects: {
         //任务栏目标
         *fetchTaskList({ payload: { uid, tid, type } }, { call, put }) {
-            const tastList = [];
-            const { data: taskBarobj } = yield call(GetTaskList, uid, tid, type);
-            tastList.push(taskBarobj)
-            // console.log(JSON.parse(localStorage.getItem('persist:root')).player)
+            const { data: tastList } = yield call(GetTaskList, uid, tid, type);
             yield put({ type: "fetchTaskListUpdate", payload: { tastList } })
         },
 
@@ -79,8 +76,7 @@ export default {
             yield put({ type: "fetchTaskImgDataUpdate", payload: { taskLabelData, newTaskImgData, taskArray, swiperArray } })
         },
 
-
-        //任务栏目标
+        //日志
         *fetchLogSave({ payload: { uid, tid, time, log } }, { call, put }) {
             const { data: { lid: logSave } } = yield call(LogSave, uid, tid, time, log);
             yield put({ type: "fetchLogSaveUpdate", payload: { logSave } })
@@ -88,11 +84,12 @@ export default {
     },
 
     reducers: {
+        //任务栏目标
         fetchTaskListUpdate(state, { payload: { tastList } }) {
             return {
                 ...state,
-                taskBar: [...tastList],
-                localUid: tastList[tastList.length - 1].tid
+                taskBar: tastList,
+                localUid: tastList.tid
             }
         },
         fetchTaskImgDataUpdate(state, { payload: { taskLabelData, newTaskImgData, taskArray, swiperArray } }) {
@@ -142,12 +139,21 @@ export default {
                 taskType: 1,
             }
         },
-
+        /** 获取任务数量 */
         fetchTaskLimitUpdate(state, { payload: { taskNumber } }) {
             return {
                 ...state,
                 taskNumber,
             }
-        }
+        },
+
+        taskLimitUpdate(state, { payload: { taskNumber } }) {
+            const num = taskNumber + taskNumber
+            return {
+                ...state,
+                taskNumber: num,
+            }
+        },
+
     },
 }

@@ -425,7 +425,7 @@
   text-align: center;
   color: #FFFFFF;
   margin-bottom: 25px;
-  font-family: "PingFang SC";
+  font-family: "Microsoft YaHei";
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -433,7 +433,7 @@
 }
 
 .modal_content :global .am-button span {
-  font-family: "PingFang SC";
+  font-family: "Microsoft YaHei";
   font-style: normal;
   font-weight: 500;
   color: #fff;

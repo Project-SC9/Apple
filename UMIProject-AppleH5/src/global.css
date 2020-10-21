@@ -110,7 +110,8 @@ input {
 }
 
 .am-pull-to-refresh-down .am-pull-to-refresh-indicator {
-  margin-top: -0.45rem
+  margin-top: -0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .am-pull-to-refresh-indicator {
@@ -126,14 +127,15 @@ input {
   height: 0.43333rem;
 }
 
-.am-pull-to-refresh-content-wrapper {
+/* .am-pull-to-refresh-content-wrapper {
   overflow: inherit;
   height: 100%;
-}
+} */
 
 .pages_hoc {
-  position: absolute !important;
+  /* position: absolute !important; */
   left: 0;
   right: 0;
   width: 100% !important;
+  touch-action: pan-y;
 }

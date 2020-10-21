@@ -70,7 +70,7 @@ class Index extends Component {
                           val.map((item, index) => {
                             return (
                               <div key={index} className={styles.task_list}>
-                                <img src={`http://juuuce.com/media_static/${item.url}`} style={{ width: '100%', verticalAlign: 'top', }} />
+                                <img src={`https://juuuce.com/media_static/${item.url}`} style={{ width: '100%', verticalAlign: 'top', }} />
                                 <p className={styles.task_title}>{item.desc}</p>
                               </div>
 
@@ -128,14 +128,14 @@ class Index extends Component {
    * 开始游戏
    */
   gameStartClickedHandler = () => {
-    const { dispatch, taskBar, taskImgData, taskArray, taskArrayAfter } = this.props;
+    const { dispatch, taskBar, taskImgData, taskArray, taskArrayAfter, taskNumber } = this.props;
     if (this.props.location.query.uid == undefined) {
       this.setState({
         popup: true
       })
       return
     }
-    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${taskBar[taskBar.length - 1].tid}`)
+    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${taskBar.tid}`)
     // dispatch(routerRedux.replace({
     //   pathname: `/home/game`,
     //   query: { taskBar, taskImgData, taskArray, taskArrayAfter }
@@ -143,6 +143,7 @@ class Index extends Component {
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = "点击开始游戏"
     this._catchLogSave(newdate, cxt)
+
   }
 
   swiperTouchStartHandler = (idx) => {
@@ -247,7 +248,7 @@ class Index extends Component {
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
-  const { taskBar, taskImgData, taskArray, taskArrayAfter, mainSwiperList, taskType, localUid } = state.player;
+  const { taskBar, taskImgData, taskArray, taskArrayAfter, mainSwiperList, taskType, localUid, taskNumber } = state.player;
   return {
     taskBar: taskBar,
     taskImgData: taskImgData,
@@ -256,6 +257,7 @@ const mapStateToProps = (state) => {
     mainSwiperList: mainSwiperList,
     taskType: taskType,
     localUid: localUid,
+    taskNumber: taskNumber
   };
 }
 

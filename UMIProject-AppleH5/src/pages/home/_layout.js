@@ -106,7 +106,10 @@ class Index extends Component {
   componentDidMount() {
     // this.screenDirectionHandler()
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", this.screenDirectionHandler, false)
-
+    const { dispatch, taskNumber } = this.props
+    setInterval(() => {
+      dispatch({ type: "player/taskLimitUpdate", payload: { taskNumber: taskNumber } })
+    }, 86400000)
   }
 
 }
@@ -115,8 +118,10 @@ class Index extends Component {
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
+  const { taskNumber } = state.player;
   return {
-    state
+    state,
+    taskNumber: taskNumber
   }
 }
 

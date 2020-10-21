@@ -8,14 +8,12 @@ export default {
         // 接口服务器地址
         'process.env.apiServerUrl': 'http://localhost:8000',
         'process.env.host': 'http://localhost:8000',
-        // 'process.env.apiServerUrl': 'http://192.168.43.167:8000',
-        // 'process.env.host': 'http://192.168.43.167:8000',
     },
 
     /** 代理配置 **/
     proxy: {
         '/juuuce': {
-            target: 'http://juuuce.com',
+            target: 'https://juuuce.com',
             changeOrigin: true,
             secure: false,
             // pathRewrite: {

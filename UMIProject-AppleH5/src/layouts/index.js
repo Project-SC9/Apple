@@ -31,7 +31,7 @@ class Index extends Component {
 		)
 	}
 	componentDidMount() {
-		const { dispatch } = this.props
+		const { dispatch, taskNumber } = this.props
 		window.setInterval(() => {
 			localStorage.clear();
 		}, 172800000)

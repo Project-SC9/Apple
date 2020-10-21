@@ -82,6 +82,7 @@ export class Index extends Component {
     const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList } = this.props;
     return (
       <div className={styles.game}>
+
         <div className={styles.game_back}>
           <div className={styles.game_status}>
             <div className={styles.main_top}>
@@ -91,12 +92,10 @@ export class Index extends Component {
             <div className={styles.game_content}>
               <ClassifyBar taskLabelData={taskLabelData} onClickClassifyBar={this.classifyBarClickedHandler} />
             </div>
-
           </div>
-
         </div>
-        <div className={styles.content}>
 
+        <div className={styles.content}>
 
           {/**内容展示区 */}
           <div
@@ -110,21 +109,19 @@ export class Index extends Component {
                 ? this.renderGameContent() : this.renderSearchContent()
             }
           </div>
-
+          {this.state.showScroll ? (
+            <div className={styles.backtop} onClick={this.handleScrollTop}>
+              <img src={require('assets/image/top.svg')} />
+            </div>
+          ) : null}
         </div>
         {/** 行动栏 */}
         <div className={styles.behavior_bar} ref={el => this.behaviorBar = el}>
           <BehaviorBar
-            taskBar={taskBar[taskBar.length - 1]}
+            taskBar={taskBar}
             starImgCheck={starImgCheck}
           />
         </div>
-
-        {this.state.showScroll ? (
-          <div className={styles.backtop} onClick={this.handleScrollTop}>
-            <img src={require('assets/image/top.svg')} />
-          </div>
-        ) : null}
 
         {/**底部搜索栏 */}
         {
@@ -139,7 +136,7 @@ export class Index extends Component {
 
         <ModalPopup
           taskPopup={taskPopup}
-          taskBar={taskBar[taskBar.length - 1]}
+          taskBar={taskBar}
           onClickTaskPopUp={this.taskPopUpClickedHandler}
 
           awardPopup={awardPopup}
@@ -175,21 +172,27 @@ export class Index extends Component {
   awardPopupClickedHandler = () => {
     const { awardList, dispatch, taskNumber } = this.props;
     if (awardList.length >= taskNumber) {
-      this.setState({ awardAllPopup: true, taskPopup: false })
+      this.setState({ awardAllPopup: true, taskPopup: false, awardPopup: false })
+      dispatch({
+        type: "player/starImgCheckUpdate",
+        payload: { starImgCheck: [] }
+      })
       return
     }
     if (awardList.length < taskNumber) {
+
+      this._fetchTaskBar()//获取加载
+      this._fetchTaskImg()
+
+      dispatch({
+        type: "player/starImgCheckUpdate",
+        payload: { starImgCheck: [] }
+      })
+
       this.setState({ awardPopup: false, taskPopup: true })
       return
     }
 
-    this._fetchTaskBar()//获取加载
-    this._fetchTaskImg()
-
-    dispatch({
-      type: "player/starImgCheckUpdate",
-      payload: { starImgCheck: [] }
-    })
   }
 
   awardAllPopupClickedHandler = () => {
@@ -207,10 +210,11 @@ export class Index extends Component {
    */
   renderGameContent = () => {
     const { imgDataList, hasMore, scroller } = this.state
-    // if (imgDataList == '') { return }
+    // 
+    // console.log(window.devicePixelRatio)
     return (
       <div className="pages_pinterest" className={styles.pages_pinterest}>
-        <div ref={el => { this.flyItem = el }} className={styles.fly_item}><img src={`http://juuuce.com/media_static/${this.state.behaviorImg}`} /></div>
+        <div ref={el => { this.flyItem = el }} className={styles.fly_item}><img src={`https://juuuce.com/media_static/${this.state.behaviorImg}`} /></div>
 
         {/* 下拉加载 */}
         <InfiniteScroll
@@ -226,23 +230,23 @@ export class Index extends Component {
           }
           hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
           useWindow={true} // 不监听 window 滚动条
-        > <PullToRefresh
-          damping={window.devicePixelRatio * 25}
-          ref={el => this.ptr = el}
-          style={{ height: this.state.height }}
-          indicator={this.state.down ? {} : { deactivate: '' }}
-          direction={this.state.down ? 'down' : 'up'}
-          refreshing={this.state.refreshing}
-          onRefresh={this.refreshHandler}
         >
-
+          <PullToRefresh
+            damping={25}
+            ref={el => this.ptr = el}
+            style={{ height: this.state.height, overflow: "auto" }}
+            indicator={this.state.down ? {} : { deactivate: '下拉' }}
+            direction={this.state.down ? 'down' : "up"}
+            refreshing={this.state.refreshing}
+            onRefresh={this.refreshHandler}
+          >
             <div className={"pages_hoc"} style={{ margin: "auto" }}>
               {
                 imgDataList.map((item, index) => {
                   return (
                     <div key={index} className={'imgBox'} style={{ width: "50%" }}>
                       <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)} ref={component => this.btnCart = component}>
-                        <img src={`http://juuuce.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} ref={component => this.behaviorUrl = component} />
+                        <img src={`https://juuuce.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} ref={component => this.behaviorUrl = component} />
                         <p className={styles.task_title}>{item.desc}</p>
                         <p className={item.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
                       </div>
@@ -250,57 +254,43 @@ export class Index extends Component {
                   )
                 })
               }
-
             </div>
-
           </PullToRefresh>
 
         </InfiniteScroll>
-
       </div>
     )
   }
+
 
   /**
   * 搜索内容展示
   */
   renderSearchContent = () => {
-    const { searchImgDataList, hasMore } = this.state
+    const { searchImgDataList, hasMore, scroller } = this.state
     return (
       <div className="pages_pinterest" className={styles.pages_pinterest}>
-
-        <PullToRefresh
-          damping={window.devicePixelRatio * 25}
-          ref={el => this.ptr = el}
-          style={{
-            height: "21rem",
-            overflow: 'auto',
-          }}
-          indicator={this.state.down ? {} : { deactivate: '' }}
-          direction={this.state.down ? 'down' : 'up'}
-          refreshing={this.state.refreshing}
-          onRefresh={() => {
-
-            let i = searchImgDataList.length;
-            while (i) {
-              let j = Math.floor(Math.random() * i--);
-              [searchImgDataList[j], searchImgDataList[i]] = [searchImgDataList[i], searchImgDataList[j]];
-            }
-
-            this.setState({ refreshing: true });
-            setTimeout(() => {
-              this.setState({ refreshing: false, searchImgDataList: searchImgDataList }, () => this.imagesOnload());
-            }, 3000)
-
-
-          }}
-        >   {/* 下拉加载 */}
-          <InfiniteScroll
-            initialLoad={false} // 不让它进入直接加载
-            pageStart={1} // 设置初始化请求的页数
-            loadMore={this.loadMoreDataHandler}  // 监听的ajax请求
-            hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
-            useWindow={false} // 不监听 window 滚动条
+        {/* 下拉加载 */}
+        <InfiniteScroll
+          initialLoad={false} // 不让它进入直接加载
+          pageStart={1} // 设置初始化请求的页数
+          loadMore={this.loadMoreDataHandler}  // 监听的ajax请求
+          loader={
+            <div className={styles.loading_down} key={0}>
+              <p>加载完毕</p>
+            </div>
+          }
+          hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
+          useWindow={true} // 不监听 window 滚动条
+        >
+          <PullToRefresh
+            damping={20}
+            // ref={el => this.ptr = el}
+            style={{ height: this.state.height, overflow: "auto" }}
+            indicator={this.state.down ? {} : { deactivate: '下拉' }}
+            direction={this.state.down ? 'down' : "up"}
+            refreshing={this.state.refreshing}
+            onRefresh={this.searchLoadHandler}
           >
             <div className={"pages_hoc"} style={{ margin: "auto", position: "absolute !important" }}>
               {
@@ -308,7 +298,7 @@ export class Index extends Component {
                   return (
                     <div key={index} className={'imgBox'} style={{ width: "50%" }}>
                       <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(item, index)}>
-                        <img src={`http://juuuce.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} />
+                        <img src={`https://juuuce.com/media_static/${item.url}`} style={{ width: "100%", height: "100%" }} />
                         <p className={styles.task_title}>{item.desc}</p>
                         <p className={item.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
                       </div>
@@ -316,13 +306,10 @@ export class Index extends Component {
                   )
                 })
               }
-              <div className={styles.loading_down} style={{ marginBottom: "-10%", position: "absolute", bottom: 0 }}>
-                <p>加载完毕</p>
-              </div>
-            </div>
 
-          </InfiniteScroll>
-        </PullToRefresh>
+            </div>
+          </PullToRefresh>
+        </InfiniteScroll>
       </div >
     )
   }
@@ -337,7 +324,7 @@ export class Index extends Component {
       let taskBarData = []
       let searchImgDataList = [...starImgCheck, ...taskArrayAfter, ...taskArray]
 
-      taskBarData.push(taskBar[taskBar.length - 1])
+      taskBarData.push(taskBar)
       let valKey = taskBarData.find(item => item.name == val)
       let valKeyDesc = searchImgDataList.find(item => item.desc == val)
 
@@ -414,7 +401,10 @@ export class Index extends Component {
     this.setState({ refreshing: true });
     setTimeout(() => {
       this.setState({ refreshing: false, imgDataList: newTaskArray }, () => this.imagesOnload());
-    }, 3000);
+    }, 2000);
+
+
+
   }
 
   /**
@@ -461,6 +451,22 @@ export class Index extends Component {
 
   }
 
+  searchLoadHandler = () => {
+    // console.log('***************')
+    // console.log(this.state.refreshing)
+    const { searchImgDataList } = this.state
+    let i = searchImgDataList.length;
+    while (i) {
+      let j = Math.floor(Math.random() * i--);
+      [searchImgDataList[j], searchImgDataList[i]] = [searchImgDataList[i], searchImgDataList[j]];
+    }
+
+    this.setState({ refreshing: true });
+    setTimeout(() => {
+      this.setState({ refreshing: false, searchImgDataList: searchImgDataList }, () => this.imagesOnload());
+    }, 3000)
+  }
+
   scrollBottomClickedHandler = () => {
     const { imgDataList } = this.state
     const { taskArrayAfter, starImgCheck, taskArray } = this.props;
@@ -485,7 +491,11 @@ export class Index extends Component {
   imagesOnload = () => {
     const elLoad = imagesloaded('.pages_hoc')  //获取下拉加载里面的第一个盒子
     //always 图片已全部加载，或被确认加载失败
-    elLoad.on('progress', () => {
+    // elLoad.on('progress', () => {
+    //   // 调用瀑布流
+    //   this.advanceWidth()
+    // })
+    elLoad.on('always', () => {
       // 调用瀑布流
       this.advanceWidth()
     })
@@ -499,7 +509,7 @@ export class Index extends Component {
     const { taskBar, taskImgData, dispatch, starImgCheck, awardList, newAwardList, taskNumber } = this.props;
     let assignmentArr = this.state.assignmentList;
     let taskImageIndexArray = this.state.taskImageIndexArray;
-    let taskBarGobal = taskBar[taskBar.length - 1].gobal + 1
+    let taskBarGobal = taskBar.gobal + 1
     if (taskImageIndexArray.length > taskBarGobal) { return false }
 
     if (awardList.length >= taskNumber) {
@@ -507,7 +517,7 @@ export class Index extends Component {
       return false
     }
     if (awardList.length < taskNumber) {
-      if (item.key == taskBar[taskBar.length - 1].key) {
+      if (item.key == taskBar.key) {
         this.state.behaviorImg = item.url;
         // this.animatedClickedHandler()
         item.checked = true; //选中star
@@ -524,7 +534,7 @@ export class Index extends Component {
         const ToDoList = JSON.parse(JSON.stringify([...this.state.imgDataList]))
         // filter方法筛选数组，这里的意思是id与传过来的id2不一样的就留下，一样的就删除。
         let newTaskData = ToDoList.filter(item => item.pid !== id2);
-        if (starImgCheck.length <= taskBar[taskBar.length - 1].goal) {
+        if (starImgCheck.length <= taskBar.goal) {
           starImgCheck.push(item)
 
           const hash = {};
@@ -538,7 +548,7 @@ export class Index extends Component {
             payload: { starImgCheck: newstarImgCheck }
           })
           // 当前任务完成
-          if (newstarImgCheck.length === taskBar[taskBar.length - 1].goal) {
+          if (newstarImgCheck.length === taskBar.goal) {
 
             const date = moment().format('YYYY.MM.DD HH:mm') //当前时间
             const number = this.props.location.query.uid //酒店房间号 
@@ -572,7 +582,7 @@ export class Index extends Component {
         }
 
         //日志
-        if (starImgCheck.length < taskBar[taskBar.length - 1].goal) {
+        if (starImgCheck.length < taskBar.goal) {
           let newdate = moment().format('YYYYMMDDHHmmss')
           let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
           this._catchLogSave(newdate, cxt)
@@ -585,7 +595,7 @@ export class Index extends Component {
 
     }
 
-    if (item.key !== taskBar[taskBar.length - 1].key) {
+    if (item.key !== taskBar.key) {
 
       this.state.notificationData.push(item)
       if (this.state.notificationData.length < 3) {
@@ -630,6 +640,7 @@ export class Index extends Component {
       }
     }
   }
+
   /** 滑动结束事件 */
   navonTouchEndHandler = (e) => {
     // this.setState({ moveUp: true })
@@ -646,7 +657,7 @@ export class Index extends Component {
       type: "player/fetchTaskList",
       payload: {
         uid: this.props.location.query.uid,
-        tid: taskBar[taskBar.length - 1].tid,
+        tid: taskBar.tid,
         type: 0,
       }
     })
@@ -662,7 +673,7 @@ export class Index extends Component {
       type: "player/fetchTaskImgData",
       payload: {
         uid: this.props.location.query.uid,
-        tid: taskBar[taskBar.length - 1].tid,
+        tid: taskBar.tid,
         total: TASK_TOTAL
       }
     })
@@ -675,12 +686,13 @@ export class Index extends Component {
       type: "player/fetchLogSave",
       payload: {
         uid: this.props.location.query.uid,
-        tid: taskBar[taskBar.length - 1].tid,
+        tid: taskBar.tid,
         time: time,
         log: cxt
       }
     })
   }
+
   /** TOP */
   toggleTopShow = () => {
     let showScroll = '';
@@ -693,27 +705,24 @@ export class Index extends Component {
     this.setState({
       showScroll
     });
+
   }
 
   handleScrollTop = () => {
     window.scrollTo(0, 0)
+    console.log(document.getElementsByClassName('pages_hoc'))
+    document.getElementsByClassName('pages_hoc').scrollTop = 0
   }
 
   componentDidMount() {
     // await this._fetchTaskBar()//获取加载
     // this._fetchTaskImg()
-
     this.imagesOnload()//图片加载
 
-
-    let elem = document.querySelector('.pages_hoc');
-    let em = document.documentElement.getElementsByClassName('.pages_hoc');
-    elem.style.position = "absolute !important";
-    elem.style.position = "";
+    let em = document.documentElement.getElementsByClassName(styles.game_back);
 
     // const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-    const hei = document.body.scrollHeight / 1.9;
-    // console.log()
+    const hei = document.body.clientHeight - em[0].clientHeight - 40;
 
     setTimeout(() => this.setState({
       height: hei,
@@ -740,6 +749,16 @@ export class Index extends Component {
         }, 0);
       }
     })
+
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.refreshHandler());
+    clearTimeout(this.searchLoadHandler())
+  }
+  componentDidUpdate() {
+    // this.searchSubmitHandler()
+    // this.classifyBarClickedHandler()
   }
 }
 

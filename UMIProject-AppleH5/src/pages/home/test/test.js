@@ -38,11 +38,7 @@
 //     },
 // ];
 
-// const NUM_ROWS = 20;
-// let pageIndex = 0;
-
-
-// export class test extends Component {
+// export class Index extends Component {
 
 //     constructor(props) {
 //         super(props);
@@ -56,41 +52,36 @@
 //             isLoading: true,
 //             height: document.documentElement.clientHeight,
 //             useBodyScroll: false,
+//             imgDataList: props.taskArray,//前40张
 //         };
 //     }
 //     render() {
 
-//         let index = data.length - 1;
 //         const row = (rowData, sectionID, rowID) => {
-//             if (index < 0) {
-//                 index = data.length - 1;
-//             }
-//             const obj = data[index--];
 //             return (
-//                 <div key={rowID}
-//                     style={{
-//                         padding: '0 15px',
-//                         backgroundColor: 'white',
-//                     }}
-//                 >
-//                     <div style={{ height: '50px', lineHeight: '50px', color: '#888', fontSize: '18px', borderBottom: '1px solid #ddd' }}>
-//                         {obj.title}
+//                 <div key={rowID} className={'imgBox'} style={{ width: "50%" }} >
+//                     <div className={styles.task_list} onClick={() => this.taskImageClickedHandler(rowData, rowID)} ref={component => this.btnCart = component}>
+//                         <img src={`https://juuuce.com/media_static/${rowData.url}`} style={{ width: "100%", height: "100%" }} ref={component => this.behaviorUrl = component} />
+//                         <p className={styles.task_title}>{rowData.desc}</p>
+//                         <p className={rowData.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
 //                     </div>
 //                 </div>
 //             );
 //         };
+//         console.log(row)
+//         // const cpm = () => (<div className={"pages_hoc"} style={{ margin: "auto" }}>
+//         //     row
+//         // </div>)
 //         return (
 //             <div>
-
-
 //                 <ListView
 //                     key={this.state.useBodyScroll ? '0' : '1'}
 //                     ref={el => this.lv = el}
 //                     dataSource={this.state.dataSource}
+//                     renderRow={row}
 //                     renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
 //                         {this.state.isLoading ? 'Loading...' : 'Loaded'}
 //                     </div>)}
-//                     renderRow={row}
 //                     useBodyScroll={this.state.useBodyScroll}
 //                     style={this.state.useBodyScroll ? {} : {
 //                         height: this.state.height,
@@ -102,10 +93,35 @@
 //                         onRefresh={this.onRefresh}
 //                     />}
 //                     onEndReached={this.onEndReached}
-//                     pageSize={5}
-//                 />
-//             </div>
+//                     pageSize={40}
+//                 >
+//                 </ListView>
+//             </div >
 //         )
+//     }
+//     /**
+//   * 瀑布流
+//   */
+//     advanceWidth = () => {
+//         let elem = document.querySelector('.pages_hoc');
+//         new Masonry(elem, {
+//             itemSelector: '.imgBox', //要布局的网格元素
+//             columnWidth: '.imgBox', //自适应
+//             fitWidth: true, // 设置网格容器宽度等于网格宽度
+//             gutter: 0,
+//             cols: 2
+//         });
+//     }
+//     /**
+//   * 图片懒加载
+//   */
+//     imagesOnload = () => {
+//         const elLoad = imagesloaded('.pages_hoc')  //获取下拉加载里面的第一个盒子
+//         //always 图片已全部加载，或被确认加载失败
+//         elLoad.on('progress', () => {
+//             // 调用瀑布流
+//             this.advanceWidth()
+//         })
 //     }
 
 //     componentDidUpdate() {
@@ -117,21 +133,18 @@
 //     }
 //     componentDidMount() {
 //         const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
-
-//         setTimeout(() => {
-//             this.setState({
-//                 dataSource: this.state.dataSource.cloneWithRows(genData()),
-//                 height: hei,
-//                 refreshing: false,
-//                 isLoading: false,
-//             });
-//         }, 1500);
+//         this.rData = this.props.taskArray
+//         this.setState({
+//             dataSource: this.state.dataSource.cloneWithRows(this.rData),
+//             height: hei,
+//             refreshing: false,
+//             isLoading: false,
+//         }, () => this.imagesOnload());
 //     }
 //     onRefresh = () => {
 //         this.setState({ refreshing: true, isLoading: true });
-//         // simulate initial Ajax
 //         setTimeout(() => {
-//             this.rData = genData();
+//             this.rData = this.props.taskArrayAfter;
 //             this.setState({
 //                 dataSource: this.state.dataSource.cloneWithRows(this.rData),
 //                 refreshing: false,
@@ -140,20 +153,21 @@
 //         }, 600);
 //     };
 //     onEndReached = (event) => {
-//         // load new data
-//         // hasMore: from backend data, indicates whether it is the last page, here is false
 //         if (this.state.isLoading && !this.state.hasMore) {
 //             return;
 //         }
 //         console.log('reach end', event);
 //         this.setState({ isLoading: true });
-//         setTimeout(() => {
-//             this.rData = [...this.rData, ...genData(++pageIndex)];
+//         const { taskArrayAfter, taskArray } = this.props;
+//         console.log(this.rData)
+//         if (this.rData.length + taskArray.length < taskArrayAfter.length + taskArray.length + 1) {
+//             this.rData = [...this.rData, ...this.props.taskArrayAfter];
 //             this.setState({
 //                 dataSource: this.state.dataSource.cloneWithRows(this.rData),
 //                 isLoading: false,
 //             });
-//         }, 1000);
+//         }
+
 //     };
 // }
 // const mapStateToProps = (state) => {
