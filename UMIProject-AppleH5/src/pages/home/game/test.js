@@ -12,7 +12,7 @@ import moment from 'moment'
 import {
     StarFilled
 } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { Spin, Skeleton } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
@@ -64,13 +64,14 @@ export class Index extends Component {
             dataSourceClass,
             refreshing: true,
             isLoading: false,
+
             height: document.documentElement.clientHeight,
             useBodyScroll: false,
             imgDataList: props.taskArray,//前40张
         };
     }
     render() {
-        const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl } = this.state
+        const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl, isLoading } = this.state
         const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList } = this.props;
 
         const row = (rowData, sectionID, rowID) => {
@@ -115,7 +116,7 @@ export class Index extends Component {
                                 </div>)}
                                 useBodyScroll={this.state.useBodyScroll}
                                 style={this.state.useBodyScroll ? {} : {
-                                    height: this.state.height,
+                                    height: this.state.height
                                 }}
                                 pullToRefresh={<PullToRefresh
                                     refreshing={this.state.refreshing}
@@ -266,7 +267,7 @@ export class Index extends Component {
                         })
 
                         let newdate = moment().format('YYYYMMDDHHmmss')
-                        let cxt = `点击最后一张（任务正确）图片`
+                        let cxt = `点击最后一张（任务正确）图片${item.pid}`
                         this._catchLogSave(newdate, cxt)
 
                         this.setState({ awardPopup: true });
@@ -277,7 +278,7 @@ export class Index extends Component {
                 //日志
                 if (starImgCheck.length < taskBar.goal) {
                     let newdate = moment().format('YYYYMMDDHHmmss')
-                    let cxt = `点击第${starImgCheck.length}张（任务正确）图片`
+                    let cxt = `点击第${starImgCheck.length}张（任务正确）图片${item.pid}`
                     this._catchLogSave(newdate, cxt)
                 }
 
@@ -293,12 +294,12 @@ export class Index extends Component {
             this.state.notificationData.push(item)
             if (this.state.notificationData.length < 3) {
                 let newdate = moment().format('YYYYMMDDHHmmss')
-                let cxt = `点击第${this.state.notificationData.length}张（任务不正确）图片`
+                let cxt = `点击第${this.state.notificationData.length}张（任务不正确）图片${item.pid}`
                 this._catchLogSave(newdate, cxt)
             }
             if (this.state.notificationData.length >= 3) {
                 let newdate = moment().format('YYYYMMDDHHmmss')
-                let cxt = `点击最后一张（任务不正确）图片`
+                let cxt = `点击最后一张（任务不正确）图片${item.pid}`
                 this._catchLogSave(newdate, cxt)
                 this.setState({ notificationPopup: true })
                 return

@@ -325,3 +325,29 @@ export const taskList = [
         imgurl: "https://i.loli.net/2020/09/25/J8t9KgATu5ZrQMz.png"
     },
 ]
+
+export const orginSwiper = [
+    { img: "https://i.loli.net/2020/10/24/9f5tUGkr14TmjJL.png" },
+    { img: "https://i.loli.net/2020/10/24/eDjOMJV4hmv9lEp.png" },
+    { img: "https://i.loli.net/2020/10/24/LEIl32zWAhQd4TS.png" },
+    { img: "https://i.loli.net/2020/10/24/TNMlE8d6BwAJaUO.png" },
+]
+
+export const orginSwiperTitle = [
+    {
+        title: '不知吃啥？',
+        text: '先看看图',
+    },
+    {
+        title: '还没想好？',
+        text: '玩个游戏',
+    },
+    {
+        title: '游戏简单',
+        text: '奖励多多',
+    },
+    {
+        title: '输入寂寞',
+        text: '给你汉堡',
+    }
+]

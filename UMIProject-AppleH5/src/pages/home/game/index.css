@@ -29,12 +29,12 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 1.8rem;
+  bottom: 1.4rem;
   left: 0.2rem;
 }
 
 .backtop img {
-  width: 100%;
+  width: 84%;
 }
 
 .main_top {
