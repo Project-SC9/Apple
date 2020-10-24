@@ -149,7 +149,7 @@ export class Index extends Component {
                             )
                     }
                     <div className={styles.backtop} onClick={() => this.handleScrollTop('hoc', true)}>
-                        <img src={require('assets/image/top.svg')} />
+                        <img src={require('assets/image/fram.svg')} />
                     </div>
                 </div>
                 {/** 行动栏 */}

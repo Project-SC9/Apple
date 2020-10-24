@@ -38,7 +38,7 @@ const routes = [
           },
           {
             path: '/home/game',
-            component: require('../home/test/test').default,
+            component: require('../home/game/test').default,
             exact: true,
             _title: 'Apple',
             _title_default: 'Apple',
