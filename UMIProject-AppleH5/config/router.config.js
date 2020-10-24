@@ -21,7 +21,11 @@ export default [
           },
           {
             path: '/home/game',
-            component: './home/test/test',
+            component: './home/game/test',
+          },
+          {
+            path: '/home/begin',
+            component: './home/begin/test',
           },
         ],
       },
