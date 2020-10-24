@@ -110,8 +110,7 @@ input {
 }
 
 .am-pull-to-refresh-down .am-pull-to-refresh-indicator {
-  margin-top: -0.4rem;
-  margin-bottom: 0.2rem;
+  margin-top: auto;
 }
 
 .am-pull-to-refresh-indicator {
@@ -119,7 +118,7 @@ input {
 }
 
 .am-icon-loading {
-  margin: 0.25rem
+  margin: 0.15rem
 }
 
 .am-icon-md {

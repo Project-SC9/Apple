@@ -127,6 +127,10 @@
     width: 2rem !important;
   }
 
+  .nSlider :global .slick-slider button {
+    display: none;
+  }
+
   .carousel .carousel_img p {
     margin-left: 0.25rem;
   }

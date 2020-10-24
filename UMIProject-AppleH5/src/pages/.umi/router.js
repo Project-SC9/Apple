@@ -38,13 +38,6 @@ const routes = [
           },
           {
             path: '/home/game',
-            component: require('../home/game/index').default,
-            exact: true,
-            _title: 'Apple',
-            _title_default: 'Apple',
-          },
-          {
-            path: '/home/test',
             component: require('../home/test/test').default,
             exact: true,
             _title: 'Apple',

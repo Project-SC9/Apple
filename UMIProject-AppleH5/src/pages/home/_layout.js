@@ -46,9 +46,9 @@ class Index extends Component {
         <div className={styles.orientation_text}><h2>竖屏效果更好哦</h2> </div>
       )
     }
-    if (window.screen.width > 450) {
-      return (<div> { this.renderModal()} </div>);
-    }
+    // if (window.screen.width > 450) {
+    //   return (<div> { this.renderModal()} </div>);
+    // }
 
     if (browser.android == false && browser.iPhone == false) {
       return (<div> { this.renderModal()} </div>);
@@ -110,6 +110,13 @@ class Index extends Component {
     setInterval(() => {
       dispatch({ type: "player/taskLimitUpdate", payload: { taskNumber: taskNumber } })
     }, 86400000)
+    let ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true
+    } else {
+      return false
+    }
+
   }
 
 }

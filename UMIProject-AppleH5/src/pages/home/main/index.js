@@ -136,10 +136,6 @@ class Index extends Component {
       return
     }
     router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${taskBar.tid}`)
-    // dispatch(routerRedux.replace({
-    //   pathname: `/home/game`,
-    //   query: { taskBar, taskImgData, taskArray, taskArrayAfter }
-    // }))
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = "点击开始游戏"
     this._catchLogSave(newdate, cxt)

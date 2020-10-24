@@ -7,6 +7,7 @@
  */
 // const BASE_HOST_URL = process.env.apiServerUrl;
 const BASE_HOST_URL = "https://juuuce.com";
+// const BASE_HOST_URL = http://localhost:8000;
 
 /**
  * 服务器路径
