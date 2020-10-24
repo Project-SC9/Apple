@@ -46,9 +46,9 @@ class Index extends Component {
         <div className={styles.orientation_text}><h2>竖屏效果更好哦</h2> </div>
       )
     }
-    // if (window.screen.width > 450) {
-    //   return (<div> { this.renderModal()} </div>);
-    // }
+    if (window.screen.width > 450) {
+      return (<div> { this.renderModal()} </div>);
+    }
 
     if (browser.android == false && browser.iPhone == false) {
       return (<div> { this.renderModal()} </div>);
