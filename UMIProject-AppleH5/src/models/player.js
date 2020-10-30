@@ -1,7 +1,8 @@
 /**
  * 游戏列表state状态
  */
-import { GetTaskList, GameList, LogSave, TaskLimit } from '@/services'
+import { GetTaskList, GameList } from '@/services'
+// import { GetTaskList, GameList, LogSave, TaskLimit } from '@/services'
 
 function GetQueryValue(queryName) {
     var query = decodeURI(window.location.hash);
@@ -38,7 +39,7 @@ export default {
         },
         logSave: "",
         taskType: 0,
-        taskNumber: 0,
+        taskNumber: 6,
         localUid: taskId,
         visible: true
     },
@@ -52,9 +53,10 @@ export default {
 
         // 每天任务上限值获取
         *fetchTaskLimit({ payload: { uid } }, { call, put }) {
-            const { data: { task_limit: taskNumber } } = yield call(TaskLimit, uid);
-            yield put({ type: "fetchTaskLimitUpdate", payload: { taskNumber } })
+            // const { data: { task_limit: taskNumber } } = yield call(TaskLimit, uid);
+            // yield put({ type: "fetchTaskLimitUpdate", payload: { taskNumber } })
         },
+
         //图片获取
         *fetchTaskImgData({ payload: { uid, tid, total } }, { call, put }) {
             const { data: taskImgData } = yield call(GameList, uid, tid, total);
@@ -79,8 +81,8 @@ export default {
 
         //日志
         *fetchLogSave({ payload: { uid, tid, time, log } }, { call, put }) {
-            const { data: { lid: logSave } } = yield call(LogSave, uid, tid, time, log);
-            yield put({ type: "fetchLogSaveUpdate", payload: { logSave } })
+            // const { data: { lid: logSave } } = yield call(LogSave, uid, tid, time, log);
+            // yield put({ type: "fetchLogSaveUpdate", payload: { logSave } })
         },
     },
 

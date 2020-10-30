@@ -110,7 +110,11 @@ class Index extends Component {
     setInterval(() => {
       dispatch({ type: "player/taskLimitUpdate", payload: { taskNumber: taskNumber } })
     }, 86400000)
+
+    dispatch({ type: "player/fetchtest" })
     let ua = navigator.userAgent.toLowerCase();
+
+
     if (ua.match(/MicroMessenger/i) == "micromessenger") {
       return true
     } else {

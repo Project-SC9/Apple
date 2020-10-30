@@ -28,11 +28,10 @@ export const GAME_LIST = BASE_HOST_URL + API_PATH + '/pic/list.json';
 /**
  * 用户日志采集【异步】
  */
-export const LOG_SAVE = BASE_HOST_URL + API_PATH + '/log/save.json';
-
+// export const LOG_SAVE = BASE_HOST_URL + API_PATH + '/log/save.json';
 
 
 /**
  * 每天任务上限值获取
  */
-export const TASK_LIMIT = BASE_HOST_URL + API_PATH + '/task/limit.json';
+// export const TASK_LIMIT = BASE_HOST_URL + API_PATH + '/task/limit.json';
