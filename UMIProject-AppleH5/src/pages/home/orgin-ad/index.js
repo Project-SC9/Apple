@@ -61,7 +61,7 @@ class Index extends Component {
                   return (
                     <div style={{ touchAction: "none" }} key={index}>
                       <div className={styles.carousel} onTouchStart={() => this.swiperTouchStartHandler(index)}>
-                        <img src={val.img} style={{ width: '100%', verticalAlign: 'top', }} />
+                        <img src={val.img} style={{ width: '70%', verticalAlign: 'top', marginTop: "1.2rem" }} />
                       </div>
                     </div>
                   )

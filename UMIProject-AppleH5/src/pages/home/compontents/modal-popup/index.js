@@ -16,6 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
  */
 export class Index extends PureComponent {
   state = {
+    visible: true,
     incentive: [
       {
         title: "奖励名称01",
@@ -33,9 +34,13 @@ export class Index extends PureComponent {
     ],
   }
   render() {
-    const { taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup } = this.props;
+    const { taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, visible } = this.props;
     return (
       <div>
+        {/** 任务发布首次 */}
+        {
+          visible ? this.renderTaskPopUpFirst() : null
+        }
         {/** 任务发布 */}
         {
           taskPopup ? this.renderTaskPopUp() : null
@@ -59,11 +64,38 @@ export class Index extends PureComponent {
       </div>
     )
   }
-  /**
- * 任务弹出框 
- */
-  renderTaskPopUp = () => {
 
+  /**
+   * 任务弹出框 首次
+   */
+  renderTaskPopUpFirst = () => {
+    const { visible, taskImgurl, taskBar } = this.props;
+    return (
+      <div className={styles.popup}>
+        <Modal
+          visible={visible}
+          transparent
+          maskClosable={false}
+          wrapClassName={styles.popup_modal_task}>
+          <div className={styles.modal_header}>
+            <div className={styles.modal_header_img}>
+              {/*<img src={require("assets/image/mianb.png")} />*/}
+              <img src={taskImgurl} />
+            </div>
+          </div>
+          <div className={styles.modal_content}>
+            <h2>{taskBar.name}</h2>
+            <p>找到并点击{taskBar.goal}张对应的图片</p>
+            <Button onClick={this.taskPopUpClickedFirstHandler}>我知道了</Button>
+          </div>
+        </Modal>
+      </div>
+    )
+  }
+  /**
+   * 任务弹出框 
+   */
+  renderTaskPopUp = () => {
     const { taskPopup, taskImgurl, taskBar } = this.props;
     return (
       <div className={styles.popup}>
@@ -86,6 +118,13 @@ export class Index extends PureComponent {
         </Modal>
       </div>
     )
+  }
+
+
+
+  taskPopUpClickedFirstHandler = () => {
+    const { onClickTaskPopUpFirst } = this.props;
+    onClickTaskPopUpFirst()
   }
 
   taskPopUpClickedHandler = () => {

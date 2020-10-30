@@ -327,10 +327,12 @@ export const taskList = [
 ]
 
 export const orginSwiper = [
-    { img: "https://i.loli.net/2020/10/24/9f5tUGkr14TmjJL.png" },
-    { img: "https://i.loli.net/2020/10/24/eDjOMJV4hmv9lEp.png" },
-    { img: "https://i.loli.net/2020/10/24/LEIl32zWAhQd4TS.png" },
-    { img: "https://i.loli.net/2020/10/24/TNMlE8d6BwAJaUO.png" },
+    { img: "https://i.loli.net/2020/10/25/L5xUbCGAfhcjK46.png" },
+
+    { img: "https://i.loli.net/2020/10/25/JZ68wSWE1Rg5dmp.png" },
+    { img: "https://i.loli.net/2020/10/25/i4CwuOcI69sY1zV.png" },
+
+    { img: "https://i.loli.net/2020/10/26/KXN8ay3pERSskLA.png" },
 ]
 
 export const orginSwiperTitle = [

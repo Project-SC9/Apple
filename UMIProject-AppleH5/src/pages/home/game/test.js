@@ -68,13 +68,16 @@ export class Index extends Component {
             height: document.documentElement.clientHeight,
             useBodyScroll: false,
             imgDataList: props.taskArray,//前40张
+            skeleton: true,
+            images: []
         };
     }
     render() {
-        const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl, isLoading } = this.state
-        const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList } = this.props;
+        const { searchImgDataList, taskPopup, awardPopup, awardAllPopup, notificationPopup, userRewardPopup, taskImgurl, isLoading, images } = this.state
+        const { taskBar, awardList, starImgCheck, taskLabelData, newAwardList, visible } = this.props;
 
         const row = (rowData, sectionID, rowID) => {
+            // if (images.length === 51) {
             return (
                 <div key={rowID} className={'imgBox'} style={{ width: "100%" }} >
                     <div className={styles.task_list} ref={component => this.btnCart = component} onClick={() => this.taskImageClickedHandler(rowData, rowID)}>
@@ -84,6 +87,21 @@ export class Index extends Component {
                     </div>
                 </div>
             );
+            // } else {
+            //     // 说明图片还没有全部加载完成，这个时候要显示loading动画效果
+            //     return (
+            //         <div key={rowID} className={'imgBox'} style={{ width: "100%" }} >
+            //             <Skeleton loading={true} round={true}>
+            //                 <div className={styles.task_list} ref={component => this.btnCart = component} onClick={() => this.taskImageClickedHandler(rowData, rowID)}>
+            //                     <img src={`https://juuuce.com/media_static/${rowData.url}`} onLoad={this.onloadHandler} style={{ width: "100%", height: "100%" }} ref={component => this.behaviorUrl = component} />
+            //                     <p className={styles.task_title}>{rowData.desc}</p>
+            //                     <p className={rowData.checked === true ? styles.star_fill : styles.star_fill_toogle}><StarFilled /></p>
+            //                 </div>
+            //             </Skeleton>
+            //         </div>
+            //     )
+            // }
+
         };
         return (
             <div className={styles.game}>
@@ -175,6 +193,8 @@ export class Index extends Component {
                 <ModalPopup
                     taskPopup={taskPopup}
                     taskBar={taskBar}
+                    visible={visible}
+                    onClickTaskPopUpFirst={this.onClickTaskPopUpFirst}
                     onClickTaskPopUp={this.taskPopUpClickedHandler}
 
                     awardPopup={awardPopup}
@@ -194,6 +214,10 @@ export class Index extends Component {
                     taskImgurl={taskImgurl} />
             </div>
         )
+    }
+
+    onloadHandler = () => {
+        // console.log('************8')
     }
 
     /** 
@@ -395,9 +419,16 @@ export class Index extends Component {
      * 发布任务
      */
     taskPopUpClickedHandler = () => {
-        this.setState({ taskPopup: false, starImgCheck: [] });
         window.location.reload()
         window.location.href = window.location.href + 10000 * Math.random();
+        this.setState({ taskPopup: false });
+    }
+
+    onClickTaskPopUpFirst = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "player/visibleUpdate",
+        })
     }
 
     /**
@@ -423,7 +454,8 @@ export class Index extends Component {
                 payload: { starImgCheck: [] }
             })
 
-            this.setState({ awardPopup: false, taskPopup: true })
+            this.setState({ awardPopup: false, taskPopup: true, starImgCheck: [] })
+
             return
         }
 
@@ -631,13 +663,31 @@ export class Index extends Component {
                 }, 0);
             }
         })
+        // setTimeout(() => {
+        //     this.setState({ skeleton: false });
+        // }, 2000)
     }
+
+    // componentWillMount() {
+    // 在渲染之前进行操作
+    // const { taskArray } = this.props
+    // var images = []
+    // taskArray.forEach(el => {
+    //     var image = new Image()
+
+    //     image.src = `https://juuuce.com/media_static/${el.url}`
+    //     image.onload = () => {
+    //         images.push(image.src)
+    //         this.state.images = images
+    //     }
+    // })
+    // }
 }
 /**
  * state整棵状态树
 */
 const mapStateToProps = (state) => {
-    const { taskBar, taskImgData, taskArray, taskArrayAfter, starImgCheck, awardList, taskLabelData, newAwardList, taskNumber } = state.player;
+    const { taskBar, taskImgData, taskArray, taskArrayAfter, starImgCheck, awardList, taskLabelData, newAwardList, taskNumber, visible } = state.player;
     return {
         taskBar: taskBar,
         taskImgData: taskImgData,
@@ -647,7 +697,8 @@ const mapStateToProps = (state) => {
         starImgCheck: starImgCheck,
         awardList: awardList,
         newAwardList: newAwardList,
-        taskNumber: taskNumber
+        taskNumber: taskNumber,
+        visible: visible,
     };
 }
 

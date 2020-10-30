@@ -5,9 +5,9 @@
 /**
  * 服务器地址(开发)
  */
-// const BASE_HOST_URL = process.env.apiServerUrl;
-const BASE_HOST_URL = "https://juuuce.com";
-// const BASE_HOST_URL = http://localhost:8000;
+const BASE_HOST_URL = process.env.apiServerUrl;
+// const BASE_HOST_URL = "https://juuuce.com";
+// const BASE_HOST_URL = "https://project-sc9.github.io/Apple";
 
 /**
  * 服务器路径

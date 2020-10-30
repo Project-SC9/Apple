@@ -39,7 +39,8 @@ export default {
         logSave: "",
         taskType: 0,
         taskNumber: 0,
-        localUid: taskId
+        localUid: taskId,
+        visible: true
     },
 
     effects: {
@@ -154,6 +155,13 @@ export default {
                 taskNumber: num,
             }
         },
+
+        visibleUpdate(state) {
+            return {
+                ...state,
+                visible: false,
+            }
+        }
 
     },
 }
