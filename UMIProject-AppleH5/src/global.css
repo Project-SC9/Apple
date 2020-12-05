@@ -78,19 +78,18 @@ div:focus {
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: #fff;
-  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  height: 50px;
-  border-radius: 4px;
+  background-color: #673ab7;
+  height: 0.04rem;
+  border-radius: 0.04rem;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: .04rem;
+  height: 0.04rem;
 }
 
 input {

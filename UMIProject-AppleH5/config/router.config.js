@@ -29,6 +29,10 @@ export default [
           },
         ],
       },
+      {
+        path: '/index',
+        component: './website/index',
+      },
     ],
   },
 
