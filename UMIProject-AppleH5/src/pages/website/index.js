@@ -2,14 +2,29 @@ import React, { Component } from 'react'
 import styles from './index.css';
 import Link from 'umi/link'
 
-const img1 = 'https://i.loli.net/2020/12/01/RBi4zhXNoulypDO.png'
-const img2 = 'https://i.loli.net/2020/12/01/KXcYofsrIB9SZG8.png'
-const img3 = 'https://i.loli.net/2020/12/01/X9sjFlKxgLTWYMP.png'
-const img4 = 'https://i.loli.net/2020/12/05/6h2A9xOPpSa5fUL.png'
+`
+
+
+`
+
+
+const img1 = 'https://i.loli.net/2020/12/06/6SuWbDLUtsmgi7G.png'
+const img2 = 'https://i.loli.net/2020/12/06/4R5DMSNnwPol7ep.png'
+const img3 = 'https://i.loli.net/2020/12/06/ynBbTEhMk5ls37f.png'
+const img4 = 'https://i.loli.net/2020/12/06/uhNcas4dnT6rEev.png'
+
+const img5 = 'https://i.loli.net/2020/12/06/rItz3GmwViaZpyH.png'
+const img6 = 'https://i.loli.net/2020/12/06/1zMA3PZ8VBKcvUd.png'
+const img7 = 'https://i.loli.net/2020/12/06/uwlqW213745PnBR.png'
+
+const img8 = 'https://i.loli.net/2020/12/06/25G4FQa3DtMX7jk.png'
+
+
 
 export class index extends Component {
     state = {
-        show: false
+        show: false,
+        show1: false
     }
     render() {
         return (
@@ -19,7 +34,7 @@ export class index extends Component {
                         <div className={styles.top_left}> <img src={require('assets/web/Componentx.png')} /></div>
                         <div className={styles.top_right}>
                             <p className={this.state.show == true ? styles.active : ''} onClick={() => this.setState({ show: !this.state.show })}>关于我们</p>
-                            <p>联系我们</p>
+                            <p className={this.state.show1 == true ? styles.active : ''} onClick={() => this.setState({ show1: !this.state.show1 })}>联系我们</p>
                         </div></div>
                 </header>
 
@@ -33,6 +48,18 @@ export class index extends Component {
                                 Juuuce up （捷什）在早期主要服务于年轻消费者，希望通过有趣的方式带动新消费体验，提高商家与消费者之间的直接互动从而改变目前较为乏味的线下消费体验。
                     </p>
                             <p className={styles.close} onClick={() => this.setState({ show: false })}><img src={require('assets/web/close.svg')} /></p>
+                        </div>
+                    ) : null
+                }
+                {
+
+                    !!this.state.show1 ? (
+                        <div className={styles.t_npxmain5} style={{ height: "79px" }}>
+                            <div style={{ display: "flex", width: "74%", margin: 'auto', justifyContent: "space-around" }}>
+                                <p> 非常感谢您，宝贵与真诚的建议！</p>
+                                <p>smileonsmile2017@163.com </p>
+                            </div>
+                            <p className={styles.close} onClick={() => this.setState({ show1: false })}><img src={require('assets/web/close.svg')} /></p>
                         </div>
                     ) : null
                 }
@@ -66,7 +93,8 @@ export class index extends Component {
                     </div>
                     <div className={styles.t_npxmain3}>
                         <div className={styles.content}>
-                            <div className={styles.trophy}><img src={require('assets/web/trophy 3.png')} /></div>
+                            <div className={styles.trophy} style={{ width: "122px" }}>
+                                <img src={img8} style={{ width: "100%" }} /></div>
 
                             <div className={styles.title} >
                                 <h1>需要能量 Juuuce Up</h1>
@@ -84,7 +112,7 @@ export class index extends Component {
                                 <h4> 咖啡店 酒店 游乐园 </h4>
                                 <h4>  书店 买手店： </h4>
                                 <p>扫码探店发掘平时miss的</p>
-                                <div className={styles.imga}><img src={require('assets/web/Dayflow Standing.png')} /></div>
+                                <div className={styles.imga}><img src={img7} /></div>
                             </div>
                             <div className={styles.cont}>
                                 <h5>02</h5>
@@ -92,7 +120,7 @@ export class index extends Component {
                                 <p>咖啡店里找川菜？</p>
                                 <p style={{ marginLeft: "-2px" }}>酒店里找漫画？</p>
                                 <p>买手店里找咖啡？ </p>
-                                <div className={styles.imga}><img src={require('assets/web/Task bar.png')} /></div>
+                                <div className={styles.imga}><img src={img5} /></div>
                             </div>
                             <div className={styles.right}>
                                 <h5>03</h5>
@@ -100,7 +128,7 @@ export class index extends Component {
                                 <p>送川菜小吃</p>
                                 <p style={{ marginLeft: "-8px" }}>免费阅读漫画</p>
                                 <p>送小杯咖啡</p>
-                                <div className={styles.imga}><img src={require('assets/web/Frame 92.png')} /></div>
+                                <div className={styles.imga}><img src={img6} /></div>
                             </div>
                         </div>
                     </div>

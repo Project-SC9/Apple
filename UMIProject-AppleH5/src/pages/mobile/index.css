@@ -1,44 +1,45 @@
-.t_npxweb {
+.web {
   width: 100%;
   height: 100%;
-  min-width: 1280px;
 }
 
-.t_npxweb header {
+.web header {
   width: 100%;
   /* height: 60px; */
   background: #fff;
 }
 
-.t_npxheader {
-  width: 90%;
+.header {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: auto;
   padding: 1px 0;
+  margin-bottom: 0.15rem;
 }
 
-.t_npxheader .top_left {
-  width: 187px;
-  height: 44px;
+.header .top_left {
+  width: 4.11667rem;
+  height: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.t_npxheader .top_left img {
+.header .top_left img {
   width: 73%;
 }
 
-.t_npxheader .top_right {
+.header .top_right {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.t_npxheader .top_right p {
+.header .top_right p {
   font-family: "PingFang HK";
   font-size: 16px;
   font-weight: normal;
@@ -51,11 +52,11 @@
 
 }
 
-.t_npxheader .top_right .active {
+.header .top_right .active {
   font-weight: 600 !important;
 }
 
-.t_npxheader p {
+.header p {
   width: 100px;
   font-family: "PingFang HK";
   font-size: 16px;
@@ -69,17 +70,17 @@
 }
 
 
-.t_npxmain1 {
+.main1 {
   width: 100%;
-  height: 398px;
+  height: 7.2rem;
   object-fit: contain;
   background-color: #fdf5ff;
   background: url(../../assets/web/hero-image_bk.png) no-repeat;
   background-size: 100% 100%;
 }
 
-.t_npxmain2 .content,
-.t_npxmain1 .content {
+.main2 .content,
+.main1 .content {
   width: 77%;
   margin: auto;
   display: flex;
@@ -89,39 +90,42 @@
   position: relative;
 }
 
-.t_npxmain1 .content .img {
-  width: 442px;
+.main1 .content .img {
+  width: 6.36667rem;
   position: absolute;
-  top: 0;
+  top: 1.5rem;
   left: 0;
 }
 
-.t_npxmain1 .content .img img {
+.main1 .content .img img {
   width: 100%;
 }
 
-.t_npxmain1 .content .title {
+.main1 .content .title {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 156px;
-  margin-right: 120px;
+  margin-top: 0.6rem;
 }
 
-.t_npxmain1 .content .title .imga {
-  width: 302px;
-  height: 20px;
+.main1 .content .title .imga {
+  width: 5rem;
   margin: 16px 17px 9px;
   object-fit: contain;
   display: flex;
   align-items: center;
 }
 
-.t_npxmain1 .content .title h1 {
+.main1 .content .title .imga img {
+  width: 100%;
+}
+
+.main1 .content .title h1 {
   /* width: 336px; */
-  height: 69px;
+  /* height: 69px; */
   font-family: "PingFang HK";
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -131,63 +135,61 @@
   color: #673ab7;
 }
 
-.t_npxmain1 .content .title h5 {
-  width: 180px;
-  height: 28px;
+.main1 .content .title h5 {
   font-family: "PingFang HK";
-  font-size: 18px;
+  font-size: 35px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: left;
+  text-align: center;
   color: #673ab7;
 }
 
-.t_npxmain2 {
+.main2 {
   width: 100%;
-  height: 398px;
+  height: 5.8rem;
   object-fit: contain;
   background-color: #fdf5ff;
   background: url(../../assets/web/Rectangle\ 2.png) no-repeat;
   background-size: 100% 100%;
 }
 
-.t_npxmain2 .content {
+.main2 .content {
   width: 90%;
   justify-content: center;
 }
 
 
-.t_npxmain2 .content .img {
-  width: 388px;
+.main2 .content .img {
+  width: 4.46667rem;
   position: absolute;
-  top: 153px;
-  left: 0;
+  top: 2.4rem;
+  left: -2.9rem;
   z-index: 9;
 }
 
-.t_npxmain2 .content .imga {
-  width: 435.1px;
+.main2 .content .imga {
+  width: 2.46667rem;
   position: absolute;
-  top: 263px;
-  right: 0;
+  top: 3.85rem;
+  right: -0.4rem;
   z-index: 9;
 }
 
-.t_npxmain2 .content .imga img,
-.t_npxmain2 .content .img img {
+.main2 .content .imga img,
+.main2 .content .img img {
   width: 100%;
 }
 
-.t_npxmain2 .title {
+.main2 .title {
   margin-top: 100px;
 }
 
-.t_npxmain2 .content p {
+.main2 .content p {
   font-family: "PingFang HK";
-  font-size: 35px;
+  font-size: 38px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -195,12 +197,12 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 }
 
-.t_npxmain2 .content h6 {
+.main2 .content h6 {
   font-family: "PingFang HK";
-  font-size: 14px;
+  font-size: 0.3rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -208,16 +210,17 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 48px;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
 }
 
-.t_npxmain2 .content a p {
+.main2 .content a p {
   width: 240px;
   height: 40px;
   border-radius: 30px;
   background-color: #673ab7;
   font-family: "PingFang HK";
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -229,15 +232,15 @@
 }
 
 
-.t_npxmain3 {
+.main3 {
   width: 100%;
-  height: 598px;
+  /* height: 598px; */
   object-fit: contain;
   background-color: #fff;
   position: relative;
 }
 
-.t_npxmain3 .content {
+.main3 .content {
   width: 60%;
   margin: auto;
   justify-content: center;
@@ -245,15 +248,16 @@
 }
 
 
-.t_npxmain3 .content .title {
+.main3 .content .title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 147px;
+  margin-top: 1.5rem;
+  z-index: 9;
 }
 
-.t_npxmain3 .content .title .imga {
-  width: 302px;
+.main3 .content .title .imga {
+  width: 6rem;
   height: 20px;
   margin: 0px 17px 9px;
   object-fit: contain;
@@ -261,11 +265,14 @@
   align-items: center;
 }
 
-.t_npxmain3 .content .title h1 {
-  /* width: 336px; */
-  height: 69px;
+.main3 .content .title .imga img {
+  width: 100%;
+}
+
+.main3 .content .title h1 {
+  height: .6rem;
   font-family: "PingFang HK";
-  font-size: 35px;
+  font-size: 0.48rem;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -273,13 +280,14 @@
   letter-spacing: normal;
   text-align: left;
   color: #673ab7;
+  margin-bottom: 0.15rem;
 }
 
-.t_npxmain3 .content .title h5 {
+.main3 .content .title h5 {
   /* width: 180px; */
-  height: 28px;
+  height: 0.46667rem;
   font-family: "PingFang HK";
-  font-size: 18px;
+  font-size: 0.35rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -289,26 +297,26 @@
   color: #673ab7;
 }
 
-.t_npxmain3 .trophy {
+.main3 .trophy {
   position: absolute;
-  top: -28px;
+  top: -0.3rem;
 }
 
-.t_npxmain3 .frame {
+.main3 .frame {
   width: 97%;
   margin: auto;
-  margin-top: -151px;
+  margin-top: -1rem;
 
 }
 
-.t_npxmain3 .frame img {
+.main3 .frame img {
   width: 100%;
 }
 
 
-.t_npxmain4 {
+.main4 {
   width: 100%;
-  height: 512px;
+  /* height: 512px; */
   object-fit: contain;
   background-color: #fdf5ff;
   background: url("https://i.loli.net/2020/12/05/RPhUpI3G8JLlyB7.png") no-repeat;
@@ -317,66 +325,29 @@
   padding-top: 40px;
 }
 
-.t_npxmain4 .line {
-  width: 60%;
+.main4 .line {
+  width: 0.13333rem;
   margin: auto;
-  height: 8px;
+  height: 10.66667rem;
   background-color: #e6d7f8;
   position: absolute;
-  top: 55px;
-  left: 20%;
+  left: 1.06rem;
+  top: 7%;
 }
 
-.t_npxmain4 .content {
-  width: 87%;
+.main4 .content {
+  width: 100%;
   margin: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
 }
 
-.t_npxmain4 .content .left,
-.t_npxmain4 .content .cont,
-.t_npxmain4 .content .right {
-  flex: 1;
-}
-
-.t_npxmain4 .content .left h4 {
-  width: 58%;
+.main4 .content h4 {
+  width: 75%;
   margin: auto;
-}
-
-.t_npxmain4 .content .left p {
-  text-align: center;
-  margin-left: -24px;
-}
-
-.t_npxmain4 .content .cont h4 {
-  width: 34%;
-  margin: auto;
-}
-
-.t_npxmain4 .content .cont p {
-  text-align: center;
-  margin-left: 18px;
-}
-
-
-.t_npxmain4 .content .right h4 {
-  width: 29%;
-  margin: auto;
-}
-
-.t_npxmain4 .content .right p {
-  text-align: center;
-  margin-left: -24px;
-}
-
-
-
-.t_npxmain4 .content h4 {
   font-family: "PingFang HK";
-  font-size: 26px;
+  font-size: 0.4rem;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -385,9 +356,10 @@
   text-align: left;
   color: #673ab7;
   margin-bottom: 5px;
+  margin-left: 1rem;
 }
 
-.t_npxmain4 .content h5 {
+.main4 .content h5 {
   width: 40px;
   height: 40px;
   background: #673ab7;
@@ -401,7 +373,7 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   font-family: "PingFang HK";
-  font-size: 22px;
+  font-size: 30px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -410,12 +382,15 @@
   color: #ffffff;
   margin-bottom: 25px;
   z-index: 9;
-  position: relative;
+  position: absolute;
+  top: 0.1rem;
 }
 
-.t_npxmain4 .content p {
+.main4 .content p {
+  width: 75%;
+  margin: auto;
   font-family: "PingFang HK";
-  font-size: 18px;
+  font-size: 0.4rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -424,57 +399,68 @@
   text-align: left;
   color: #673ab7;
   margin-bottom: 5px;
+  margin-left: 1rem;
 }
 
-.t_npxmain4 .content img {
+.main4 .content img {
   width: 100%;
 }
 
-.t_npxmain4 .content .left .imga {
-  width: 288px;
-  height: 288px;
-  position: absolute;
-  bottom: -18px;
-  z-index: 9;
+.main4 .content .left .imga {
+  width: 234px;
+  height: 234px;
+  margin: 0.3rem 0;
+  margin-bottom: 0.5rem;
 }
 
-.t_npxmain4 .content .cont .imga {
-  width: 288px;
-  height: 64px;
-  margin: auto;
-  margin-top: 100px;
+.main4 .content .cont .imga {
+  width: 4.8rem;
   object-fit: contain;
+  margin-left: 0.7rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
 
-.t_npxmain4 .content .right .imga {
+.main4 .content .right .imga {
   width: 138px;
   height: 78.4px;
   margin: auto;
-  margin-top: 100px;
   object-fit: contain;
+  margin-left: 0.7rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
-
-.t_npxweb footer {
-  width: 100%;
-  height: 57px;
-  background-color: #673ab7;
+.main4 .content .left,
+.main4 .content .cont,
+.main4 .content .right {
+  width: 80%;
+  margin: auto;
   position: relative;
 }
 
-.t_npxweb footer .content {
+
+.web footer {
+  width: 100%;
+  height: 1.55rem;
+  background-color: #673ab7;
+  position: relative;
+  padding: 0.2rem 0;
+}
+
+.web footer .content {
   width: 50%;
-  height: 100%;
+  /* height: 100%; */
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.t_npxweb footer .content p {
+.web footer p {
   font-family: "PingFang HK";
-  font-size: 14px;
+  font-size: 25px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -484,57 +470,21 @@
   color: #ffffff;
 }
 
-.t_npxweb footer .left {
-  position: absolute;
-  left: 1%;
-  top: 37%;
+.web footer .left {
   font-family: "PingFang HK";
-  font-size: 14px;
+  font-size: 0.25rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: left;
+  text-align: center;
   color: #ffffff;
+  margin-bottom: 0.1rem;
 }
 
-.t_npxweb footer .left a,
-.t_npxweb footer .left a:hover {
+.web footer .left a,
+.web footer .left a:hover {
   margin-left: 5px;
   color: #ffffff;
-}
-
-
-.t_npxmain5 {
-  width: 100%;
-  margin: auto;
-  height: 180px;
-  padding: 31px 168px 23px 164px;
-  opacity: 0.9;
-  background-color: #e8e8ff;
-  position: absolute;
-  top: 46px;
-  z-index: 99;
-}
-
-.t_npxmain5 p {
-  font-family: "PingFang HK";
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #673ab7;
-}
-
-
-.t_npxmain5 .close {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
 }

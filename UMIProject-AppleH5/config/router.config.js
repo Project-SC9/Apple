@@ -33,6 +33,10 @@ export default [
         path: '/index',
         component: './website/index',
       },
+      {
+        path: '/main',
+        component: './mobile/index',
+      },
     ],
   },
 
