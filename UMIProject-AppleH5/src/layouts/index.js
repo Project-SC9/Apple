@@ -5,7 +5,7 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import styles from './index.css';
 import { Spin } from 'antd';
-
+import router from 'umi/router';
 /**
  * 全局的布局
  */
@@ -14,6 +14,8 @@ class Index extends Component {
 
 	componentWillMount() {
 		document.title = 'juuuce.com'
+		console.log("document", document)
+		document.icon = 'https://i.loli.net/2020/12/13/M5aVNmzFvjYgLBA.png'
 		this._reduxPersistor = persistStore(window.g_app._store);
 		window._reduxPersistor = this._reduxPersistor;
 		window.addEventListener('beforeunload', this.beforeunload);
@@ -40,6 +42,11 @@ class Index extends Component {
 			dispatch({ type: "player/taskNumberUpdate" })
 		}, 10000)
 
+
+
+		if (window.screen.width > 450) {
+			router.push('/index');
+		}
 	}
 }
 

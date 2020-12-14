@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styles from './index.css';
 import Link from 'umi/link'
+import router from 'umi/router';
+
 
 const img1 = 'https://i.loli.net/2020/12/06/Kdrs9DO3JSHLWov.png'
 const img2 = 'https://i.loli.net/2020/12/06/4R5DMSNnwPol7ep.png'
@@ -12,6 +14,11 @@ const img6 = 'https://i.loli.net/2020/12/06/1zMA3PZ8VBKcvUd.png'
 const img7 = 'https://i.loli.net/2020/12/06/uwlqW213745PnBR.png'
 
 const img8 = 'https://i.loli.net/2020/12/06/25G4FQa3DtMX7jk.png'
+
+
+const im10 = 'https://i.loli.net/2020/12/13/5sFjItQ1mrYRqUW.png'
+const im11 = 'https://i.loli.net/2020/12/13/tEcep8mKbN79uUs.png'
+
 export class index extends Component {
     render() {
         return (
@@ -25,7 +32,7 @@ export class index extends Component {
                     <div className={styles.main1}>
                         <div className={styles.content}>
                             <div className={styles.title}>
-                                <h1>发掘有趣的商品</h1>
+                                <h1><img src={im10} width='100%' /></h1>
                                 <div className={styles.imga}><img src={require('assets/web/Frame 82.png')} /></div>
                                 <h5>无聊有趣，由你来定</h5>
                             </div>
@@ -43,7 +50,7 @@ export class index extends Component {
                                 <p>用户到店扫码</p>
                                 <p>即刻体验</p>
                                 <h6>不啰嗦，让你与商品直接互动</h6>
-                                <Link to="/"><p>开始互动</p></Link>
+                                <Link to="/home/begin"><p>开始互动</p></Link>
                             </div>
                             <div className={styles.imga} >
                                 <img src={require('../../assets/web/Dayflow Abstract 3.png')} />
@@ -56,8 +63,7 @@ export class index extends Component {
                                 <img src={img8} style={{ width: "100%" }} /></div>
 
                             <div className={styles.title} >
-                                <h1>需要能量 </h1>
-                                <h1>Juuuce Up </h1>
+                                <h1> <img src={im11} style={{ width: "100%" }} /> </h1>
                                 <div className={styles.imga}><img src={require('assets/web/Frame 82.png')} /></div>
                                 <h5>发掘亮点，点亮家家薪火</h5>
                             </div>
@@ -101,13 +107,12 @@ export class index extends Component {
                         Icons made by
             <Link to="#" title="Freepik" > Freepik </Link >
                 from
-                <Link to="www.flaticon.com/" title="Flaticon" > www.flaticon.com</Link >
+                <Link to="#" title="Flaticon" onClick={() => window.location.href = "https://www.flaticon.com/"}> www.flaticon.com</Link >
 
                     </div>
-                    <p style={{ textAlign: "center", marginBottom: ".2rem" }}>Juuuce Up © 2020   珠海六个火科技有限公司</p>
+                    <p style={{ textAlign: "center", marginBottom: ".3rem" }}>捷什网 Juuuce Up © 2020<span style={{ marginLeft: ".3rem" }}>珠海六个火科技有限公司</span></p>
                     <div className={styles.content}>
-                        <p>工信部备案号</p>
-                        <p> 公安备案</p>
+                        <Link to="#" title="" onClick={() => { window.location.href = "https://www.beian.miit.gov.cn/" }}><p>粤ICP备19147212号-2</p></Link>
                     </div>
 
                 </footer>

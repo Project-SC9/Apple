@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import styles from './index.css';
 import Link from 'umi/link'
 
-`
 
-
-`
 
 
 const img1 = 'https://i.loli.net/2020/12/06/6SuWbDLUtsmgi7G.png'
@@ -19,6 +16,9 @@ const img7 = 'https://i.loli.net/2020/12/06/uwlqW213745PnBR.png'
 
 const img8 = 'https://i.loli.net/2020/12/06/25G4FQa3DtMX7jk.png'
 
+const im10 = 'https://i.loli.net/2020/12/13/5sFjItQ1mrYRqUW.png'
+
+const im11 = 'https://i.loli.net/2020/12/13/1Pv8Sz4JfRd7EnM.png'
 
 
 export class index extends Component {
@@ -33,8 +33,8 @@ export class index extends Component {
                     <div className={styles.t_npxheader}>
                         <div className={styles.top_left}> <img src={require('assets/web/Componentx.png')} /></div>
                         <div className={styles.top_right}>
-                            <p className={this.state.show == true ? styles.active : ''} onClick={() => this.setState({ show: !this.state.show })}>关于我们</p>
-                            <p className={this.state.show1 == true ? styles.active : ''} onClick={() => this.setState({ show1: !this.state.show1 })}>联系我们</p>
+                            <p className={this.state.show == true ? styles.active : ''} onClick={() => this.setState({ show: !this.state.show, show1: false })}>关于我们</p>
+                            <p className={this.state.show1 == true ? styles.active : ''} onClick={() => this.setState({ show1: !this.state.show1, show: false })}>联系我们</p>
                         </div></div>
                 </header>
 
@@ -70,7 +70,7 @@ export class index extends Component {
                                 <img src={img3} />
                             </div>
                             <div className={styles.title}>
-                                <h1>发掘有趣的商品</h1>
+                                <h1> <img src={im10} width='100%' /></h1>
                                 <div className={styles.imga}><img src={require('assets/web/Frame 82.png')} /></div>
                                 <h5>无聊有趣，由你来定</h5>
                             </div>
@@ -84,7 +84,7 @@ export class index extends Component {
                             <div className={styles.title} >
                                 <p>用户到店扫码，即刻体验</p>
                                 <h6>不啰嗦，让你与商品直接互动</h6>
-                                <Link to="/"><p>开始互动</p></Link>
+                                <Link to="/home/begin"><p>开始互动</p></Link>
                             </div>
                             <div className={styles.imga} >
                                 <img src={img1} />
@@ -97,7 +97,7 @@ export class index extends Component {
                                 <img src={img8} style={{ width: "100%" }} /></div>
 
                             <div className={styles.title} >
-                                <h1>需要能量 Juuuce Up</h1>
+                                <h1><img src={im11} width='100%' /></h1>
                                 <div className={styles.imga}><img src={require('assets/web/Frame 82.png')} /></div>
                                 <h5>发掘亮点，点亮家家薪火</h5>
                             </div>
@@ -118,7 +118,11 @@ export class index extends Component {
                                 <h5>02</h5>
                                 <h4>看图做任务</h4>
                                 <p>咖啡店里找川菜？</p>
-                                <p style={{ marginLeft: "-2px" }}>酒店里找漫画？</p>
+                                <p style={{
+                                    width: "33%",
+                                    margin: "auto",
+                                    textLign: "left"
+                                }}>酒店里找漫画？</p>
                                 <p>买手店里找咖啡？ </p>
                                 <div className={styles.imga}><img src={img5} /></div>
                             </div>
@@ -126,7 +130,7 @@ export class index extends Component {
                                 <h5>03</h5>
                                 <h4> 完成任务</h4>
                                 <p>送川菜小吃</p>
-                                <p style={{ marginLeft: "-8px" }}>免费阅读漫画</p>
+                                <p>免费阅读漫画</p>
                                 <p>送小杯咖啡</p>
                                 <div className={styles.imga}><img src={img6} /></div>
                             </div>
@@ -141,14 +145,13 @@ export class index extends Component {
                         Icons made by
                     <Link to="#" title="Freepik">Freepik </Link>
                     from
-                    <Link to="www.flaticon.com/" title="Flaticon">www.flaticon.com</Link>
+                    <Link to="#" title="Flaticon" onClick={() => window.location.href = "https://www.flaticon.com/"} > www.flaticon.com</Link>
 
                     </div>
 
-                    <div className={styles.content}>
-                        <p>Juuuce Up © 2020   珠海六个火科技有限公司</p>
-                        <p>工信部备案号</p>
-                        <p> 公安备案</p>
+                    <div className={styles.content} style={{ position: "absolute", right: "10%" }}>
+                        <p>捷什网 Juuuce Up © 2020 &nbsp;&nbsp;&nbsp;&nbsp;珠海六个火科技有限公司</p>
+                        <Link to="#" title="" onClick={() => window.location.href = "https://www.beian.miit.gov.cn/"} > <p>粤ICP备19147212号-2</p></Link>
                     </div>
 
                 </footer>

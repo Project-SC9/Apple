@@ -8,7 +8,7 @@ export default [
     routes: [
       {
         path: '/',
-        redirect: '/home/begin',
+        redirect: '/main',
       },
       // Home
       {

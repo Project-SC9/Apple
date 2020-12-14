@@ -99,7 +99,7 @@ class Index extends Component {
 
   windowCloseClickedHandler = () => {
     // window.location.href = "about:blank";
-    window.location.href = "https://www.bobistep.com/";
+    window.location.href = "https://www.babistep.com/";
     window.close();
   }
 

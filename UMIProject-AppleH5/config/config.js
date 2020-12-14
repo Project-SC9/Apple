@@ -45,6 +45,11 @@ export default {
                     /components\//,
                 ],
             },
+            links: [
+                { rel: 'icon', href: 'https://i.loli.net/2020/12/13/A97nvsmijK8IW4x.png' },
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap' },
+            ],
+
         }],
         'umi-plugin-gh-pages',
     ],

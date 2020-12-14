@@ -16,7 +16,7 @@ const Router = routerRedux.ConnectedRouter;
 const routes = [
   {
     path: '/',
-    redirect: '/home/begin',
+    redirect: '/main',
     exact: true,
     _title: 'Apple',
     _title_default: 'Apple',
