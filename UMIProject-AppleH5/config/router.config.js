@@ -6,35 +6,36 @@ export default [
     path: '/',
     component: '../layouts/index',
     routes: [
+      // {
+      //   path: '/',
+      //   redirect: '/juuuce/index',
+      // },
+      
       {
         path: '/',
-        redirect: '/main',
+        component: './website/index',
       },
       // Home
       {
-        path: '/home',
+        path: '/juuuce/home',
         component: './home/_layout',
         routes: [
           {
-            path: '/home/main',
+            path: '/juuuce/home/main',
             component: './home/main/index',
           },
           {
-            path: '/home/game',
+            path: '/juuuce/home/game',
             component: './home/game/test',
           },
           {
-            path: '/home/begin',
+            path: '/juuuce/home/begin',
             component: './home/orgin-ad/index',
           },
         ],
       },
       {
-        path: '/index',
-        component: './website/index',
-      },
-      {
-        path: '/main',
+        path: '/juuuce/main',
         component: './mobile/index',
       },
     ],

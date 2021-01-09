@@ -16,35 +16,35 @@ const Router = routerRedux.ConnectedRouter;
 const routes = [
   {
     path: '/',
-    redirect: '/main',
-    exact: true,
-    _title: 'Apple',
-    _title_default: 'Apple',
-  },
-  {
-    path: '/',
     component: require('../../layouts/index').default,
     routes: [
       {
-        path: '/home',
+        path: '/',
+        component: require('../website/index').default,
+        exact: true,
+        _title: 'Apple',
+        _title_default: 'Apple',
+      },
+      {
+        path: '/juuuce/home',
         component: require('../home/_layout').default,
         routes: [
           {
-            path: '/home/main',
+            path: '/juuuce/home/main',
             component: require('../home/main/index').default,
             exact: true,
             _title: 'Apple',
             _title_default: 'Apple',
           },
           {
-            path: '/home/game',
+            path: '/juuuce/home/game',
             component: require('../home/game/test').default,
             exact: true,
             _title: 'Apple',
             _title_default: 'Apple',
           },
           {
-            path: '/home/begin',
+            path: '/juuuce/home/begin',
             component: require('../home/orgin-ad/index').default,
             exact: true,
             _title: 'Apple',
@@ -65,14 +65,7 @@ const routes = [
         _title_default: 'Apple',
       },
       {
-        path: '/index',
-        component: require('../website/index').default,
-        exact: true,
-        _title: 'Apple',
-        _title_default: 'Apple',
-      },
-      {
-        path: '/main',
+        path: '/juuuce/main',
         component: require('../mobile/index').default,
         exact: true,
         _title: 'Apple',

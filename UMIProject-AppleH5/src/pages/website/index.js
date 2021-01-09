@@ -84,7 +84,7 @@ export class index extends Component {
                             <div className={styles.title} >
                                 <p>用户到店扫码，即刻体验</p>
                                 <h6>不啰嗦，让你与商品直接互动</h6>
-                                <Link to="/home/begin"><p>开始互动</p></Link>
+                                <Link to="/juuuce/home/begin"><p>开始互动</p></Link>
                             </div>
                             <div className={styles.imga} >
                                 <img src={img1} />

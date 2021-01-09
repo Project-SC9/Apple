@@ -44,8 +44,8 @@ class Index extends Component {
 
 
 
-		if (window.screen.width > 450) {
-			router.push('/index');
+		if (window.screen.width < 450) {
+			router.push('/juuuce/main');
 		}
 	}
 }

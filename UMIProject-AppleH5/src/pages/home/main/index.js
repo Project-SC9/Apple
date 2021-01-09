@@ -135,7 +135,7 @@ class Index extends Component {
       })
       return
     }
-    router.push(`/home/game?uid=${this.props.location.query.uid}&tid=${taskBar.tid}`)
+    router.push(`/juuuce/home/game?uid=${this.props.location.query.uid}&tid=${taskBar.tid}`)
     let newdate = moment().format('YYYYMMDDHHmmss')
     let cxt = "点击开始游戏"
     this._catchLogSave(newdate, cxt)
