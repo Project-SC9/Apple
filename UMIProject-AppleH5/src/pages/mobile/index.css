@@ -458,7 +458,7 @@
 }
 
 .web footer .content {
-  width: 50%;
+  width: 86%;
   /* height: 100%; */
   margin: auto;
   display: flex;
@@ -466,10 +466,9 @@
   justify-content: space-between;
 }
 
-.web footer .content a {
+/* .web footer .content a {
   width: 100%;
-
-}
+} */
 
 .web footer p {
   width: 100%;

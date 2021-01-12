@@ -10,7 +10,7 @@ export default [
       //   path: '/',
       //   redirect: '/juuuce/index',
       // },
-      
+
       {
         path: '/',
         component: './website/index',

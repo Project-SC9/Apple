@@ -42,10 +42,10 @@ class Index extends Component {
 			dispatch({ type: "player/taskNumberUpdate" })
 		}, 10000)
 
-
-
-		if (window.screen.width < 450) {
-			router.push('/juuuce/main');
+		if (this.props.location.pathname == '/') {
+			if (window.screen.width < 450) {
+				router.push('/juuuce/main');
+			}
 		}
 	}
 }

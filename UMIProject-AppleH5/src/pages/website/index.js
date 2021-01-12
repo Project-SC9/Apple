@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import styles from './index.css';
 import Link from 'umi/link'
 
-
-
-
 const img1 = 'https://i.loli.net/2020/12/06/6SuWbDLUtsmgi7G.png'
 const img2 = 'https://i.loli.net/2020/12/06/4R5DMSNnwPol7ep.png'
 const img3 = 'https://i.loli.net/2020/12/06/ynBbTEhMk5ls37f.png'
@@ -150,10 +147,13 @@ export class index extends Component {
                     </div>
 
                     <div className={styles.content} style={{ position: "absolute", right: "10%" }}>
-                        <p>捷什网 Juuuce Up © 2020 &nbsp;&nbsp;&nbsp;&nbsp;珠海六个火科技有限公司</p>
-                        <Link to="#" title="" onClick={() => window.location.href = "https://www.beian.miit.gov.cn/"} > <p>粤ICP备19147212号-2</p></Link>
+                        <p>捷什网 Juuuce Up © 2021 &nbsp;&nbsp;&nbsp;&nbsp;珠海六个火科技有限公司</p>
+                        <Link to="#" title="" onClick={() => window.location.href = "https://www.beian.miit.gov.cn/"} >
+                            <p>粤ICP备19147212号-2</p></Link>
+                        <Link to="#" title="" onClick={() => window.location.href = "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=46020402000124"} >
+                            <p style={{ display: "flex", alignItems: "center" }}>
+                                <img src={require('assets/web/bh-iocn.png')} style={{ marginRight: "5px", width: "16px" }} />琼公网安备 46020402000124号</p></Link>
                     </div>
-
                 </footer>
 
             </div>

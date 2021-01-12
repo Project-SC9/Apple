@@ -471,7 +471,7 @@
 }
 
 .t_npxweb footer .content {
-  width: 50%;
+  width: 60%;
   height: 100%;
   margin: auto;
   display: flex;
@@ -493,7 +493,7 @@
 
 .t_npxweb footer .left {
   position: absolute;
-  left: 10%;
+  left: 6%;
   top: 37%;
   font-family: "PingFang HK";
   font-size: 14px;

@@ -78,11 +78,11 @@ div:focus {
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #673ab7;
+  /* background-color: #673ab7; */
   height: 0.04rem;
   border-radius: 0.04rem;
 }

@@ -8,7 +8,6 @@ export default {
 
     /** 浏览器路由配置 **/
     history: 'hash',
-    // history: 'browser',
     /** 路由配置 **/
     routes: routerConfig,
 

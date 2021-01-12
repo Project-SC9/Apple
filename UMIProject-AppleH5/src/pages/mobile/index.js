@@ -110,10 +110,17 @@ export class index extends Component {
                 <Link to="#" title="Flaticon" onClick={() => window.location.href = "https://www.flaticon.com/"}> www.flaticon.com</Link >
 
                     </div>
-                    <p style={{ textAlign: "center", marginBottom: ".3rem" }}>捷什网 Juuuce Up © 2020<span style={{ marginLeft: ".3rem" }}>珠海六个火科技有限公司</span></p>
+                    <p style={{ textAlign: "center", marginBottom: ".3rem" }}>捷什网 Juuuce Up © 2021<span style={{ marginLeft: ".3rem" }}>珠海六个火科技有限公司</span></p>
                     <div className={styles.content}>
+
+                        <Link to="#" title="" onClick={() => window.location.href = "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=46020402000124"} >
+                            <p style={{ display: "flex", alignItems: "center" }}>
+                                <img src={require('assets/web/bh-iocn.png')} style={{ marginRight: "5px", width: "16px" }} />琼公网安备 46020402000124号</p></Link>
+
                         <Link to="#" title="" onClick={() => { window.location.href = "https://www.beian.miit.gov.cn/" }}><p>粤ICP备19147212号-2</p></Link>
+
                     </div>
+
 
                 </footer>
 
